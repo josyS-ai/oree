@@ -131,6 +131,19 @@ a { color: var(--accent); }
 }
 .nav a:hover,
 .side-link:hover { background: var(--accent-soft); }
+button.side-link {
+  width: 100%;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+button.side-link:hover { background: var(--accent-soft); }
+.label { white-space: nowrap; }
+.brand-name { white-space: nowrap; }
+.navtoggle { display: none; }
+.nav-backdrop { display: none; }
 .nav a[aria-current="page"],
 .side-link[aria-current="page"] {
   background: var(--accent-soft);
@@ -551,6 +564,89 @@ select:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; }
   pointer-events: none;
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- Navigation sur ordinateur : icônes seulement / masquée ---------- */
+
+@media (min-width: 861px) {
+  .shell[data-nav="rail"] { grid-template-columns: 1fr; padding-left: 4rem; }
+  .shell[data-nav="rail"] .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 4rem;
+    z-index: 15;
+    overflow: hidden;
+    transition: width 0.16s ease;
+  }
+  .shell[data-nav="rail"] .sidebar:hover,
+  .shell[data-nav="rail"] .sidebar:focus-within {
+    width: 17rem;
+    overflow: auto;
+    box-shadow: var(--shadow);
+  }
+  .shell[data-nav="rail"] .sidebar:not(:hover):not(:focus-within) .chip {
+    font-size: 0;
+    gap: 0;
+    padding: 0.45rem;
+    width: fit-content;
+    align-self: center;
+  }
+  .shell[data-nav="rail"] .sidebar:not(:hover):not(:focus-within) .label,
+  .shell[data-nav="rail"] .sidebar:not(:hover):not(:focus-within) .brand-name { display: none; }
+  .shell[data-nav="rail"] .sidebar:not(:hover):not(:focus-within) .nav a,
+  .shell[data-nav="rail"] .sidebar:not(:hover):not(:focus-within) .side-link,
+  .shell[data-nav="rail"] .sidebar:not(:hover):not(:focus-within) .brand { justify-content: center; padding-left: 0; padding-right: 0; }
+
+  .shell[data-nav="hidden"] { grid-template-columns: 1fr; }
+  .shell[data-nav="hidden"] .sidebar { display: none; }
+  .shell[data-nav="hidden"].nav-open .sidebar {
+    display: flex;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 17rem;
+    z-index: 40;
+    box-shadow: var(--shadow);
+  }
+  .shell[data-nav="hidden"] .nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    background: rgba(10, 12, 20, 0.25);
+  }
+  .shell[data-nav="hidden"] .navtoggle {
+    display: grid;
+    place-items: center;
+    position: fixed;
+    top: 0.6rem;
+    left: 0.6rem;
+    z-index: 35;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--muted);
+    cursor: pointer;
+    opacity: 0.4;
+    transition: opacity 0.15s;
+  }
+  .shell[data-nav="hidden"] .navtoggle:hover,
+  .shell[data-nav="hidden"] .navtoggle:focus-visible,
+  .shell[data-nav="hidden"].nav-open .navtoggle { opacity: 1; }
+  .shell[data-nav="hidden"] .navtoggle[data-state="error"]::after {
+    content: "";
+    position: absolute;
+    top: 0.2rem;
+    right: 0.2rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--danger);
+  }
+}
 
 /* ---------- Téléphone ---------- */
 

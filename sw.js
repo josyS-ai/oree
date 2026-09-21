@@ -3,7 +3,7 @@
    arrivent vite et que l'app s'ouvre quand même sans connexion.
    Pour forcer une mise à jour du cache, change le numéro de version ci-dessous. */
 
-const CACHE = 'oree-v1';
+const CACHE = 'oree-v2';
 const SHELL = [
   './',
   'index.html',

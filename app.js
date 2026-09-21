@@ -11,7 +11,7 @@
     SUPABASE_URL: 'https://foboghwbppqbyvfcjkoj.supabase.co',
     SUPABASE_KEY: 'sb_publishable_qh12xNgNAnoVTLhaUL8g6A_absINt8r', // clé publique : sans danger dans le code
     ALLOW_SIGNUP: false, // usage personnel : les comptes se créent dans Supabase
-    VERSION: '1.0 (lot 1)'
+    VERSION: '1.1 (lot 1)'
   };
 
   const TABLES = ['domains', 'categories'];
@@ -76,6 +76,14 @@
       'theme.day': 'Jour', 'theme.night': 'Nuit', 'theme.sepia': 'Sépia', 'theme.auto': 'Automatique',
       'size.90': 'Petit', 'size.100': 'Normal', 'size.112': 'Grand', 'size.125': 'Très grand',
       'lang.fr': 'Français', 'lang.en': 'English',
+      'nav.title': 'Navigation sur ordinateur', 'nav.visible': 'Visible', 'nav.rail': 'Icônes seulement', 'nav.hidden': 'Masquée',
+      'nav.hint': 'Réglage propre à cet appareil. La touche F10 affiche ou masque la navigation.',
+      'nav.hide': 'Masquer la navigation', 'nav.show': 'Afficher la navigation', 'nav.pin': 'Afficher en permanence',
+      'win.title': 'Fenêtre',
+      'win.fsHint': "Le plein écran masque aussi les onglets et la barre d'adresse du navigateur. Échap ou F11 pour en sortir.",
+      'win.fullscreen': 'Plein écran', 'win.exitFullscreen': 'Quitter le plein écran',
+      'win.installHint': "Installée comme application, Orée s'ouvre dans sa propre fenêtre, sans onglets ni barre d'adresse. Dans Chrome : menu ⋮, « Enregistrer et partager », puis « Installer Orée ».",
+      'win.install': "Installer Orée comme application", 'win.installed': 'Orée est déjà ouverte comme une application.',
 
       'account.signedInAs': 'Connecté avec {email}.',
       'account.offlineMode': 'Mode hors-ligne : tes données locales sont disponibles, la connexion reviendra avec internet.',
@@ -182,6 +190,14 @@
       'theme.day': 'Day', 'theme.night': 'Night', 'theme.sepia': 'Sepia', 'theme.auto': 'Automatic',
       'size.90': 'Small', 'size.100': 'Normal', 'size.112': 'Large', 'size.125': 'Extra large',
       'lang.fr': 'Français', 'lang.en': 'English',
+      'nav.title': 'Navigation on computer', 'nav.visible': 'Visible', 'nav.rail': 'Icons only', 'nav.hidden': 'Hidden',
+      'nav.hint': 'This setting is specific to this device. The F10 key shows or hides the navigation.',
+      'nav.hide': 'Hide navigation', 'nav.show': 'Show navigation', 'nav.pin': 'Always show',
+      'win.title': 'Window',
+      'win.fsHint': 'Full screen also hides the browser tabs and address bar. Press Esc or F11 to leave it.',
+      'win.fullscreen': 'Full screen', 'win.exitFullscreen': 'Exit full screen',
+      'win.installHint': 'Installed as an app, Orée opens in its own window, without tabs or address bar. In Chrome: ⋮ menu, "Save and share", then "Install Orée".',
+      'win.install': 'Install Orée as an app', 'win.installed': 'Orée is already open as an app.',
 
       'account.signedInAs': 'Signed in as {email}.',
       'account.offlineMode': 'Offline mode: your local data is available, sign-in will return with the internet.',
@@ -280,7 +296,11 @@
     archive: '<rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v11h14V8M10 12h4"/>',
     restore: '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>',
     trash: '<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/>',
-    edit: '<path d="M4 20h4L19 9l-4-4L4 16z"/>'
+    edit: '<path d="M4 20h4L19 9l-4-4L4 16z"/>',
+    menu: '<path d="M4 6h16M4 12h16M4 18h16"/>',
+    panel: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/>',
+    expand: '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',
+    install: '<path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>'
   };
 
   function icon(name, cls) {
@@ -399,7 +419,10 @@
     syncing: false,
     onboarding: false,
     auth: { mode: 'signin', email: '', err: '', ok: '', busy: false },
-    ui: { showArch: { domains: false, categories: false } }
+    ui: { showArch: { domains: false, categories: false } },
+    nav: { mode: 'visible', last: 'visible' },
+    navOpen: false,
+    installEvt: null
   };
   let sb = null;
 
@@ -411,6 +434,67 @@
   }
 
   const fmtTime = (d) => new Date(d).toLocaleTimeString(S.settings.language, { hour: '2-digit', minute: '2-digit' });
+
+  /* ==========================================================
+     Navigation sur ordinateur, plein écran, installation
+     ========================================================== */
+  const modalStack = [];
+  const NAV_KEY = 'oree.nav';
+  const NAV_MODES = ['visible', 'rail', 'hidden'];
+
+  function readNav() {
+    try {
+      const v = JSON.parse(localStorage.getItem(NAV_KEY));
+      if (v && NAV_MODES.includes(v.mode)) return { mode: v.mode, last: ['visible', 'rail'].includes(v.last) ? v.last : 'visible' };
+    } catch (e) { /* valeur illisible : on repart du réglage par défaut */ }
+    return { mode: 'visible', last: 'visible' };
+  }
+  S.nav = readNav();
+
+  function setNav(mode) {
+    if (mode !== 'hidden') S.nav.last = mode;
+    S.nav.mode = mode;
+    S.navOpen = false;
+    try { localStorage.setItem(NAV_KEY, JSON.stringify(S.nav)); } catch (e) { /* sans conséquence */ }
+    render();
+  }
+
+  function toggleNav() {
+    setNav(S.nav.mode === 'hidden' ? (S.nav.last || 'visible') : 'hidden');
+  }
+
+  const isWide = () => window.matchMedia('(min-width: 861px)').matches;
+  const isStandalone = () => window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+  function toggleFullscreen() {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else document.documentElement.requestFullscreen().catch(() => {});
+  }
+
+  async function installApp() {
+    const e = S.installEvt;
+    if (!e) return;
+    e.prompt();
+    try { await e.userChoice; } catch (err) { /* choix ignoré */ }
+    S.installEvt = null;
+    if (S.route === 'settings/appearance') render();
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'F10' && !e.ctrlKey && !e.altKey && !e.shiftKey && !e.metaKey) {
+      if (S.user && !S.locked && !S.recovery && isWide() && !modalStack.length) { e.preventDefault(); toggleNav(); }
+    } else if (e.key === 'Escape' && S.navOpen && !modalStack.length) {
+      S.navOpen = false;
+      render();
+    }
+  });
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    S.installEvt = e;
+    if (S.route === 'settings/appearance') render();
+  });
+  window.addEventListener('appinstalled', () => { S.installEvt = null; if (S.route === 'settings/appearance') render(); });
+  document.addEventListener('fullscreenchange', () => { if (S.route === 'settings/appearance') render(); });
 
   /* ==========================================================
      Thème, langue, taille du texte
@@ -495,8 +579,6 @@
   /* ==========================================================
      Fenêtres, messages
      ========================================================== */
-  const modalStack = [];
-
   function modal({ title, body, actions = [], onDismiss }) {
     const back = h('div', { class: 'modal-back' });
     const api = {
@@ -617,6 +699,8 @@
   function updateChips() {
     const i = statusInfo();
     document.querySelectorAll('.chip').forEach((c) => { c.dataset.state = i.state; c.textContent = i.text; });
+    const nt = document.querySelector('.navtoggle');
+    if (nt) nt.dataset.state = i.state;
   }
 
   let syncTimer = null;
@@ -1104,19 +1188,41 @@
 
   function viewShell() {
     const route = S.route.split('/')[0] || 'today';
-    const navLink = (k) => h('a', { href: '#/' + k, 'aria-current': route === k ? 'page' : null }, icon(NAV_ICONS[k]), t('tab.' + k));
+    const mode = S.nav.mode;
+    const navLink = (k) => h('a', { href: '#/' + k, 'aria-current': route === k ? 'page' : null },
+      icon(NAV_ICONS[k]), h('span', { class: 'label' }, t('tab.' + k)));
+    const brand = () => h('a', { class: 'brand', href: '#/today' }, logo(), h('span', { class: 'brand-name' }, 'Orée'));
+    const navBtn = mode === 'hidden'
+      ? h('button', { type: 'button', class: 'side-link', on: { click: () => setNav(S.nav.last || 'visible') } },
+        icon('panel'), h('span', { class: 'label' }, t('nav.pin')))
+      : h('button', { type: 'button', class: 'side-link', on: { click: () => setNav('hidden') } },
+        icon('panel'), h('span', { class: 'label' }, t('nav.hide')));
     const sidebar = h('aside', { class: 'sidebar' },
-      h('a', { class: 'brand', href: '#/today' }, logo(), 'Orée'),
+      brand(),
       h('nav', { class: 'nav', 'aria-label': 'Navigation' }, NAV.map(navLink)),
       h('div', { class: 'side-foot' },
         chip(),
-        h('a', { class: 'side-link', href: '#/settings', 'aria-current': route === 'settings' ? 'page' : null }, icon('sliders'), t('tab.settings'))));
+        h('a', { class: 'side-link', href: '#/settings', 'aria-current': route === 'settings' ? 'page' : null },
+          icon('sliders'), h('span', { class: 'label' }, t('tab.settings'))),
+        navBtn));
     const topbar = h('header', { class: 'topbar' },
-      h('a', { class: 'brand', href: '#/today' }, logo(), 'Orée'),
+      brand(),
       h('div', { class: 'right' }, chip(),
         h('a', { class: 'iconbtn', href: '#/settings', 'aria-label': t('tab.settings') }, icon('sliders'))));
-    const tabbar = h('nav', { class: 'tabbar', 'aria-label': 'Navigation' }, NAV.map(navLink));
-    return h('div', { class: 'shell' }, sidebar, h('div', { class: 'main' }, topbar, viewMain()), tabbar);
+    const tabbar = h('nav', { class: 'tabbar', 'aria-label': 'Navigation' }, NAV.map((k) =>
+      h('a', { href: '#/' + k, 'aria-current': route === k ? 'page' : null }, icon(NAV_ICONS[k]), t('tab.' + k))));
+    const toggle = mode === 'hidden'
+      ? h('button', {
+        type: 'button', class: 'navtoggle', 'data-state': statusInfo().state,
+        'aria-label': t('nav.show'), 'aria-expanded': String(S.navOpen), title: t('nav.show') + ' (F10)',
+        on: { click: () => { S.navOpen = !S.navOpen; render(); } }
+      }, icon('menu'))
+      : null;
+    const backdrop = mode === 'hidden' && S.navOpen
+      ? h('div', { class: 'nav-backdrop', on: { click: () => { S.navOpen = false; render(); } } })
+      : null;
+    return h('div', { class: 'shell' + (S.navOpen ? ' nav-open' : ''), 'data-nav': mode },
+      sidebar, h('div', { class: 'main' }, topbar, viewMain()), tabbar, toggle, backdrop);
   }
 
   function viewMain() {
@@ -1208,13 +1314,28 @@
   }
 
   function secAppearance() {
+    const canFs = !!document.fullscreenEnabled;
     return h('div', null,
       h('h2', { class: 'section' }, t('set.theme')),
       segButtons(['day', 'night', 'sepia', 'auto'].map((k) => [k, t('theme.' + k)]), S.settings.theme,
         (v) => updateSettings({ theme: v })),
       h('h2', { class: 'section' }, t('set.textSize')),
       segButtons(TEXT_SIZES.map((n) => [n, t('size.' + n)]), (S.settings.data && S.settings.data.textSize) || 100,
-        (v) => updateSettings(null, { textSize: v })));
+        (v) => updateSettings(null, { textSize: v })),
+      h('h2', { class: 'section' }, t('nav.title')),
+      segButtons(NAV_MODES.map((k) => [k, t('nav.' + k)]), S.nav.mode, (v) => setNav(v)),
+      h('p', { class: 'muted' }, t('nav.hint')),
+      h('h2', { class: 'section' }, t('win.title')),
+      h('p', { class: 'muted' }, t('win.fsHint')),
+      canFs ? h('div', { class: 'actions' }, h('button', { type: 'button', class: 'btn', on: { click: toggleFullscreen } },
+        icon('expand'), document.fullscreenElement ? t('win.exitFullscreen') : t('win.fullscreen'))) : null,
+      h('p', { class: 'muted' }, t('win.installHint')),
+      isStandalone()
+        ? h('p', { class: 'msg ok' }, t('win.installed'))
+        : S.installEvt
+          ? h('div', { class: 'actions' }, h('button', { type: 'button', class: 'btn primary', on: { click: installApp } },
+            icon('install'), t('win.install')))
+          : null);
   }
 
   function secLanguage() {
@@ -1429,6 +1550,7 @@
   window.addEventListener('hashchange', () => {
     if (!location.hash.startsWith('#/')) return;
     S.route = currentRoute();
+    S.navOpen = false;
     render();
     window.scrollTo(0, 0);
   });
