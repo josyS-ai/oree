@@ -7,18 +7,142 @@
   /* ==========================================================
      Configuration
      ========================================================== */
+  /* ==========================================================
+     Contenu par défaut du défi de 30 jours
+     ========================================================== */
+  const SEED_STEPS = [
+    { block: 'Bilan positif', title: 'Gratitude envers Dieu',
+      parts: [{ type: 'bullets', key: 'gratitudes', label: 'Actions de grâce' }],
+      help: { objective: 'Prendre le temps de repenser à ce que le Seigneur a été pour toi cette année.', scripture: 'Psaume 63:2-5' } },
+    { block: 'Bilan positif', title: 'Transformation intérieure',
+      parts: [{ type: 'table', key: 'transformations', columns: ['Attitude / trait initial', 'Changement opéré'], scale: true, scaleLabel: 'Progression (1 à 10)' },
+        { type: 'text', key: 'conclusion', label: 'Conclusion' }],
+      help: { objective: 'Apprécier les changements que Dieu a opérés en toi, même les plus petits.', scripture: '2 Corinthiens 4:16' } },
+    { block: 'Bilan positif', title: 'Bénédiction pour les autres',
+      parts: [{ type: 'table', key: 'benedictions', columns: ['Bénéficiaires', 'Bénédiction apportée', 'Motivation'] },
+        { type: 'text', key: 'conclusion', label: 'Conclusion' }],
+      help: { objective: 'Examiner ta marche dans l’amour et te réjouir d’avoir été un canal de bénédiction.', scripture: 'Actes 20:35' } },
+    { block: 'Bilan positif', title: 'Délivrances et personnes-relais',
+      parts: [{ type: 'bullets', key: 'bienfaits', label: 'Bienfaits, victoires, prières exaucées' },
+        { type: 'bullets', key: 'personnes', label: 'Personnes par lesquelles Dieu m’a bénie' }],
+      help: { objective: 'Te souvenir des délivrances et des personnes que Dieu a mises sur ta route.', scripture: 'Psaume 71:6' } },
+    { block: 'Bilan positif', title: 'Objectifs accomplis',
+      parts: [{ type: 'checklist', key: 'objectifs', label: 'Objectifs atteints cette année' },
+        { type: 'text', key: 'horsplan', label: 'Accomplissements non planifiés' }],
+      help: { objective: 'Rendre grâce pour ce que Dieu t’a permis d’accomplir cette année.', scripture: 'Jean 6:63' } },
+    { block: 'Bilan positif', title: 'Actions de grâce pour les épreuves',
+      parts: [{ type: 'text', key: 'revelation', label: 'Ce que le Seigneur m’a révélé à travers ces épreuves' },
+        { type: 'text', key: 'priere', label: 'Prière et remerciement' }],
+      help: { objective: 'Dire merci à Dieu même pour les épreuves traversées cette année.', scripture: 'Jacques 1:2 ; 1 Thessaloniciens 5:18' } },
+    { block: 'Analyse et ajustements', title: 'Objectifs non atteints',
+      parts: [{ type: 'table', key: 'nonatteints', columns: ['Objectif non atteint', 'Causes / obstacles', 'Mesures d’ajustement'] }],
+      help: { objective: 'Identifier les objectifs non atteints et réfléchir aux causes sans te juger.', scripture: 'Proverbes 26:11' } },
+    { block: 'Analyse et ajustements', title: 'Audit du temps',
+      parts: [{ type: 'table', key: 'audittemps', columns: ['Activité', 'Impact (m’aide ou m’éloigne)'], scale: true, scaleLabel: 'Fréquence (1 à 10)' },
+        { type: 'text', key: 'conclusion', label: 'Conclusion' }],
+      help: {
+        objective: 'Prendre conscience des activités qui te rapprochent de tes objectifs et de celles qui t’en éloignent.',
+        howto: '1. Liste tes activités les plus fréquentes cette année.\n2. Indique la fréquence de 1 à 10.\n3. Note si chacune t’a aidée ou éloignée de tes objectifs.',
+        example: 'Réseaux sociaux (fréquence : 8/10) → m’éloigne de mes objectifs.',
+        scripture: 'Éphésiens 5:16'
+      } },
+    { block: 'Analyse et ajustements', title: 'Audit financier',
+      parts: [{ type: 'table', key: 'auditfinances', columns: ['Poste de dépense', 'Alignement spirituel'], scale: true, scaleLabel: 'Montant ou proportion (1 à 10)' },
+        { type: 'text', key: 'conclusion', label: 'Conclusion sur l’intendance' }],
+      help: { objective: 'Examiner comment tu as utilisé ton argent cette année, en bonne intendance.', scripture: 'Proverbes 3:9 ; 1 Timothée 6:17' } },
+    { block: 'Analyse et ajustements', title: 'Erreurs à ne plus répéter',
+      parts: [{ type: 'cards', key: 'erreurs', fields: ['Domaine', 'Erreur commise', 'Cause profonde', 'Mesure à cultiver'] }],
+      help: { objective: 'Identifier les causes profondes de tes erreurs pour ne plus y retomber.', scripture: 'Proverbes 26:11' } },
+    { block: 'Vision', title: 'Prière d’alignement & vision globale',
+      parts: [{ type: 'text', key: 'vision', label: 'Impressions, versets reçus, révélations', rows: 8 }],
+      help: { objective: 'Demander au Seigneur de te révéler Sa vision pour ton année, dans chaque domaine de ta vie.', scripture: 'Jérémie 33:3 ; Éphésiens 2:10' } },
+    { block: 'Vision', title: 'Vision — Vie spirituelle',
+      parts: [{ type: 'text', key: 'spirituel', label: 'Ma vie spirituelle (écris au présent, comme si c’était déjà une réalité)', rows: 6 },
+        { type: 'text', key: 'ancrage', label: 'Verset d’ancrage' }],
+      help: { objective: 'Voir ta relation et ta marche avec le Seigneur au travers de Son regard.', scripture: 'Marc 1:35' } },
+    { block: 'Vision', title: 'Vision — Ministère, carrière & études',
+      parts: [{ type: 'text', key: 'court', label: 'Court terme (1 an)' }, { type: 'text', key: 'long', label: 'Long terme (5 à 15 ans)' }],
+      help: { objective: 'Voir ton ministère, ta carrière ou tes études au travers du regard de Dieu, à court et long terme.', scripture: 'Jérémie 29:11' } },
+    { block: 'Vision', title: 'Vision — Relations, famille, santé & développement',
+      parts: [{ type: 'text', key: 'relations', label: 'Relations & famille' }, { type: 'text', key: 'sante', label: 'Santé & bien-être' },
+        { type: 'text', key: 'talents', label: 'Talents & compétences à développer' }],
+      help: { objective: 'Voir tes relations, ta santé et ton développement personnel comme Dieu les voit.', scripture: 'Ésaïe 53:5 ; 3 Jean 2' } },
+    { block: 'Vision', title: 'Vision — Finances & influence',
+      parts: [{ type: 'text', key: 'finances', label: 'Finances — prospérité & gestion' }, { type: 'text', key: 'influence', label: 'Influence — héritage & impact' }],
+      help: { objective: 'Voir tes finances et ton impact dans la société au travers du regard de Dieu.', scripture: 'Proverbes 10:22 ; Tite 3:8' } },
+    { block: 'Objectifs SMART', title: 'Objectifs — Spirituel',
+      parts: [{ type: 'cards', key: 'objectifs', fields: ['Titre de l’objectif', 'Indicateur de mesure (KPI)', 'Date cible'] }],
+      help: { objective: 'Écrire des objectifs pour ta vie spirituelle, à partir de la vision reçue.', scripture: null } },
+    { block: 'Objectifs SMART', title: 'Objectifs — Ministère & carrière',
+      parts: [{ type: 'cards', key: 'objectifs', fields: ['Titre de l’objectif', 'Indicateur de mesure (KPI)', 'Date cible'] }],
+      help: { objective: 'Écrire tes objectifs pour ton ministère, ta carrière, tes affaires ou tes études.', scripture: null } },
+    { block: 'Objectifs SMART', title: 'Objectifs — Social & personnel',
+      parts: [{ type: 'cards', key: 'objectifs', fields: ['Titre de l’objectif', 'Indicateur de mesure (KPI)', 'Date cible'] }],
+      help: { objective: 'Écrire tes objectifs pour tes relations, ta famille, ta santé et ton développement personnel.', scripture: null } },
+    { block: 'Objectifs SMART', title: 'Objectifs — Finances & influence',
+      parts: [{ type: 'cards', key: 'objectifs', fields: ['Titre de l’objectif', 'Indicateur de mesure (KPI)', 'Date cible'] }],
+      help: { objective: 'Écrire tes objectifs financiers et ceux liés à ton influence dans la société.', scripture: null } },
+    { block: 'Objectifs SMART', title: 'Consolidation & validation SMART',
+      parts: [{ type: 'text', key: 'revue', label: 'Revue de mes objectifs', rows: 8 }, { type: 'bullets', key: 'retenus', label: 'Liste finale des objectifs retenus' }],
+      help: {
+        objective: 'Relire tes objectifs pour t’assurer qu’ils sont bien formulés avant de passer au plan d’action.',
+        howto: '1. Formule chaque objectif de façon positive.\n2. Vérifie qu’il est spécifique, mesurable, réaliste et limité dans le temps.\n3. Regroupe ou découpe les objectifs si besoin, puis retiens ta liste définitive.',
+        scripture: null
+      } },
+    { block: 'Plan d’action', title: 'Plan d’action — Spirituel',
+      parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
+        { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
+      help: { objective: 'Élaborer ton plan d’action pour atteindre tes objectifs spirituels.', scripture: null } },
+    { block: 'Plan d’action', title: 'Plan d’action — Ministère',
+      parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
+        { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
+      help: { objective: 'Élaborer ton plan d’action pour ton ministère.', scripture: null } },
+    { block: 'Plan d’action', title: 'Plan d’action — Professionnel / académique',
+      parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
+        { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
+      help: { objective: 'Élaborer ton plan d’action pour ton travail, tes affaires ou tes études.', scripture: null } },
+    { block: 'Plan d’action', title: 'Plan d’action — Social & couple',
+      parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
+        { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
+      help: { objective: 'Élaborer ton plan d’action pour tes relations, ta famille et ta vie de couple.', scripture: null } },
+    { block: 'Plan d’action', title: 'Plan d’action — Santé & développement personnel',
+      parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
+        { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
+      help: { objective: 'Élaborer ton plan d’action pour ta santé, ton bien-être et ton développement personnel.', scripture: null } },
+    { block: 'Plan d’action', title: 'Plan d’action — Finances',
+      parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
+        { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
+      help: { objective: 'Élaborer ton plan d’action pour tes finances.', scripture: null } },
+    { block: 'Plan d’action', title: 'Plan d’action — Influence',
+      parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
+        { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
+      help: { objective: 'Élaborer ton plan d’action pour ton influence et ton apport dans la société.', scripture: null } },
+    { block: 'Clôture', title: 'Optimisation et délais',
+      parts: [{ type: 'table', key: 'echeances', columns: ['Action', 'Domaine', 'Date limite'] }],
+      help: { objective: 'Relire tous tes plans d’action et t’assurer que chaque échéance est réaliste.', scripture: null } },
+    { block: 'Clôture', title: 'Tableau de bord d’engagement',
+      parts: [{ type: 'text', key: 'engagement', label: 'Ce que je veux mettre en place pour tenir mes objectifs', rows: 6 }],
+      help: {
+        objective: 'Te donner les moyens de rester fidèle à ta vision tout au long de l’année.',
+        howto: '1. Garde ta vision et tes objectifs à portée de main.\n2. Reste ouverte à toute nouvelle direction du Saint-Esprit.\n3. Fais un bilan mensuel de ta progression.\n4. Compte sur la puissance du Saint-Esprit.\n5. Ne renonce pas à ces habitudes de suivi.',
+        scripture: null
+      } },
+    { block: 'Clôture', title: 'Attestation de fin de défi', closing: true, parts: [], help: null }
+  ];
+
+
   const CONFIG = {
     SUPABASE_URL: 'https://foboghwbppqbyvfcjkoj.supabase.co',
     SUPABASE_KEY: 'sb_publishable_qh12xNgNAnoVTLhaUL8g6A_absINt8r', // clé publique : sans danger dans le code
     ALLOW_SIGNUP: false, // usage personnel : les comptes se créent dans Supabase
-    VERSION: '1.1 (lot 1)'
+    VERSION: '1.2 (lot 2)'
   };
 
-  const TABLES = ['domains', 'categories'];
+  const TABLES = ['domains', 'categories', 'challenge_steps', 'challenge_runs', 'challenge_entries'];
   const PALETTE = ['#7c5cbf', '#2f7fd1', '#2e9c8a', '#4aa04a', '#c99a1c', '#d9772b',
     '#d4577a', '#c0392b', '#6b7480', '#8d6e63', '#00838f', '#5c6bc0'];
   const TEXT_SIZES = [90, 100, 112, 125];
-  const LOT_OF = { challenge: 2, plan: 5, journals: 4, library: 6 };
+  const LOT_OF = { plan: 5, journals: 4, library: 6 };
 
   /* ==========================================================
      Textes (français / anglais)
@@ -76,6 +200,44 @@
       'theme.day': 'Jour', 'theme.night': 'Nuit', 'theme.sepia': 'Sépia', 'theme.auto': 'Automatique',
       'size.90': 'Petit', 'size.100': 'Normal', 'size.112': 'Grand', 'size.125': 'Très grand',
       'lang.fr': 'Français', 'lang.en': 'English',
+
+      'challenge.welcomeTitle': 'Ton défi de bilan et de vision',
+      'challenge.welcomeText': 'Choisis ton point de départ pour ce module. Tu pourras tout modifier ensuite.',
+      'challenge.kitMine': 'Mon défi de 30 jours', 'challenge.kitMineDesc': 'Les 30 étapes de ton programme, prêtes à suivre et à modifier.',
+      'challenge.kitEmpty': 'Partir de zéro', 'challenge.kitEmptyDesc': 'Aucune étape : tu construis ton propre programme.',
+      'challenge.needSteps': 'Ajoute au moins une étape pour commencer ton défi.',
+      'challenge.manageSteps': 'Gérer les étapes', 'challenge.stepsTitle': 'Étapes du défi',
+      'challenge.stepsInfo': 'Ajoute, modifie, réordonne ou archive les étapes de ton programme.',
+      'challenge.stepTitleLabel': 'Titre', 'challenge.stepBlockLabel': 'Bloc / thème',
+      'challenge.newStepTitle': 'Nouvelle étape',
+      'challenge.columnsTitle': 'Colonnes du tableau', 'challenge.columnsLabel': 'Colonnes (séparées par des virgules)',
+      'challenge.col1': 'Colonne 1', 'challenge.col2': 'Colonne 2',
+      'challenge.fieldsTitle': 'Champs de la carte', 'challenge.fieldsLabel': 'Champs (séparés par des virgules)',
+      'challenge.field1': 'Champ 1', 'challenge.field2': 'Champ 2',
+      'challenge.brickTitle': 'Type de saisie',
+      'brick.text': 'Texte libre', 'brick.textDesc': "Une zone d'écriture, façon journal.",
+      'brick.bullets': 'Puces dynamiques', 'brick.bulletsDesc': 'Une liste que tu complètes au fil de l’eau.',
+      'brick.checklist': 'Liste à cocher', 'brick.checklistDesc': 'Des éléments que tu coches un par un.',
+      'brick.table': 'Tableau', 'brick.tableDesc': 'Des lignes avec les colonnes de ton choix.',
+      'brick.cards': 'Cartes', 'brick.cardsDesc': 'Des fiches répétables avec plusieurs champs.',
+      'challenge.setupTitle': 'Commencer le défi', 'challenge.editTitle': 'Changer la cadence',
+      'challenge.cadenceLabel': 'Cadence', 'challenge.startLabel': 'Date de départ',
+      'cadence.intensive': 'Intensif', 'cadence.moderate': 'Modéré', 'cadence.custom': 'Sur-mesure',
+      'day.0': 'Dim', 'day.1': 'Lun', 'day.2': 'Mar', 'day.3': 'Mer', 'day.4': 'Jeu', 'day.5': 'Ven', 'day.6': 'Sam',
+      'challenge.saveCadence': 'Enregistrer', 'challenge.start': 'Commencer',
+      'challenge.pickDay': 'Choisis au moins un jour de la semaine.', 'challenge.needDate': 'Choisis une date de départ.',
+      'challenge.summary': '{n} étapes, du {start} au {end}.', 'challenge.defaultName': 'Défi {year}',
+      'challenge.progress': '{done} sur {total} étapes accomplies.', 'challenge.changeCadence': 'Changer la cadence',
+      'challenge.noRun': 'Aucun défi en cours.', 'challenge.missing': 'Étape introuvable.',
+      'challenge.help': 'Conseil & exemple', 'challenge.helpTitle': 'Conseil pour cette étape',
+      'challenge.helpWhy': "L'objectif :", 'challenge.helpHow': 'Comment faire :', 'challenge.helpExample': 'Exemple :',
+      'challenge.noHelp': "Pas encore d'aide pour cette étape.",
+      'challenge.markDone': 'Marquer comme fait', 'challenge.done': 'Fait',
+      'challenge.closingText': 'Tu as accompli {done} étape(s) sur {total}. Cette étape clôture ton défi et verrouille ton année.',
+      'challenge.close': 'Clôturer le défi', 'challenge.closed': 'Défi clôturé. Bravo !',
+      'tpl.addLine': 'Ajouter une ligne', 'tpl.addRow': 'Ajouter une ligne', 'tpl.addCard': 'Ajouter une carte',
+      'tpl.scale': 'Évaluation (1 à 10)', 'common.remove': 'Supprimer',
+
       'nav.title': 'Navigation sur ordinateur', 'nav.visible': 'Visible', 'nav.rail': 'Icônes seulement', 'nav.hidden': 'Masquée',
       'nav.hint': 'Réglage propre à cet appareil. La touche F10 affiche ou masque la navigation.',
       'nav.hide': 'Masquer la navigation', 'nav.show': 'Afficher la navigation', 'nav.pin': 'Afficher en permanence',
@@ -190,6 +352,44 @@
       'theme.day': 'Day', 'theme.night': 'Night', 'theme.sepia': 'Sepia', 'theme.auto': 'Automatic',
       'size.90': 'Small', 'size.100': 'Normal', 'size.112': 'Large', 'size.125': 'Extra large',
       'lang.fr': 'Français', 'lang.en': 'English',
+
+      'challenge.welcomeTitle': 'Your review and vision challenge',
+      'challenge.welcomeText': 'Choose your starting point for this module. You can change everything afterwards.',
+      'challenge.kitMine': 'My 30-day challenge', 'challenge.kitMineDesc': 'The 30 steps of your program, ready to follow and edit.',
+      'challenge.kitEmpty': 'Start from scratch', 'challenge.kitEmptyDesc': 'No steps: you build your own program.',
+      'challenge.needSteps': 'Add at least one step to start your challenge.',
+      'challenge.manageSteps': 'Manage steps', 'challenge.stepsTitle': 'Challenge steps',
+      'challenge.stepsInfo': 'Add, edit, reorder or archive the steps of your program.',
+      'challenge.stepTitleLabel': 'Title', 'challenge.stepBlockLabel': 'Block / theme',
+      'challenge.newStepTitle': 'New step',
+      'challenge.columnsTitle': 'Table columns', 'challenge.columnsLabel': 'Columns (comma-separated)',
+      'challenge.col1': 'Column 1', 'challenge.col2': 'Column 2',
+      'challenge.fieldsTitle': 'Card fields', 'challenge.fieldsLabel': 'Fields (comma-separated)',
+      'challenge.field1': 'Field 1', 'challenge.field2': 'Field 2',
+      'challenge.brickTitle': 'Input type',
+      'brick.text': 'Free text', 'brick.textDesc': 'A journal-style writing area.',
+      'brick.bullets': 'Dynamic bullets', 'brick.bulletsDesc': 'A list you build up over time.',
+      'brick.checklist': 'Checklist', 'brick.checklistDesc': 'Items you check off one by one.',
+      'brick.table': 'Table', 'brick.tableDesc': 'Rows with the columns you choose.',
+      'brick.cards': 'Cards', 'brick.cardsDesc': 'Repeatable cards with several fields.',
+      'challenge.setupTitle': 'Start the challenge', 'challenge.editTitle': 'Change the pace',
+      'challenge.cadenceLabel': 'Pace', 'challenge.startLabel': 'Start date',
+      'cadence.intensive': 'Intensive', 'cadence.moderate': 'Moderate', 'cadence.custom': 'Custom',
+      'day.0': 'Sun', 'day.1': 'Mon', 'day.2': 'Tue', 'day.3': 'Wed', 'day.4': 'Thu', 'day.5': 'Fri', 'day.6': 'Sat',
+      'challenge.saveCadence': 'Save', 'challenge.start': 'Start',
+      'challenge.pickDay': 'Pick at least one day of the week.', 'challenge.needDate': 'Choose a start date.',
+      'challenge.summary': '{n} steps, from {start} to {end}.', 'challenge.defaultName': 'Challenge {year}',
+      'challenge.progress': '{done} of {total} steps completed.', 'challenge.changeCadence': 'Change the pace',
+      'challenge.noRun': 'No challenge in progress.', 'challenge.missing': 'Step not found.',
+      'challenge.help': 'Tip & example', 'challenge.helpTitle': 'Tip for this step',
+      'challenge.helpWhy': 'The goal:', 'challenge.helpHow': 'How to do it:', 'challenge.helpExample': 'Example:',
+      'challenge.noHelp': 'No tip yet for this step.',
+      'challenge.markDone': 'Mark as done', 'challenge.done': 'Done',
+      'challenge.closingText': 'You completed {done} of {total} step(s). This step closes your challenge and locks your year.',
+      'challenge.close': 'Close the challenge', 'challenge.closed': 'Challenge closed. Well done!',
+      'tpl.addLine': 'Add a line', 'tpl.addRow': 'Add a row', 'tpl.addCard': 'Add a card',
+      'tpl.scale': 'Rating (1 to 10)', 'common.remove': 'Remove',
+
       'nav.title': 'Navigation on computer', 'nav.visible': 'Visible', 'nav.rail': 'Icons only', 'nav.hidden': 'Hidden',
       'nav.hint': 'This setting is specific to this device. The F10 key shows or hides the navigation.',
       'nav.hide': 'Hide navigation', 'nav.show': 'Show navigation', 'nav.pin': 'Always show',
@@ -300,7 +500,10 @@
     menu: '<path d="M4 6h16M4 12h16M4 18h16"/>',
     panel: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/>',
     expand: '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',
-    install: '<path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>'
+    install: '<path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>',
+    bulb: '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.6.45 1.1 1.15 1.1 1.9V16h5v-.3c0-.75.5-1.45 1.1-1.9A6 6 0 0 0 12 3z"/>',
+    check: '<path d="M20 6L9 17l-5-5"/>',
+    lock2: '<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>'
   };
 
   function icon(name, cls) {
@@ -357,11 +560,11 @@
   const IDB = (() => {
     let dbp = null;
     const open = () => dbp || (dbp = new Promise((resolve, reject) => {
-      const r = indexedDB.open('oree', 1);
+      const r = indexedDB.open('oree', 2);
       r.onupgradeneeded = () => {
         const db = r.result;
-        TABLES.forEach((s) => db.createObjectStore(s, { keyPath: 'id' }));
-        db.createObjectStore('kv');
+        TABLES.forEach((s) => { if (!db.objectStoreNames.contains(s)) db.createObjectStore(s, { keyPath: 'id' }); });
+        if (!db.objectStoreNames.contains('kv')) db.createObjectStore('kv');
       };
       r.onsuccess = () => resolve(r.result);
       r.onerror = () => reject(r.error);
@@ -419,10 +622,11 @@
     syncing: false,
     onboarding: false,
     auth: { mode: 'signin', email: '', err: '', ok: '', busy: false },
-    ui: { showArch: { domains: false, categories: false } },
+    ui: { showArch: { domains: false, categories: false, challenge_steps: false } },
     nav: { mode: 'visible', last: 'visible' },
     navOpen: false,
-    installEvt: null
+    installEvt: null,
+    currentEntry: null
   };
   let sb = null;
 
@@ -554,24 +758,23 @@
   }
 
   async function loadLists() {
-    const [d, c] = await Promise.all([IDB.all('domains'), IDB.all('categories')]);
-    S.domains = d;
-    S.categories = c;
-    S.pending = d.filter((x) => x._dirty).length + c.filter((x) => x._dirty).length + (S.settings._dirty ? 1 : 0);
+    const lists = await Promise.all(TABLES.map((k) => IDB.all(k)));
+    TABLES.forEach((k, i) => { S[k] = lists[i]; });
+    S.pending = TABLES.reduce((n, k) => n + S[k].filter((x) => x._dirty).length, 0) + (S.settings._dirty ? 1 : 0);
   }
 
   async function wipeLocal() {
-    await IDB.clear('domains');
-    await IDB.clear('categories');
-    for (const k of ['user', 'settings', 'lock', 'lastSync', 'pull_domains', 'pull_categories']) await IDB.del('kv', k);
+    for (const k of TABLES) await IDB.clear(k);
+    const pullKeys = TABLES.map((k) => 'pull_' + k);
+    for (const k of ['user', 'settings', 'lock', 'lastSync', ...pullKeys]) await IDB.del('kv', k);
     const p = readPrefs();
     S.settings = { theme: p.theme || 'auto', language: p.language || guessLang(), data: { textSize: p.textSize || 100 }, _dirty: false, _rev: 0 };
     S.lock = { enabled: false, delay: 5 };
-    S.domains = [];
-    S.categories = [];
+    TABLES.forEach((k) => { S[k] = []; });
     S.pending = 0;
     S.sync = { state: 'idle', last: null, error: '' };
     S.locked = false;
+    S.currentEntry = null;
     await kvSet('settings', S.settings);
     applyTheme();
   }
@@ -998,7 +1201,7 @@
       paint();
       if (entered.length < len) return;
       const ok = await verifyPin(entered);
-      if (ok) { S.fails = 0; S.locked = false; lockCtl = null; render(); return; }
+      if (ok) { S.fails = 0; S.locked = false; lockCtl = null; await prepareRoute(); render(); return; }
       S.fails++;
       entered = '';
       dots.classList.remove('shake');
@@ -1148,6 +1351,7 @@
     S.auth = { mode: 'signin', email: '', err: '', ok: '', busy: false };
     if (!location.hash.startsWith('#/')) location.hash = '#/today';
     S.route = currentRoute();
+    await prepareRoute();
     render();
     await syncAll();
     await maybeOnboard();
@@ -1226,10 +1430,11 @@
   }
 
   function viewMain() {
-    const [a, b] = S.route.split('/');
-    switch (a) {
-      case 'settings': return viewSettings(b);
-      case 'challenge': case 'plan': case 'journals': case 'library': return viewSoon(a);
+    const parts = S.route.split('/');
+    switch (parts[0]) {
+      case 'settings': return viewSettings(parts[1]);
+      case 'challenge': return viewChallenge(parts.slice(1));
+      case 'plan': case 'journals': case 'library': return viewSoon(parts[0]);
       default: return viewToday();
     }
   }
@@ -1482,15 +1687,555 @@
   }
 
   /* ==========================================================
+     Défi (Bilan & Vision) : dates, gabarits, entrées
+     ========================================================== */
+  function parseYMD(str) { const [y, m, d] = str.split('-').map(Number); return new Date(y, m - 1, d); }
+  function fmtYMD(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function addDays(d, n) { const r = new Date(d); r.setDate(r.getDate() + n); return r; }
+  function fmtDateLong(d) { return cap(d.toLocaleDateString(S.settings.language, { day: 'numeric', month: 'long', year: 'numeric' })); }
+  function fmtDateShort(d) { return cap(d.toLocaleDateString(S.settings.language, { day: 'numeric', month: 'short' })); }
+
+  function stepDateForIndex(run, index) {
+    const start = parseYMD(run.start_date);
+    if (run.cadence === 'intensive' || !run.weekdays || !run.weekdays.length) return addDays(start, index);
+    let count = -1;
+    let cur = start;
+    for (let guard = 0; guard < 3660; guard++) {
+      if (run.weekdays.includes(cur.getDay())) { count++; if (count === index) return cur; }
+      cur = addDays(cur, 1);
+    }
+    return addDays(start, index);
+  }
+
+  const activeChallengeSteps = () => S.challenge_steps.filter((r) => !r.deleted_at && !r.archived).sort(byPos);
+  const activeRun = () => S.challenge_runs.find((r) => r.status === 'active' && !r.deleted_at) || null;
+
+  async function getOrCreateEntry(run, step) {
+    let entry = S.challenge_entries.find((e) => e.run_id === run.id && e.step_id === step.id && !e.deleted_at);
+    if (!entry) {
+      const now = new Date().toISOString();
+      entry = {
+        id: crypto.randomUUID(), user_id: S.user.id, run_id: run.id, step_id: step.id,
+        data: {}, done: false, done_at: null, deleted_at: null, created_at: now, updated_at: now, _dirty: true, _rev: 1
+      };
+      await IDB.put('challenge_entries', entry);
+      await loadLists();
+    }
+    return entry;
+  }
+
+  let entrySaveTimer = null;
+  function touchEntry(entry) {
+    entry._dirty = true;
+    entry._rev = (entry._rev || 0) + 1;
+    entry.updated_at = new Date().toISOString();
+    clearTimeout(entrySaveTimer);
+    entrySaveTimer = setTimeout(async () => {
+      await IDB.put('challenge_entries', entry);
+      await loadLists();
+      // Ne redessine que si on n'est plus en train d'écrire dans une étape (sinon on perdrait le focus du champ en cours de saisie).
+      const onAnyStep = S.route.split('/')[0] === 'challenge' && S.route.split('/')[1] === 'step';
+      if (!onAnyStep) render(); else updateChips();
+      scheduleSync(800);
+    }, 500);
+  }
+
+  async function prepareRoute() {
+    const parts = S.route.split('/');
+    S.currentEntry = null;
+    if (!S.user || parts[0] !== 'challenge') return;
+    await maybeChallengeOnboard();
+    if (parts[1] === 'step' && parts[2]) {
+      const step = S.challenge_steps.find((s) => s.id === parts[2] && !s.deleted_at);
+      const run = activeRun();
+      if (step && run) S.currentEntry = await getOrCreateEntry(run, step);
+    }
+  }
+
+  async function seedChallengeSteps() {
+    for (let i = 0; i < SEED_STEPS.length; i++) {
+      const seed = SEED_STEPS[i];
+      const now = new Date().toISOString();
+      await IDB.put('challenge_steps', {
+        id: crypto.randomUUID(), user_id: S.user.id, position: i, day_label: null,
+        title: seed.title, block: seed.block, help: seed.help || null, parts: seed.parts,
+        closing: !!seed.closing, archived: false, deleted_at: null, created_at: now, updated_at: now, _dirty: true, _rev: 1
+      });
+    }
+    await afterChange();
+  }
+
+  function maybeChallengeOnboard() {
+    if (S.settings.data && S.settings.data.challengeStarted) return Promise.resolve();
+    return new Promise((resolve) => {
+      let m = null;
+      const choose = async (which) => {
+        m.close();
+        if (which === 'seed') await seedChallengeSteps();
+        await updateSettings(null, { challengeStarted: true });
+        resolve();
+      };
+      const choice = (title, desc, which) => h('button', { type: 'button', class: 'choice', on: { click: () => choose(which) } },
+        h('strong', null, title), h('span', null, desc));
+      m = modal({
+        title: t('challenge.welcomeTitle'),
+        body: h('div', null, h('p', null, t('challenge.welcomeText')),
+          choice(t('challenge.kitMine'), t('challenge.kitMineDesc'), 'seed'),
+          choice(t('challenge.kitEmpty'), t('challenge.kitEmptyDesc'), 'empty')),
+        actions: [],
+        onDismiss: () => resolve()
+      });
+    });
+  }
+
+  /* --- Briques de saisie (parts) --- */
+  function ensureArr(data, key) { if (!Array.isArray(data[key])) data[key] = []; return data[key]; }
+
+  function partBullets(part, data, touch) {
+    const arr = ensureArr(data, part.key);
+    const list = h('ul', { class: 'blist' });
+    const renderItem = (val) => {
+      const inp = h('input', { type: 'text', value: val || '', 'aria-label': part.label || t('tpl.bulletItem') });
+      const li = h('li', { class: 'brow' });
+      const del = h('button', {
+        type: 'button', class: 'iconbtn', 'aria-label': t('common.remove'),
+        on: { click: () => { const i = [...list.children].indexOf(li); if (i > -1) arr.splice(i, 1); li.remove(); touch(); } }
+      }, icon('trash'));
+      inp.addEventListener('input', () => { const i = [...list.children].indexOf(li); if (i > -1) arr[i] = inp.value; touch(); });
+      li.append(inp, del);
+      return { li, inp };
+    };
+    arr.forEach((v) => { const { li } = renderItem(v); list.append(li); });
+    const addBtn = h('button', {
+      type: 'button', class: 'btn ghost',
+      on: { click: () => { arr.push(''); const { li, inp } = renderItem(''); list.append(li); inp.focus(); touch(); } }
+    }, icon('plus'), t('tpl.addLine'));
+    return h('div', { class: 'part' }, part.label ? h('h3', { class: 'part-label' }, part.label) : null, list, addBtn);
+  }
+
+  function partChecklist(part, data, touch) {
+    const arr = ensureArr(data, part.key);
+    const list = h('ul', { class: 'blist' });
+    const renderItem = (item) => {
+      const cb = h('input', { type: 'checkbox', checked: !!item.done });
+      const inp = h('input', { type: 'text', value: item.text || '' });
+      const li = h('li', { class: 'brow' + (item.done ? ' done' : '') });
+      const del = h('button', {
+        type: 'button', class: 'iconbtn', 'aria-label': t('common.remove'),
+        on: { click: () => { const i = arr.indexOf(item); if (i > -1) arr.splice(i, 1); li.remove(); touch(); } }
+      }, icon('trash'));
+      cb.addEventListener('change', () => { item.done = cb.checked; li.classList.toggle('done', cb.checked); touch(); });
+      inp.addEventListener('input', () => { item.text = inp.value; touch(); });
+      li.append(cb, inp, del);
+      return { li, inp };
+    };
+    arr.forEach((it) => { const { li } = renderItem(it); list.append(li); });
+    const addBtn = h('button', {
+      type: 'button', class: 'btn ghost',
+      on: { click: () => { const it = { text: '', done: false }; arr.push(it); const { li, inp } = renderItem(it); list.append(li); inp.focus(); touch(); } }
+    }, icon('plus'), t('tpl.addLine'));
+    return h('div', { class: 'part' }, part.label ? h('h3', { class: 'part-label' }, part.label) : null, list, addBtn);
+  }
+
+  function partText(part, data, touch) {
+    const ta = h('textarea', { rows: String(part.rows || 5) });
+    ta.value = data[part.key] || '';
+    ta.addEventListener('input', () => { data[part.key] = ta.value; touch(); });
+    return h('div', { class: 'part' }, part.label ? h('h3', { class: 'part-label' }, part.label) : null, ta);
+  }
+
+  function partTable(part, data, touch) {
+    const arr = ensureArr(data, part.key);
+    const list = h('div', { class: 'trows' });
+    const renderRow = (row) => {
+      const cells = part.columns.map((label, ci) => {
+        const inp = h('input', { type: 'text', value: row['c' + ci] || '', placeholder: label });
+        inp.addEventListener('input', () => { row['c' + ci] = inp.value; touch(); });
+        return h('div', { class: 'field' }, h('label', null, label), inp);
+      });
+      let scaleEl = null;
+      if (part.scale) {
+        if (row.scale == null) row.scale = 5;
+        const rng = h('input', { type: 'range', min: '1', max: '10', value: String(row.scale) });
+        const out = h('span', { class: 'rangeval' }, String(row.scale));
+        rng.addEventListener('input', () => { row.scale = Number(rng.value); out.textContent = rng.value; touch(); });
+        scaleEl = h('div', { class: 'field' }, h('label', null, part.scaleLabel || t('tpl.scale')), h('div', { class: 'rangewrap' }, rng, out));
+      }
+      const el = h('div', { class: 'trow' });
+      const del = h('button', {
+        type: 'button', class: 'iconbtn', 'aria-label': t('common.remove'),
+        on: { click: () => { const i = arr.indexOf(row); if (i > -1) arr.splice(i, 1); el.remove(); touch(); } }
+      }, icon('trash'));
+      el.append(...cells, scaleEl || document.createDocumentFragment(), h('div', { class: 'trow-actions' }, del));
+      return el;
+    };
+    arr.forEach((r) => list.append(renderRow(r)));
+    const addBtn = h('button', {
+      type: 'button', class: 'btn ghost',
+      on: { click: () => { const r = {}; arr.push(r); list.append(renderRow(r)); touch(); } }
+    }, icon('plus'), t('tpl.addRow'));
+    return h('div', { class: 'part' }, part.label ? h('h3', { class: 'part-label' }, part.label) : null, list, addBtn);
+  }
+
+  function partCards(part, data, touch) {
+    const arr = ensureArr(data, part.key);
+    const list = h('div', { class: 'trows' });
+    const renderCard = (card) => {
+      const fields = part.fields.map((label, fi) => {
+        const inp = h('input', { type: 'text', value: card['f' + fi] || '', placeholder: label });
+        inp.addEventListener('input', () => { card['f' + fi] = inp.value; touch(); });
+        return h('div', { class: 'field' }, h('label', null, label), inp);
+      });
+      const el = h('div', { class: 'trow' });
+      const del = h('button', {
+        type: 'button', class: 'iconbtn', 'aria-label': t('common.remove'),
+        on: { click: () => { const i = arr.indexOf(card); if (i > -1) arr.splice(i, 1); el.remove(); touch(); } }
+      }, icon('trash'));
+      el.append(...fields, h('div', { class: 'trow-actions' }, del));
+      return el;
+    };
+    arr.forEach((c) => list.append(renderCard(c)));
+    const addBtn = h('button', {
+      type: 'button', class: 'btn ghost',
+      on: { click: () => { const c = {}; arr.push(c); const el = renderCard(c); list.append(el); const f = el.querySelector('input'); if (f) f.focus(); touch(); } }
+    }, icon('plus'), t('tpl.addCard'));
+    return h('div', { class: 'part' }, part.label ? h('h3', { class: 'part-label' }, part.label) : null, list, addBtn);
+  }
+
+  function renderPart(part, data, touch) {
+    switch (part.type) {
+      case 'bullets': return partBullets(part, data, touch);
+      case 'checklist': return partChecklist(part, data, touch);
+      case 'text': return partText(part, data, touch);
+      case 'table': return partTable(part, data, touch);
+      case 'cards': return partCards(part, data, touch);
+      default: return null;
+    }
+  }
+
+  /* --- Réglage de la cadence --- */
+  async function createOrUpdateRun(run, cadence, startDate, weekdays) {
+    if (run) {
+      run.cadence = cadence;
+      run.start_date = startDate;
+      run.weekdays = cadence === 'intensive' ? [] : weekdays;
+      await saveRecord('challenge_runs', run);
+    } else {
+      const now = new Date().toISOString();
+      await IDB.put('challenge_runs', {
+        id: crypto.randomUUID(), user_id: S.user.id, name: t('challenge.defaultName', { year: parseYMD(startDate).getFullYear() }),
+        cadence, start_date: startDate, weekdays: cadence === 'intensive' ? [] : weekdays,
+        status: 'active', completed_at: null, deleted_at: null, created_at: now, updated_at: now, _dirty: true, _rev: 1
+      });
+    }
+    await afterChange();
+    location.hash = '#/challenge';
+  }
+
+  /* --- Étapes : ajout, édition --- */
+  function pickBrick() {
+    return new Promise((resolve) => {
+      let m = null;
+      const opt = (kind, title, desc) => h('button', {
+        type: 'button', class: 'choice', on: { click: () => { m.close(); resolve(kind); } }
+      }, h('strong', null, title), h('span', null, desc));
+      m = modal({
+        title: t('challenge.brickTitle'),
+        body: h('div', null,
+          opt('text', t('brick.text'), t('brick.textDesc')),
+          opt('bullets', t('brick.bullets'), t('brick.bulletsDesc')),
+          opt('checklist', t('brick.checklist'), t('brick.checklistDesc')),
+          opt('table', t('brick.table'), t('brick.tableDesc')),
+          opt('cards', t('brick.cards'), t('brick.cardsDesc'))),
+        actions: [{ label: t('common.cancel'), onClick: () => resolve(null) }],
+        onDismiss: () => resolve(null)
+      });
+    });
+  }
+
+  async function addChallengeStepFlow() {
+    const kind = await pickBrick();
+    if (!kind) return;
+    const title = await textPrompt({ title: t('challenge.newStepTitle'), label: t('challenge.stepTitleLabel') });
+    if (!title) return;
+    let parts;
+    if (kind === 'table') {
+      const raw = await textPrompt({ title: t('challenge.columnsTitle'), label: t('challenge.columnsLabel') });
+      const cols = (raw || '').split(',').map((x) => x.trim()).filter(Boolean);
+      parts = [{ type: 'table', key: 'lignes', columns: cols.length ? cols : [t('challenge.col1'), t('challenge.col2')] }];
+    } else if (kind === 'cards') {
+      const raw = await textPrompt({ title: t('challenge.fieldsTitle'), label: t('challenge.fieldsLabel') });
+      const flds = (raw || '').split(',').map((x) => x.trim()).filter(Boolean);
+      parts = [{ type: 'cards', key: 'cartes', fields: flds.length ? flds : [t('challenge.field1'), t('challenge.field2')] }];
+    } else if (kind === 'bullets') {
+      parts = [{ type: 'bullets', key: 'items', label: title }];
+    } else if (kind === 'checklist') {
+      parts = [{ type: 'checklist', key: 'items', label: title }];
+    } else {
+      parts = [{ type: 'text', key: 'texte', label: title, rows: 6 }];
+    }
+    const now = new Date().toISOString();
+    await IDB.put('challenge_steps', {
+      id: crypto.randomUUID(), user_id: S.user.id, position: nextPosition('challenge_steps'), day_label: null,
+      title, block: '', help: null, parts, closing: false, archived: false, deleted_at: null,
+      created_at: now, updated_at: now, _dirty: true, _rev: 1
+    });
+    await afterChange();
+  }
+
+  function editStepMeta(step) {
+    return new Promise((resolve) => {
+      const t1 = h('input', { type: 'text', value: step.title, maxlength: 100 });
+      const t2 = h('input', { type: 'text', value: step.block || '', maxlength: 60 });
+      modal({
+        title: t('mgr.rename'),
+        body: h('div', null,
+          h('div', { class: 'field' }, h('label', null, t('challenge.stepTitleLabel')), t1),
+          h('div', { class: 'field' }, h('label', null, t('challenge.stepBlockLabel')), t2)),
+        actions: [
+          { label: t('common.cancel'), onClick: () => resolve(null) },
+          {
+            label: t('common.save'), kind: 'primary',
+            onClick: async () => {
+              const v = t1.value.trim();
+              if (!v) return false;
+              step.title = v;
+              step.block = t2.value.trim();
+              await saveRecord('challenge_steps', step);
+              await afterChange();
+              resolve(true);
+              return undefined;
+            }
+          }
+        ],
+        onDismiss: () => resolve(null)
+      });
+    });
+  }
+
+  function openHelp(step) {
+    const hlp = step.help;
+    const body = hlp
+      ? h('div', null,
+        hlp.objective ? h('p', null, h('strong', null, t('challenge.helpWhy') + ' '), hlp.objective) : null,
+        hlp.howto ? h('div', null, h('strong', null, t('challenge.helpHow')), h('p', { style: { whiteSpace: 'pre-line' } }, hlp.howto)) : null,
+        hlp.example ? h('p', null, h('strong', null, t('challenge.helpExample') + ' '), hlp.example) : null,
+        hlp.scripture ? h('p', { class: 'muted' }, hlp.scripture) : null)
+      : h('p', { class: 'muted' }, t('challenge.noHelp'));
+    modal({ title: t('challenge.helpTitle'), body, actions: [{ label: t('common.ok'), kind: 'primary' }] });
+  }
+
+  /* --- Écrans --- */
+  function viewChallenge(parts) {
+    const sub = parts[0];
+    if (sub === 'steps') return viewChallengeSteps();
+    if (sub === 'step' && parts[1]) {
+      const step = S.challenge_steps.find((s) => s.id === parts[1] && !s.deleted_at);
+      if (!step) return h('main', { class: 'page' }, h('a', { class: 'backlink', href: '#/challenge' }, icon('back'), t('tab.challenge')), h('p', { class: 'empty' }, t('challenge.missing')));
+      return viewChallengeStepDetail(activeRun(), step);
+    }
+    const run = activeRun();
+    if (sub === 'setup' || !run) return viewChallengeSetup(run);
+    return viewChallengeRun(run);
+  }
+
+  function viewChallengeSetup(run) {
+    const steps = activeChallengeSteps();
+    if (!steps.length) {
+      return h('main', { class: 'page' },
+        h('h1', { class: 'note-title' }, t('tab.challenge')),
+        h('p', { class: 'lede' }, t('challenge.needSteps')),
+        h('div', { class: 'actions' }, h('a', { class: 'btn primary', href: '#/challenge/steps' }, t('challenge.manageSteps'))));
+    }
+    let cadence = (run && run.cadence) || 'intensive';
+    const selectedDays = new Set(run && run.weekdays && run.weekdays.length ? run.weekdays : [1, 3, 5]);
+    const today = fmtYMD(new Date());
+    const dateInput = h('input', { type: 'date', id: 'startdate', value: (run && run.start_date) || today });
+
+    const cadKeys = ['intensive', 'moderate', 'custom'];
+    const cadBtns = cadKeys.map((c) => h('button', {
+      type: 'button', class: 'btn', 'aria-pressed': String(c === cadence),
+      on: {
+        click: () => {
+          cadence = c;
+          cadBtns.forEach((b, i) => b.setAttribute('aria-pressed', String(cadKeys[i] === c)));
+          weekWrap.hidden = c === 'intensive';
+          updateSummary();
+        }
+      }
+    }, t('cadence.' + c)));
+
+    const dayBtns = [0, 1, 2, 3, 4, 5, 6].map((i) => h('button', {
+      type: 'button', class: 'btn', 'aria-pressed': String(selectedDays.has(i)), title: t('day.' + i),
+      on: {
+        click: (e) => {
+          if (selectedDays.has(i)) selectedDays.delete(i); else selectedDays.add(i);
+          e.currentTarget.setAttribute('aria-pressed', String(selectedDays.has(i)));
+          updateSummary();
+        }
+      }
+    }, t('day.' + i)));
+    const weekWrap = h('div', { class: 'seg', hidden: cadence === 'intensive' }, dayBtns);
+
+    const summary = h('p', { class: 'muted' });
+    function updateSummary() {
+      if (cadence !== 'intensive' && !selectedDays.size) { summary.textContent = t('challenge.pickDay'); return; }
+      const draft = { cadence, start_date: dateInput.value || today, weekdays: [...selectedDays] };
+      const last = stepDateForIndex(draft, steps.length - 1);
+      summary.textContent = t('challenge.summary', { n: steps.length, start: fmtDateLong(parseYMD(draft.start_date)), end: fmtDateLong(last) });
+    }
+    dateInput.addEventListener('input', updateSummary);
+    updateSummary();
+
+    const err = h('p', { class: 'msg err', role: 'alert' });
+    err.hidden = true;
+    const form = h('form', {
+      novalidate: true,
+      on: {
+        submit: async (e) => {
+          e.preventDefault();
+          if (!dateInput.value) { err.textContent = t('challenge.needDate'); err.hidden = false; return; }
+          if (cadence !== 'intensive' && !selectedDays.size) { err.textContent = t('challenge.pickDay'); err.hidden = false; return; }
+          err.hidden = true;
+          await createOrUpdateRun(run, cadence, dateInput.value, [...selectedDays].sort());
+        }
+      }
+    },
+    err,
+    h('div', { class: 'field' }, h('label', null, t('challenge.cadenceLabel')), h('div', { class: 'seg' }, cadBtns)),
+    weekWrap,
+    h('div', { class: 'field' }, h('label', { for: 'startdate' }, t('challenge.startLabel')), dateInput),
+    summary,
+    h('div', { class: 'actions' },
+      h('button', { type: 'submit', class: 'btn primary' }, run ? t('challenge.saveCadence') : t('challenge.start')),
+      h('a', { class: 'btn ghost', href: '#/challenge/steps' }, t('challenge.manageSteps'))));
+
+    return h('main', { class: 'page' },
+      run ? h('a', { class: 'backlink', href: '#/challenge' }, icon('back'), t('tab.challenge')) : null,
+      h('h1', { class: 'note-title' }, t(run ? 'challenge.editTitle' : 'challenge.setupTitle')),
+      form);
+  }
+
+  function viewChallengeRun(run) {
+    const steps = activeChallengeSteps();
+    const doneIds = new Set(S.challenge_entries.filter((e) => e.run_id === run.id && e.done).map((e) => e.step_id));
+    const dataIds = new Set(S.challenge_entries.filter((e) => e.run_id === run.id && e.data && Object.keys(e.data).length).map((e) => e.step_id));
+    const rows = steps.map((st, i) => {
+      const date = stepDateForIndex(run, i);
+      const state = doneIds.has(st.id) ? 'done' : dataIds.has(st.id) ? 'progress' : 'empty';
+      return h('li', null, h('a', { class: 'row steprow', href: '#/challenge/step/' + st.id },
+        h('span', { class: 'stepdate' }, fmtDateShort(date)),
+        h('span', { class: 'statedot', 'data-state': state, 'aria-hidden': 'true' }),
+        h('span', { class: 'grow' }, st.title, st.block ? h('span', { class: 'tag' }, ' · ' + st.block) : null),
+        icon('chev', 'chev')));
+    });
+    return h('main', { class: 'page' },
+      h('h1', { class: 'note-title' }, run.name),
+      h('p', { class: 'lede' }, t('challenge.progress', { done: doneIds.size, total: steps.length })),
+      h('div', { class: 'actions' },
+        h('a', { class: 'btn', href: '#/challenge/steps' }, t('challenge.manageSteps')),
+        h('a', { class: 'btn ghost', href: '#/challenge/setup' }, t('challenge.changeCadence'))),
+      h('ul', { class: 'list' }, rows));
+  }
+
+  function viewChallengeStepDetail(run, step) {
+    if (!run || !S.currentEntry) {
+      return h('main', { class: 'page' },
+        h('a', { class: 'backlink', href: '#/challenge' }, icon('back'), t('tab.challenge')),
+        h('p', { class: 'empty' }, t('challenge.noRun')));
+    }
+    const steps = activeChallengeSteps();
+    const idx = steps.findIndex((s) => s.id === step.id);
+    const date = idx >= 0 ? stepDateForIndex(run, idx) : null;
+    const entry = S.currentEntry;
+    const touch = () => touchEntry(entry);
+    const isClosing = !!step.closing;
+
+    const helpBtn = h('button', { type: 'button', class: 'btn ghost helpbtn', on: { click: () => openHelp(step) } }, icon('bulb'), t('challenge.help'));
+    const doneBtn = h('button', {
+      type: 'button', class: 'btn' + (entry.done ? ' primary' : ''),
+      on: {
+        click: () => {
+          entry.done = !entry.done;
+          entry.done_at = entry.done ? new Date().toISOString() : null;
+          touchEntry(entry);
+          render();
+        }
+      }
+    }, entry.done ? icon('check') : null, entry.done ? t('challenge.done') : t('challenge.markDone'));
+
+    let body;
+    if (isClosing) {
+      const total = steps.length - 1;
+      const doneCount = S.challenge_entries.filter((e) => e.run_id === run.id && e.done && e.step_id !== step.id).length;
+      body = h('div', null,
+        h('p', null, t('challenge.closingText', { done: doneCount, total })),
+        h('div', { class: 'actions' }, h('button', {
+          type: 'button', class: 'btn primary',
+          on: {
+            click: async () => {
+              run.status = 'completed';
+              run.completed_at = new Date().toISOString();
+              await saveRecord('challenge_runs', run);
+              entry.done = true;
+              entry.done_at = new Date().toISOString();
+              touchEntry(entry);
+              toast(t('challenge.closed'));
+              render();
+            }
+          }
+        }, icon('lock2'), t('challenge.close'))));
+    } else {
+      const rendered = (step.parts || []).map((p) => renderPart(p, entry.data, touch)).filter(Boolean);
+      body = h('div', null, rendered);
+    }
+
+    return h('main', { class: 'page' },
+      h('a', { class: 'backlink', href: '#/challenge' }, icon('back'), t('tab.challenge')),
+      date ? h('p', { class: 'muted' }, cap(date.toLocaleDateString(S.settings.language, { weekday: 'long', day: 'numeric', month: 'long' }))) : null,
+      step.block ? h('span', { class: 'pill' }, step.block) : null,
+      h('h1', { class: 'note-title' }, step.title),
+      h('div', { class: 'actions' }, helpBtn, !isClosing ? doneBtn : null),
+      body);
+  }
+
+  function viewChallengeSteps() {
+    const showArch = S.ui.showArch.challenge_steps;
+    const all = S.challenge_steps.filter((r) => !r.deleted_at).sort(byPos);
+    const vis = showArch ? all : all.filter((r) => !r.archived);
+    const hasArch = all.some((r) => r.archived);
+    const iconBtn = (name, label, fn, disabled) => h('button', {
+      type: 'button', class: 'iconbtn', 'aria-label': label, title: label, disabled: !!disabled, on: { click: fn }
+    }, icon(name));
+    const rows = vis.map((st, i) => h('li', { class: 'mrow' + (st.archived ? ' is-archived' : '') },
+      h('button', { type: 'button', class: 'namebtn', title: t('mgr.rename'), on: { click: () => editStepMeta(st) } },
+        st.title, st.block ? h('span', { class: 'tag' }, ' · ' + st.block) : null, st.archived ? h('span', { class: 'tag' }, t('mgr.archivedTag')) : null),
+      iconBtn('up', t('mgr.up'), () => mgrMove('challenge_steps', vis, i, -1), i === 0),
+      iconBtn('down', t('mgr.down'), () => mgrMove('challenge_steps', vis, i, 1), i === vis.length - 1),
+      iconBtn(st.archived ? 'restore' : 'archive', st.archived ? t('mgr.restore') : t('mgr.archive'), () => mgrToggleArchive('challenge_steps', st)),
+      iconBtn('trash', t('mgr.delete'), () => mgrDelete('challenge_steps', st))));
+    return h('main', { class: 'page' },
+      h('a', { class: 'backlink', href: '#/challenge' }, icon('back'), t('tab.challenge')),
+      h('h1', { class: 'note-title' }, t('challenge.stepsTitle')),
+      h('p', { class: 'lede' }, t('challenge.stepsInfo')),
+      vis.length ? h('ul', { class: 'list' }, rows) : h('p', { class: 'empty' }, t('mgr.empty')),
+      h('div', { class: 'actions' },
+        h('button', { type: 'button', class: 'btn primary', on: { click: addChallengeStepFlow } }, icon('plus'), t('mgr.add')),
+        hasArch ? h('button', {
+          type: 'button', class: 'btn',
+          on: { click: () => { S.ui.showArch.challenge_steps = !showArch; render(); } }
+        }, showArch ? t('mgr.hideArchived') : t('mgr.showArchived')) : null));
+  }
+
+  /* ==========================================================
      Sauvegarde : export / import
      ========================================================== */
   function exportBackup() {
     const data = {
-      app: 'oree', version: 1, exportedAt: new Date().toISOString(),
-      settings: { theme: S.settings.theme, language: S.settings.language, data: S.settings.data },
-      domains: S.domains.map(strip),
-      categories: S.categories.map(strip)
+      app: 'oree', version: 2, exportedAt: new Date().toISOString(),
+      settings: { theme: S.settings.theme, language: S.settings.language, data: S.settings.data }
     };
+    TABLES.forEach((k) => { data[k] = S[k].map(strip); });
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = h('a', { href: url, download: 'oree-sauvegarde-' + new Date().toISOString().slice(0, 10) + '.json' });
@@ -1512,8 +2257,9 @@
     if (!(await confirmDialog(t('bk.importConfirm'), t('bk.import')))) return;
     const now = new Date().toISOString();
     try {
-      for (const kind of TABLES) {
-        for (const r of j[kind]) {
+      // Domaines et catégories : forme simple, validée champ par champ.
+      for (const kind of ['domains', 'categories']) {
+        for (const r of Array.isArray(j[kind]) ? j[kind] : []) {
           if (!r || !UUID_RE.test(String(r.id)) || typeof r.name !== 'string') continue;
           await IDB.put(kind, {
             id: r.id, user_id: S.user.id, name: r.name.slice(0, 80), color: typeof r.color === 'string' ? r.color : null,
@@ -1521,6 +2267,34 @@
             deleted_at: r.deleted_at || null, created_at: r.created_at || now, updated_at: now, _dirty: true, _rev: 1
           });
         }
+      }
+      // Défi : présent seulement dans les sauvegardes plus récentes (absent = ignoré, sans erreur).
+      for (const r of Array.isArray(j.challenge_steps) ? j.challenge_steps : []) {
+        if (!r || !UUID_RE.test(String(r.id)) || typeof r.title !== 'string' || !Array.isArray(r.parts)) continue;
+        await IDB.put('challenge_steps', {
+          id: r.id, user_id: S.user.id, position: Number.isFinite(r.position) ? r.position : 0,
+          day_label: typeof r.day_label === 'string' ? r.day_label : null, title: r.title.slice(0, 200),
+          block: typeof r.block === 'string' ? r.block : '', help: r.help && typeof r.help === 'object' ? r.help : null,
+          parts: r.parts, closing: !!r.closing, archived: !!r.archived, deleted_at: r.deleted_at || null,
+          created_at: r.created_at || now, updated_at: now, _dirty: true, _rev: 1
+        });
+      }
+      for (const r of Array.isArray(j.challenge_runs) ? j.challenge_runs : []) {
+        if (!r || !UUID_RE.test(String(r.id)) || !['intensive', 'moderate', 'custom'].includes(r.cadence) || typeof r.start_date !== 'string') continue;
+        await IDB.put('challenge_runs', {
+          id: r.id, user_id: S.user.id, name: typeof r.name === 'string' ? r.name.slice(0, 120) : t('challenge.defaultName', { year: '' }),
+          cadence: r.cadence, start_date: r.start_date, weekdays: Array.isArray(r.weekdays) ? r.weekdays : [],
+          status: typeof r.status === 'string' ? r.status : 'active', completed_at: r.completed_at || null,
+          deleted_at: r.deleted_at || null, created_at: r.created_at || now, updated_at: now, _dirty: true, _rev: 1
+        });
+      }
+      for (const r of Array.isArray(j.challenge_entries) ? j.challenge_entries : []) {
+        if (!r || !UUID_RE.test(String(r.id)) || !UUID_RE.test(String(r.run_id)) || !UUID_RE.test(String(r.step_id))) continue;
+        await IDB.put('challenge_entries', {
+          id: r.id, user_id: S.user.id, run_id: r.run_id, step_id: r.step_id,
+          data: r.data && typeof r.data === 'object' ? r.data : {}, done: !!r.done, done_at: r.done_at || null,
+          deleted_at: r.deleted_at || null, created_at: r.created_at || now, updated_at: now, _dirty: true, _rev: 1
+        });
       }
       const st = j.settings;
       if (st && ['day', 'night', 'sepia', 'auto'].includes(st.theme) && ['fr', 'en'].includes(st.language)) {
@@ -1547,10 +2321,11 @@
     window.scrollTo(0, y);
   }
 
-  window.addEventListener('hashchange', () => {
+  window.addEventListener('hashchange', async () => {
     if (!location.hash.startsWith('#/')) return;
     S.route = currentRoute();
     S.navOpen = false;
+    await prepareRoute();
     render();
     window.scrollTo(0, 0);
   });
@@ -1591,7 +2366,7 @@
     }
 
     S.route = currentRoute();
-    if (S.user) { await loadLists(); S.locked = !!S.lock.enabled; }
+    if (S.user) { await loadLists(); S.locked = !!S.lock.enabled; if (!S.locked) await prepareRoute(); }
     render();
     if (S.user && !S.offline) { await syncAll(); await maybeOnboard(); }
   }
