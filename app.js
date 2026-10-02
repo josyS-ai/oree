@@ -13,118 +13,118 @@
   const SEED_STEPS = [
     { block: 'Bilan positif', title: 'Gratitude envers Dieu',
       parts: [{ type: 'bullets', key: 'gratitudes', label: 'Actions de grâce' }],
-      help: { objective: 'Prendre le temps de repenser à ce que le Seigneur a été pour toi cette année.', scripture: 'Psaume 63:2-5' } },
+      help: { objective: 'Je prends le temps de repenser à ce que le Seigneur a été pour moi cette année.', scripture: 'Psaume 63:2-5' } },
     { block: 'Bilan positif', title: 'Transformation intérieure',
       parts: [{ type: 'table', key: 'transformations', columns: ['Attitude / trait initial', 'Changement opéré'], scale: true, scaleLabel: 'Progression (1 à 10)' },
         { type: 'text', key: 'conclusion', label: 'Conclusion' }],
-      help: { objective: 'Apprécier les changements que Dieu a opérés en toi, même les plus petits.', scripture: '2 Corinthiens 4:16' } },
+      help: { objective: 'J’apprécie les changements que Dieu a opérés en moi, même les plus petits.', scripture: '2 Corinthiens 4:16' } },
     { block: 'Bilan positif', title: 'Bénédiction pour les autres',
       parts: [{ type: 'table', key: 'benedictions', columns: ['Bénéficiaires', 'Bénédiction apportée', 'Motivation'] },
         { type: 'text', key: 'conclusion', label: 'Conclusion' }],
-      help: { objective: 'Examiner ta marche dans l’amour et te réjouir d’avoir été un canal de bénédiction.', scripture: 'Actes 20:35' } },
+      help: { objective: 'J’examine ma marche dans l’amour et je me réjouis d’avoir été un canal de bénédiction.', scripture: 'Actes 20:35' } },
     { block: 'Bilan positif', title: 'Délivrances et personnes-relais',
       parts: [{ type: 'bullets', key: 'bienfaits', label: 'Bienfaits, victoires, prières exaucées' },
         { type: 'bullets', key: 'personnes', label: 'Personnes par lesquelles Dieu m’a bénie' }],
-      help: { objective: 'Te souvenir des délivrances et des personnes que Dieu a mises sur ta route.', scripture: 'Psaume 71:6' } },
+      help: { objective: 'Je me souviens des délivrances et des personnes que Dieu a mises sur ma route.', scripture: 'Psaume 71:6' } },
     { block: 'Bilan positif', title: 'Objectifs accomplis',
       parts: [{ type: 'checklist', key: 'objectifs', label: 'Objectifs atteints cette année' },
         { type: 'text', key: 'horsplan', label: 'Accomplissements non planifiés' }],
-      help: { objective: 'Rendre grâce pour ce que Dieu t’a permis d’accomplir cette année.', scripture: 'Jean 6:63' } },
+      help: { objective: 'Je rends grâce pour ce que Dieu m’a permis d’accomplir cette année.', scripture: 'Jean 6:63' } },
     { block: 'Bilan positif', title: 'Actions de grâce pour les épreuves',
       parts: [{ type: 'text', key: 'revelation', label: 'Ce que le Seigneur m’a révélé à travers ces épreuves' },
         { type: 'text', key: 'priere', label: 'Prière et remerciement' }],
-      help: { objective: 'Dire merci à Dieu même pour les épreuves traversées cette année.', scripture: 'Jacques 1:2 ; 1 Thessaloniciens 5:18' } },
+      help: { objective: 'Je dis merci à Dieu même pour les épreuves traversées cette année.', scripture: 'Jacques 1:2 ; 1 Thessaloniciens 5:18' } },
     { block: 'Analyse et ajustements', title: 'Objectifs non atteints',
       parts: [{ type: 'table', key: 'nonatteints', columns: ['Objectif non atteint', 'Causes / obstacles', 'Mesures d’ajustement'] }],
-      help: { objective: 'Identifier les objectifs non atteints et réfléchir aux causes sans te juger.', scripture: 'Proverbes 26:11' } },
+      help: { objective: 'J’identifie les objectifs non atteints et je réfléchis aux causes sans me juger.', scripture: 'Proverbes 26:11' } },
     { block: 'Analyse et ajustements', title: 'Audit du temps',
       parts: [{ type: 'table', key: 'audittemps', columns: ['Activité', 'Impact (m’aide ou m’éloigne)'], scale: true, scaleLabel: 'Fréquence (1 à 10)' },
         { type: 'text', key: 'conclusion', label: 'Conclusion' }],
       help: {
-        objective: 'Prendre conscience des activités qui te rapprochent de tes objectifs et de celles qui t’en éloignent.',
-        howto: '1. Liste tes activités les plus fréquentes cette année.\n2. Indique la fréquence de 1 à 10.\n3. Note si chacune t’a aidée ou éloignée de tes objectifs.',
+        objective: 'Je prends conscience des activités qui me rapprochent de mes objectifs et de celles qui m’en éloignent.',
+        howto: '1. Je liste mes activités les plus fréquentes cette année.\n2. J’indique la fréquence de 1 à 10.\n3. Je note si chacune m’a aidée ou éloignée de mes objectifs.',
         example: 'Réseaux sociaux (fréquence : 8/10) → m’éloigne de mes objectifs.',
         scripture: 'Éphésiens 5:16'
       } },
     { block: 'Analyse et ajustements', title: 'Audit financier',
       parts: [{ type: 'table', key: 'auditfinances', columns: ['Poste de dépense', 'Alignement spirituel'], scale: true, scaleLabel: 'Montant ou proportion (1 à 10)' },
         { type: 'text', key: 'conclusion', label: 'Conclusion sur l’intendance' }],
-      help: { objective: 'Examiner comment tu as utilisé ton argent cette année, en bonne intendance.', scripture: 'Proverbes 3:9 ; 1 Timothée 6:17' } },
+      help: { objective: 'J’examine comment j’ai utilisé mon argent cette année, en bonne intendance.', scripture: 'Proverbes 3:9 ; 1 Timothée 6:17' } },
     { block: 'Analyse et ajustements', title: 'Erreurs à ne plus répéter',
       parts: [{ type: 'cards', key: 'erreurs', fields: ['Domaine', 'Erreur commise', 'Cause profonde', 'Mesure à cultiver'] }],
-      help: { objective: 'Identifier les causes profondes de tes erreurs pour ne plus y retomber.', scripture: 'Proverbes 26:11' } },
+      help: { objective: 'J’identifie les causes profondes de mes erreurs pour ne plus y retomber.', scripture: 'Proverbes 26:11' } },
     { block: 'Vision', title: 'Prière d’alignement & vision globale',
       parts: [{ type: 'text', key: 'vision', label: 'Impressions, versets reçus, révélations', rows: 8 }],
-      help: { objective: 'Demander au Seigneur de te révéler Sa vision pour ton année, dans chaque domaine de ta vie.', scripture: 'Jérémie 33:3 ; Éphésiens 2:10' } },
+      help: { objective: 'Je demande au Seigneur de me révéler Sa vision pour mon année, dans chaque domaine de ma vie.', scripture: 'Jérémie 33:3 ; Éphésiens 2:10' } },
     { block: 'Vision', title: 'Vision — Vie spirituelle',
-      parts: [{ type: 'text', key: 'spirituel', label: 'Ma vie spirituelle (écris au présent, comme si c’était déjà une réalité)', rows: 6 },
+      parts: [{ type: 'text', key: 'spirituel', label: 'Ma vie spirituelle (j’écris au présent, comme si c’était déjà une réalité)', rows: 6 },
         { type: 'text', key: 'ancrage', label: 'Verset d’ancrage' }],
-      help: { objective: 'Voir ta relation et ta marche avec le Seigneur au travers de Son regard.', scripture: 'Marc 1:35' } },
+      help: { objective: 'Je vois ma relation et ma marche avec le Seigneur au travers de Son regard.', scripture: 'Marc 1:35' } },
     { block: 'Vision', title: 'Vision — Ministère, carrière & études',
       parts: [{ type: 'text', key: 'court', label: 'Court terme (1 an)' }, { type: 'text', key: 'long', label: 'Long terme (5 à 15 ans)' }],
-      help: { objective: 'Voir ton ministère, ta carrière ou tes études au travers du regard de Dieu, à court et long terme.', scripture: 'Jérémie 29:11' } },
+      help: { objective: 'Je vois mon ministère, ma carrière ou mes études au travers du regard de Dieu, à court et long terme.', scripture: 'Jérémie 29:11' } },
     { block: 'Vision', title: 'Vision — Relations, famille, santé & développement',
       parts: [{ type: 'text', key: 'relations', label: 'Relations & famille' }, { type: 'text', key: 'sante', label: 'Santé & bien-être' },
         { type: 'text', key: 'talents', label: 'Talents & compétences à développer' }],
-      help: { objective: 'Voir tes relations, ta santé et ton développement personnel comme Dieu les voit.', scripture: 'Ésaïe 53:5 ; 3 Jean 2' } },
+      help: { objective: 'Je vois mes relations, ma santé et mon développement personnel comme Dieu les voit.', scripture: 'Ésaïe 53:5 ; 3 Jean 2' } },
     { block: 'Vision', title: 'Vision — Finances & influence',
       parts: [{ type: 'text', key: 'finances', label: 'Finances — prospérité & gestion' }, { type: 'text', key: 'influence', label: 'Influence — héritage & impact' }],
-      help: { objective: 'Voir tes finances et ton impact dans la société au travers du regard de Dieu.', scripture: 'Proverbes 10:22 ; Tite 3:8' } },
+      help: { objective: 'Je vois mes finances et mon impact dans la société au travers du regard de Dieu.', scripture: 'Proverbes 10:22 ; Tite 3:8' } },
     { block: 'Objectifs SMART', title: 'Objectifs — Spirituel',
       parts: [{ type: 'cards', key: 'objectifs', fields: ['Titre de l’objectif', 'Indicateur de mesure (KPI)', 'Date cible'] }],
-      help: { objective: 'Écrire des objectifs pour ta vie spirituelle, à partir de la vision reçue.', scripture: null } },
+      help: { objective: 'J’écris des objectifs pour ma vie spirituelle, à partir de la vision reçue.', scripture: null } },
     { block: 'Objectifs SMART', title: 'Objectifs — Ministère & carrière',
       parts: [{ type: 'cards', key: 'objectifs', fields: ['Titre de l’objectif', 'Indicateur de mesure (KPI)', 'Date cible'] }],
-      help: { objective: 'Écrire tes objectifs pour ton ministère, ta carrière, tes affaires ou tes études.', scripture: null } },
+      help: { objective: 'J’écris mes objectifs pour mon ministère, ma carrière, mes affaires ou mes études.', scripture: null } },
     { block: 'Objectifs SMART', title: 'Objectifs — Social & personnel',
       parts: [{ type: 'cards', key: 'objectifs', fields: ['Titre de l’objectif', 'Indicateur de mesure (KPI)', 'Date cible'] }],
-      help: { objective: 'Écrire tes objectifs pour tes relations, ta famille, ta santé et ton développement personnel.', scripture: null } },
+      help: { objective: 'J’écris mes objectifs pour mes relations, ma famille, ma santé et mon développement personnel.', scripture: null } },
     { block: 'Objectifs SMART', title: 'Objectifs — Finances & influence',
       parts: [{ type: 'cards', key: 'objectifs', fields: ['Titre de l’objectif', 'Indicateur de mesure (KPI)', 'Date cible'] }],
-      help: { objective: 'Écrire tes objectifs financiers et ceux liés à ton influence dans la société.', scripture: null } },
+      help: { objective: 'J’écris mes objectifs financiers et ceux liés à mon influence dans la société.', scripture: null } },
     { block: 'Objectifs SMART', title: 'Consolidation & validation SMART',
       parts: [{ type: 'text', key: 'revue', label: 'Revue de mes objectifs', rows: 8 }, { type: 'bullets', key: 'retenus', label: 'Liste finale des objectifs retenus' }],
       help: {
-        objective: 'Relire tes objectifs pour t’assurer qu’ils sont bien formulés avant de passer au plan d’action.',
-        howto: '1. Formule chaque objectif de façon positive.\n2. Vérifie qu’il est spécifique, mesurable, réaliste et limité dans le temps.\n3. Regroupe ou découpe les objectifs si besoin, puis retiens ta liste définitive.',
+        objective: 'Je relis mes objectifs pour m’assurer qu’ils sont bien formulés avant de passer au plan d’action.',
+        howto: '1. Je formule chaque objectif de façon positive.\n2. Je vérifie qu’il est spécifique, mesurable, réaliste et limité dans le temps.\n3. Je regroupe ou découpe mes objectifs si besoin, puis je retiens ma liste définitive.',
         scripture: null
       } },
     { block: 'Plan d’action', title: 'Plan d’action — Spirituel',
       parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
         { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
-      help: { objective: 'Élaborer ton plan d’action pour atteindre tes objectifs spirituels.', scripture: null } },
+      help: { objective: 'J’élabore mon plan d’action pour atteindre mes objectifs spirituels.', scripture: null } },
     { block: 'Plan d’action', title: 'Plan d’action — Ministère',
       parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
         { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
-      help: { objective: 'Élaborer ton plan d’action pour ton ministère.', scripture: null } },
+      help: { objective: 'J’élabore mon plan d’action pour mon ministère.', scripture: null } },
     { block: 'Plan d’action', title: 'Plan d’action — Professionnel / académique',
       parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
         { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
-      help: { objective: 'Élaborer ton plan d’action pour ton travail, tes affaires ou tes études.', scripture: null } },
+      help: { objective: 'J’élabore mon plan d’action pour mon travail, mes affaires ou mes études.', scripture: null } },
     { block: 'Plan d’action', title: 'Plan d’action — Social & couple',
       parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
         { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
-      help: { objective: 'Élaborer ton plan d’action pour tes relations, ta famille et ta vie de couple.', scripture: null } },
+      help: { objective: 'J’élabore mon plan d’action pour mes relations, ma famille et ma vie de couple.', scripture: null } },
     { block: 'Plan d’action', title: 'Plan d’action — Santé & développement personnel',
       parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
         { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
-      help: { objective: 'Élaborer ton plan d’action pour ta santé, ton bien-être et ton développement personnel.', scripture: null } },
+      help: { objective: 'J’élabore mon plan d’action pour ma santé, mon bien-être et mon développement personnel.', scripture: null } },
     { block: 'Plan d’action', title: 'Plan d’action — Finances',
       parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
         { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
-      help: { objective: 'Élaborer ton plan d’action pour tes finances.', scripture: null } },
+      help: { objective: 'J’élabore mon plan d’action pour mes finances.', scripture: null } },
     { block: 'Plan d’action', title: 'Plan d’action — Influence',
       parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
         { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
-      help: { objective: 'Élaborer ton plan d’action pour ton influence et ton apport dans la société.', scripture: null } },
+      help: { objective: 'J’élabore mon plan d’action pour mon influence et mon apport dans la société.', scripture: null } },
     { block: 'Clôture', title: 'Optimisation et délais',
       parts: [{ type: 'table', key: 'echeances', columns: ['Action', 'Domaine', 'Date limite'] }],
-      help: { objective: 'Relire tous tes plans d’action et t’assurer que chaque échéance est réaliste.', scripture: null } },
+      help: { objective: 'Je relis tous mes plans d’action et je m’assure que chaque échéance est réaliste.', scripture: null } },
     { block: 'Clôture', title: 'Tableau de bord d’engagement',
       parts: [{ type: 'text', key: 'engagement', label: 'Ce que je veux mettre en place pour tenir mes objectifs', rows: 6 }],
       help: {
-        objective: 'Te donner les moyens de rester fidèle à ta vision tout au long de l’année.',
-        howto: '1. Garde ta vision et tes objectifs à portée de main.\n2. Reste ouverte à toute nouvelle direction du Saint-Esprit.\n3. Fais un bilan mensuel de ta progression.\n4. Compte sur la puissance du Saint-Esprit.\n5. Ne renonce pas à ces habitudes de suivi.',
+        objective: 'Je me donne les moyens de rester fidèle à ma vision tout au long de l’année.',
+        howto: '1. Je garde ma vision et mes objectifs à portée de main.\n2. Je reste ouverte à toute nouvelle direction du Saint-Esprit.\n3. Je fais un bilan mensuel de ma progression.\n4. Je compte sur la puissance du Saint-Esprit.\n5. Je ne renonce pas à ces habitudes de suivi.',
         scripture: null
       } },
     { block: 'Clôture', title: 'Attestation de fin de défi', closing: true, parts: [], help: null }
@@ -135,7 +135,7 @@
     SUPABASE_URL: 'https://foboghwbppqbyvfcjkoj.supabase.co',
     SUPABASE_KEY: 'sb_publishable_qh12xNgNAnoVTLhaUL8g6A_absINt8r', // clé publique : sans danger dans le code
     ALLOW_SIGNUP: false, // usage personnel : les comptes se créent dans Supabase
-    VERSION: '1.2 (lot 2)'
+    VERSION: '1.3 (lot 2)'
   };
 
   const TABLES = ['domains', 'categories', 'challenge_steps', 'challenge_runs', 'challenge_entries'];
@@ -237,6 +237,19 @@
       'challenge.close': 'Clôturer le défi', 'challenge.closed': 'Défi clôturé. Bravo !',
       'tpl.addLine': 'Ajouter une ligne', 'tpl.addRow': 'Ajouter une ligne', 'tpl.addCard': 'Ajouter une carte',
       'tpl.scale': 'Évaluation (1 à 10)', 'common.remove': 'Supprimer',
+      'challenge.verseTextHint': 'Ajoute le texte du verset selon la version de la Bible que tu préfères.',
+      'challenge.verseTextPlaceholder': 'Texte du verset',
+      'challenge.resetProgress': 'Réinitialiser la progression',
+      'challenge.resetConfirm': 'Toutes les réponses déjà saisies pour ce défi seront effacées, mais tes étapes et ta cadence restent inchangées.',
+      'challenge.resetConfirmBtn': 'Réinitialiser', 'challenge.resetDone': 'Progression réinitialisée.',
+      'challenge.editStepTitle': "Modifier l'étape", 'challenge.contentTitle': 'Contenu',
+      'challenge.noParts': 'Aucune brique pour le moment.', 'challenge.addPart': 'Ajouter une brique',
+      'challenge.partLabelTitle': 'Titre de cette brique', 'challenge.partLabelHint': 'Titre',
+      'challenge.closingFixed': 'Cette étape clôture le défi ; son contenu ne se modifie pas.',
+      'challenge.snapshotSave': 'Sauvegarder ce programme', 'challenge.snapshotLoad': 'Restaurer un programme',
+      'challenge.snapshotSaved': 'Programme sauvegardé.',
+      'challenge.snapshotRestoreConfirm': "Restaurer ce programme ? Tes étapes actuelles seront remplacées ; les réponses déjà saisies restent conservées mais ne seront plus reliées à une étape visible.",
+      'challenge.snapshotRestore': 'Restaurer', 'challenge.snapshotRestored': 'Programme restauré.',
 
       'nav.title': 'Navigation sur ordinateur', 'nav.visible': 'Visible', 'nav.rail': 'Icônes seulement', 'nav.hidden': 'Masquée',
       'nav.hint': 'Réglage propre à cet appareil. La touche F10 affiche ou masque la navigation.',
@@ -389,6 +402,19 @@
       'challenge.close': 'Close the challenge', 'challenge.closed': 'Challenge closed. Well done!',
       'tpl.addLine': 'Add a line', 'tpl.addRow': 'Add a row', 'tpl.addCard': 'Add a card',
       'tpl.scale': 'Rating (1 to 10)', 'common.remove': 'Remove',
+      'challenge.verseTextHint': 'Add the verse text in the Bible version you prefer.',
+      'challenge.verseTextPlaceholder': 'Verse text',
+      'challenge.resetProgress': 'Reset progress',
+      'challenge.resetConfirm': 'All answers already entered for this challenge will be cleared, but your steps and pace stay unchanged.',
+      'challenge.resetConfirmBtn': 'Reset', 'challenge.resetDone': 'Progress reset.',
+      'challenge.editStepTitle': 'Edit step', 'challenge.contentTitle': 'Content',
+      'challenge.noParts': 'No block yet.', 'challenge.addPart': 'Add a block',
+      'challenge.partLabelTitle': 'Title of this block', 'challenge.partLabelHint': 'Title',
+      'challenge.closingFixed': 'This step closes the challenge; its content cannot be changed.',
+      'challenge.snapshotSave': 'Save this program', 'challenge.snapshotLoad': 'Restore a program',
+      'challenge.snapshotSaved': 'Program saved.',
+      'challenge.snapshotRestoreConfirm': "Restore this program? Your current steps will be replaced; answers already entered stay saved but won't be linked to a visible step anymore.",
+      'challenge.snapshotRestore': 'Restore', 'challenge.snapshotRestored': 'Program restored.',
 
       'nav.title': 'Navigation on computer', 'nav.visible': 'Visible', 'nav.rail': 'Icons only', 'nav.hidden': 'Hidden',
       'nav.hint': 'This setting is specific to this device. The F10 key shows or hides the navigation.',
@@ -1791,11 +1817,23 @@
   /* --- Briques de saisie (parts) --- */
   function ensureArr(data, key) { if (!Array.isArray(data[key])) data[key] = []; return data[key]; }
 
+  function autoGrow(ta) {
+    const resize = () => { ta.style.height = 'auto'; ta.style.height = ta.scrollHeight + 'px'; };
+    ta.addEventListener('input', resize);
+    requestAnimationFrame(resize);
+    return ta;
+  }
+  function growField(value, placeholder) {
+    const ta = h('textarea', { rows: '1', class: 'grow-field', placeholder: placeholder || undefined });
+    ta.value = value || '';
+    return autoGrow(ta);
+  }
+
   function partBullets(part, data, touch) {
     const arr = ensureArr(data, part.key);
     const list = h('ul', { class: 'blist' });
     const renderItem = (val) => {
-      const inp = h('input', { type: 'text', value: val || '', 'aria-label': part.label || t('tpl.bulletItem') });
+      const inp = growField(val, part.label || t('tpl.bulletItem'));
       const li = h('li', { class: 'brow' });
       const del = h('button', {
         type: 'button', class: 'iconbtn', 'aria-label': t('common.remove'),
@@ -1818,7 +1856,7 @@
     const list = h('ul', { class: 'blist' });
     const renderItem = (item) => {
       const cb = h('input', { type: 'checkbox', checked: !!item.done });
-      const inp = h('input', { type: 'text', value: item.text || '' });
+      const inp = growField(item.text, part.label);
       const li = h('li', { class: 'brow' + (item.done ? ' done' : '') });
       const del = h('button', {
         type: 'button', class: 'iconbtn', 'aria-label': t('common.remove'),
@@ -1838,20 +1876,26 @@
   }
 
   function partText(part, data, touch) {
-    const ta = h('textarea', { rows: String(part.rows || 5) });
-    ta.value = data[part.key] || '';
+    const ta = growField(data[part.key], null);
+    ta.rows = String(part.rows || 5);
+    ta.style.height = '';
+    requestAnimationFrame(() => { ta.style.height = 'auto'; ta.style.height = ta.scrollHeight + 'px'; });
     ta.addEventListener('input', () => { data[part.key] = ta.value; touch(); });
     return h('div', { class: 'part' }, part.label ? h('h3', { class: 'part-label' }, part.label) : null, ta);
   }
 
   function partTable(part, data, touch) {
     const arr = ensureArr(data, part.key);
-    const list = h('div', { class: 'trows' });
+    const gridCols = part.columns.map(() => '1fr').join(' ') + (part.scale ? ' 8.5rem' : '');
+    const head = h('div', { class: 'ttable-head', style: { gridTemplateColumns: gridCols } },
+      part.columns.map((c) => h('span', null, c)),
+      part.scale ? h('span', null, part.scaleLabel || t('tpl.scale')) : null);
+    const list = h('div', { class: 'ttable' });
     const renderRow = (row) => {
       const cells = part.columns.map((label, ci) => {
-        const inp = h('input', { type: 'text', value: row['c' + ci] || '', placeholder: label });
+        const inp = growField(row['c' + ci], label);
         inp.addEventListener('input', () => { row['c' + ci] = inp.value; touch(); });
-        return h('div', { class: 'field' }, h('label', null, label), inp);
+        return inp;
       });
       let scaleEl = null;
       if (part.scale) {
@@ -1859,9 +1903,9 @@
         const rng = h('input', { type: 'range', min: '1', max: '10', value: String(row.scale) });
         const out = h('span', { class: 'rangeval' }, String(row.scale));
         rng.addEventListener('input', () => { row.scale = Number(rng.value); out.textContent = rng.value; touch(); });
-        scaleEl = h('div', { class: 'field' }, h('label', null, part.scaleLabel || t('tpl.scale')), h('div', { class: 'rangewrap' }, rng, out));
+        scaleEl = h('div', { class: 'rangewrap' }, rng, out);
       }
-      const el = h('div', { class: 'trow' });
+      const el = h('div', { class: 'ttable-row', style: { gridTemplateColumns: gridCols } });
       const del = h('button', {
         type: 'button', class: 'iconbtn', 'aria-label': t('common.remove'),
         on: { click: () => { const i = arr.indexOf(row); if (i > -1) arr.splice(i, 1); el.remove(); touch(); } }
@@ -1874,7 +1918,7 @@
       type: 'button', class: 'btn ghost',
       on: { click: () => { const r = {}; arr.push(r); list.append(renderRow(r)); touch(); } }
     }, icon('plus'), t('tpl.addRow'));
-    return h('div', { class: 'part' }, part.label ? h('h3', { class: 'part-label' }, part.label) : null, list, addBtn);
+    return h('div', { class: 'part' }, part.label ? h('h3', { class: 'part-label' }, part.label) : null, head, list, addBtn);
   }
 
   function partCards(part, data, touch) {
@@ -1882,7 +1926,7 @@
     const list = h('div', { class: 'trows' });
     const renderCard = (card) => {
       const fields = part.fields.map((label, fi) => {
-        const inp = h('input', { type: 'text', value: card['f' + fi] || '', placeholder: label });
+        const inp = growField(card['f' + fi], label);
         inp.addEventListener('input', () => { card['f' + fi] = inp.value; touch(); });
         return h('div', { class: 'field' }, h('label', null, label), inp);
       });
@@ -1897,7 +1941,7 @@
     arr.forEach((c) => list.append(renderCard(c)));
     const addBtn = h('button', {
       type: 'button', class: 'btn ghost',
-      on: { click: () => { const c = {}; arr.push(c); const el = renderCard(c); list.append(el); const f = el.querySelector('input'); if (f) f.focus(); touch(); } }
+      on: { click: () => { const c = {}; arr.push(c); const el = renderCard(c); list.append(el); const f = el.querySelector('textarea,input'); if (f) f.focus(); touch(); } }
     }, icon('plus'), t('tpl.addCard'));
     return h('div', { class: 'part' }, part.label ? h('h3', { class: 'part-label' }, part.label) : null, list, addBtn);
   }
@@ -1932,6 +1976,16 @@
     location.hash = '#/challenge';
   }
 
+  async function resetRunProgress(run) {
+    const ok = await confirmDialog(t('challenge.resetConfirm'), t('challenge.resetConfirmBtn'), true);
+    if (!ok) return;
+    const now = new Date().toISOString();
+    const mine = S.challenge_entries.filter((e) => e.run_id === run.id && !e.deleted_at);
+    for (const e of mine) { e.deleted_at = now; e.data = {}; e.done = false; e.done_at = null; await saveRecord('challenge_entries', e); }
+    await afterChange();
+    toast(t('challenge.resetDone'));
+  }
+
   /* --- Étapes : ajout, édition --- */
   function pickBrick() {
     return new Promise((resolve) => {
@@ -1953,63 +2007,137 @@
     });
   }
 
-  async function addChallengeStepFlow() {
+  function partSummary(part) {
+    const kindLabel = t('brick.' + part.type);
+    if (part.type === 'table') return kindLabel + ' — ' + part.columns.join(', ');
+    if (part.type === 'cards') return kindLabel + ' — ' + part.fields.join(', ');
+    if (part.label) return kindLabel + ' — ' + part.label;
+    return kindLabel;
+  }
+
+  async function addPartToStep(step) {
     const kind = await pickBrick();
     if (!kind) return;
-    const title = await textPrompt({ title: t('challenge.newStepTitle'), label: t('challenge.stepTitleLabel') });
-    if (!title) return;
-    let parts;
+    const isFirst = step.parts.length === 0;
+    let label = step.title;
+    if (!isFirst && (kind === 'text' || kind === 'bullets' || kind === 'checklist')) {
+      label = await textPrompt({ title: t('challenge.partLabelTitle'), label: t('challenge.partLabelHint') });
+      if (!label) return;
+    }
+    const uid = kind + '_' + Math.random().toString(36).slice(2, 8);
+    let part;
     if (kind === 'table') {
       const raw = await textPrompt({ title: t('challenge.columnsTitle'), label: t('challenge.columnsLabel') });
       const cols = (raw || '').split(',').map((x) => x.trim()).filter(Boolean);
-      parts = [{ type: 'table', key: 'lignes', columns: cols.length ? cols : [t('challenge.col1'), t('challenge.col2')] }];
+      part = { type: 'table', key: uid, columns: cols.length ? cols : [t('challenge.col1'), t('challenge.col2')] };
     } else if (kind === 'cards') {
       const raw = await textPrompt({ title: t('challenge.fieldsTitle'), label: t('challenge.fieldsLabel') });
       const flds = (raw || '').split(',').map((x) => x.trim()).filter(Boolean);
-      parts = [{ type: 'cards', key: 'cartes', fields: flds.length ? flds : [t('challenge.field1'), t('challenge.field2')] }];
+      part = { type: 'cards', key: uid, fields: flds.length ? flds : [t('challenge.field1'), t('challenge.field2')] };
     } else if (kind === 'bullets') {
-      parts = [{ type: 'bullets', key: 'items', label: title }];
+      part = { type: 'bullets', key: uid, label };
     } else if (kind === 'checklist') {
-      parts = [{ type: 'checklist', key: 'items', label: title }];
+      part = { type: 'checklist', key: uid, label };
     } else {
-      parts = [{ type: 'text', key: 'texte', label: title, rows: 6 }];
+      part = { type: 'text', key: uid, label, rows: 6 };
     }
-    const now = new Date().toISOString();
-    await IDB.put('challenge_steps', {
-      id: crypto.randomUUID(), user_id: S.user.id, position: nextPosition('challenge_steps'), day_label: null,
-      title, block: '', help: null, parts, closing: false, archived: false, deleted_at: null,
-      created_at: now, updated_at: now, _dirty: true, _rev: 1
-    });
+    step.parts = [...step.parts, part];
+    await saveRecord('challenge_steps', step);
     await afterChange();
   }
 
-  function editStepMeta(step) {
-    return new Promise((resolve) => {
-      const t1 = h('input', { type: 'text', value: step.title, maxlength: 100 });
-      const t2 = h('input', { type: 'text', value: step.block || '', maxlength: 60 });
-      modal({
-        title: t('mgr.rename'),
-        body: h('div', null,
-          h('div', { class: 'field' }, h('label', null, t('challenge.stepTitleLabel')), t1),
-          h('div', { class: 'field' }, h('label', null, t('challenge.stepBlockLabel')), t2)),
-        actions: [
-          { label: t('common.cancel'), onClick: () => resolve(null) },
-          {
-            label: t('common.save'), kind: 'primary',
-            onClick: async () => {
-              const v = t1.value.trim();
-              if (!v) return false;
-              step.title = v;
-              step.block = t2.value.trim();
-              await saveRecord('challenge_steps', step);
-              await afterChange();
-              resolve(true);
-              return undefined;
-            }
+  async function movePart(step, i, dir) {
+    const j = i + dir;
+    if (j < 0 || j >= step.parts.length) return;
+    const arr = step.parts.slice();
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+    step.parts = arr;
+    await saveRecord('challenge_steps', step);
+    await afterChange();
+  }
+
+  async function removePart(step, i) {
+    const arr = step.parts.slice();
+    arr.splice(i, 1);
+    step.parts = arr;
+    await saveRecord('challenge_steps', step);
+    await afterChange();
+  }
+
+  async function addChallengeStepFlow() {
+    const title = await textPrompt({ title: t('challenge.newStepTitle'), label: t('challenge.stepTitleLabel') });
+    if (!title) return;
+    const now = new Date().toISOString();
+    const rec = {
+      id: crypto.randomUUID(), user_id: S.user.id, position: nextPosition('challenge_steps'), day_label: null,
+      title, block: '', help: null, parts: [], closing: false, archived: false, deleted_at: null,
+      created_at: now, updated_at: now, _dirty: true, _rev: 1
+    };
+    await IDB.put('challenge_steps', rec);
+    await afterChange();
+    location.hash = '#/challenge/steps/' + rec.id;
+  }
+
+  function iconBtnGeneric(name, label, fn, disabled) {
+    return h('button', {
+      type: 'button', class: 'iconbtn', 'aria-label': label, title: label, disabled: !!disabled, on: { click: fn }
+    }, icon(name));
+  }
+
+  function viewStepEditor(step) {
+    const titleInput = h('input', { type: 'text', id: 'st-title', value: step.title, maxlength: 140 });
+    titleInput.addEventListener('change', async () => {
+      const v = titleInput.value.trim();
+      if (v && v !== step.title) { step.title = v; await saveRecord('challenge_steps', step); await afterChange(); }
+    });
+    const blockInput = h('input', { type: 'text', id: 'st-block', value: step.block || '', maxlength: 60 });
+    blockInput.addEventListener('change', async () => {
+      const v = blockInput.value.trim();
+      if (v !== (step.block || '')) { step.block = v; await saveRecord('challenge_steps', step); await afterChange(); }
+    });
+
+    let content;
+    if (step.closing) {
+      content = h('p', { class: 'muted' }, t('challenge.closingFixed'));
+    } else {
+      const rows = step.parts.map((part, i) => h('li', { class: 'mrow' },
+        h('span', { class: 'namebtn', style: { cursor: 'default' } }, partSummary(part)),
+        iconBtnGeneric('up', t('mgr.up'), () => movePart(step, i, -1), i === 0),
+        iconBtnGeneric('down', t('mgr.down'), () => movePart(step, i, 1), i === step.parts.length - 1),
+        iconBtnGeneric('trash', t('mgr.delete'), () => removePart(step, i))));
+      content = h('div', null,
+        step.parts.length ? h('ul', { class: 'list' }, rows) : h('p', { class: 'empty' }, t('challenge.noParts')),
+        h('div', { class: 'actions' }, h('button', {
+          type: 'button', class: 'btn primary', on: { click: () => addPartToStep(step) }
+        }, icon('plus'), t('challenge.addPart'))));
+    }
+    return h('main', { class: 'page' },
+      h('a', { class: 'backlink', href: '#/challenge/steps' }, icon('back'), t('challenge.stepsTitle')),
+      h('h1', { class: 'note-title' }, t('challenge.editStepTitle')),
+      h('div', { class: 'field' }, h('label', { for: 'st-title' }, t('challenge.stepTitleLabel')), titleInput),
+      h('div', { class: 'field' }, h('label', { for: 'st-block' }, t('challenge.stepBlockLabel')), blockInput),
+      h('h2', { class: 'section' }, t('challenge.contentTitle')),
+      content);
+  }
+
+  function openVerse(step) {
+    const hlp = step.help || {};
+    const ta = h('textarea', { rows: '6' });
+    ta.value = hlp.scriptureText || '';
+    modal({
+      title: hlp.scripture || t('challenge.verseTextPlaceholder'),
+      body: h('div', null, h('p', { class: 'muted' }, t('challenge.verseTextHint')), ta),
+      actions: [
+        { label: t('common.cancel') },
+        {
+          label: t('common.save'), kind: 'primary',
+          onClick: async () => {
+            step.help = { ...(step.help || {}), scriptureText: ta.value };
+            await saveRecord('challenge_steps', step);
+            await afterChange();
           }
-        ],
-        onDismiss: () => resolve(null)
-      });
+        }
+      ]
     });
   }
 
@@ -2020,15 +2148,59 @@
         hlp.objective ? h('p', null, h('strong', null, t('challenge.helpWhy') + ' '), hlp.objective) : null,
         hlp.howto ? h('div', null, h('strong', null, t('challenge.helpHow')), h('p', { style: { whiteSpace: 'pre-line' } }, hlp.howto)) : null,
         hlp.example ? h('p', null, h('strong', null, t('challenge.helpExample') + ' '), hlp.example) : null,
-        hlp.scripture ? h('p', { class: 'muted' }, hlp.scripture) : null)
+        hlp.scripture ? h('button', { type: 'button', class: 'versebtn', on: { click: () => openVerse(step) } }, hlp.scripture) : null,
+        hlp.scriptureText ? h('p', { class: 'muted versequote' }, hlp.scriptureText) : null)
       : h('p', { class: 'muted' }, t('challenge.noHelp'));
     modal({ title: t('challenge.helpTitle'), body, actions: [{ label: t('common.ok'), kind: 'primary' }] });
+  }
+
+  function exportStepsSnapshot() {
+    const steps = S.challenge_steps.filter((s) => !s.deleted_at).sort(byPos).map(strip);
+    const data = { app: 'oree-steps', version: 1, exportedAt: new Date().toISOString(), steps };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = h('a', { href: url, download: 'oree-defi-' + new Date().toISOString().slice(0, 10) + '.json' });
+    document.body.append(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+    toast(t('challenge.snapshotSaved'));
+  }
+
+  async function importStepsSnapshot(file) {
+    let j;
+    try {
+      j = JSON.parse(await file.text());
+      if (!j || j.app !== 'oree-steps' || !Array.isArray(j.steps)) throw new Error('format');
+    } catch (e) { toast(t('bk.error')); return; }
+    if (!(await confirmDialog(t('challenge.snapshotRestoreConfirm'), t('challenge.snapshotRestore'), true))) return;
+    const now = new Date().toISOString();
+    for (const st of S.challenge_steps.filter((s) => !s.deleted_at)) { st.deleted_at = now; await saveRecord('challenge_steps', st); }
+    for (const s of j.steps) {
+      if (!s || typeof s.title !== 'string') continue;
+      await IDB.put('challenge_steps', {
+        id: crypto.randomUUID(), user_id: S.user.id, position: Number.isFinite(s.position) ? s.position : 0,
+        day_label: typeof s.day_label === 'string' ? s.day_label : null, title: s.title.slice(0, 140),
+        block: typeof s.block === 'string' ? s.block : '', help: (s.help && typeof s.help === 'object') ? s.help : null,
+        parts: Array.isArray(s.parts) ? s.parts : [], closing: !!s.closing, archived: !!s.archived, deleted_at: null,
+        created_at: now, updated_at: now, _dirty: true, _rev: 1
+      });
+    }
+    await afterChange();
+    toast(t('challenge.snapshotRestored'));
   }
 
   /* --- Écrans --- */
   function viewChallenge(parts) {
     const sub = parts[0];
-    if (sub === 'steps') return viewChallengeSteps();
+    if (sub === 'steps') {
+      if (parts[1]) {
+        const step = S.challenge_steps.find((s) => s.id === parts[1] && !s.deleted_at);
+        if (!step) return h('main', { class: 'page' }, h('a', { class: 'backlink', href: '#/challenge/steps' }, icon('back'), t('challenge.stepsTitle')), h('p', { class: 'empty' }, t('challenge.missing')));
+        return viewStepEditor(step);
+      }
+      return viewChallengeSteps();
+    }
     if (sub === 'step' && parts[1]) {
       const step = S.challenge_steps.find((s) => s.id === parts[1] && !s.deleted_at);
       if (!step) return h('main', { class: 'page' }, h('a', { class: 'backlink', href: '#/challenge' }, icon('back'), t('tab.challenge')), h('p', { class: 'empty' }, t('challenge.missing')));
@@ -2118,8 +2290,8 @@
 
   function viewChallengeRun(run) {
     const steps = activeChallengeSteps();
-    const doneIds = new Set(S.challenge_entries.filter((e) => e.run_id === run.id && e.done).map((e) => e.step_id));
-    const dataIds = new Set(S.challenge_entries.filter((e) => e.run_id === run.id && e.data && Object.keys(e.data).length).map((e) => e.step_id));
+    const doneIds = new Set(S.challenge_entries.filter((e) => e.run_id === run.id && !e.deleted_at && e.done).map((e) => e.step_id));
+    const dataIds = new Set(S.challenge_entries.filter((e) => e.run_id === run.id && !e.deleted_at && e.data && Object.keys(e.data).length).map((e) => e.step_id));
     const rows = steps.map((st, i) => {
       const date = stepDateForIndex(run, i);
       const state = doneIds.has(st.id) ? 'done' : dataIds.has(st.id) ? 'progress' : 'empty';
@@ -2134,7 +2306,8 @@
       h('p', { class: 'lede' }, t('challenge.progress', { done: doneIds.size, total: steps.length })),
       h('div', { class: 'actions' },
         h('a', { class: 'btn', href: '#/challenge/steps' }, t('challenge.manageSteps')),
-        h('a', { class: 'btn ghost', href: '#/challenge/setup' }, t('challenge.changeCadence'))),
+        h('a', { class: 'btn ghost', href: '#/challenge/setup' }, t('challenge.changeCadence')),
+        h('button', { type: 'button', class: 'btn ghost', on: { click: () => resetRunProgress(run) } }, t('challenge.resetProgress'))),
       h('ul', { class: 'list' }, rows));
   }
 
@@ -2167,7 +2340,7 @@
     let body;
     if (isClosing) {
       const total = steps.length - 1;
-      const doneCount = S.challenge_entries.filter((e) => e.run_id === run.id && e.done && e.step_id !== step.id).length;
+      const doneCount = S.challenge_entries.filter((e) => e.run_id === run.id && !e.deleted_at && e.done && e.step_id !== step.id).length;
       body = h('div', null,
         h('p', null, t('challenge.closingText', { done: doneCount, total })),
         h('div', { class: 'actions' }, h('button', {
@@ -2204,16 +2377,15 @@
     const all = S.challenge_steps.filter((r) => !r.deleted_at).sort(byPos);
     const vis = showArch ? all : all.filter((r) => !r.archived);
     const hasArch = all.some((r) => r.archived);
-    const iconBtn = (name, label, fn, disabled) => h('button', {
-      type: 'button', class: 'iconbtn', 'aria-label': label, title: label, disabled: !!disabled, on: { click: fn }
-    }, icon(name));
     const rows = vis.map((st, i) => h('li', { class: 'mrow' + (st.archived ? ' is-archived' : '') },
-      h('button', { type: 'button', class: 'namebtn', title: t('mgr.rename'), on: { click: () => editStepMeta(st) } },
+      h('a', { class: 'namebtn', href: '#/challenge/steps/' + st.id },
         st.title, st.block ? h('span', { class: 'tag' }, ' · ' + st.block) : null, st.archived ? h('span', { class: 'tag' }, t('mgr.archivedTag')) : null),
-      iconBtn('up', t('mgr.up'), () => mgrMove('challenge_steps', vis, i, -1), i === 0),
-      iconBtn('down', t('mgr.down'), () => mgrMove('challenge_steps', vis, i, 1), i === vis.length - 1),
-      iconBtn(st.archived ? 'restore' : 'archive', st.archived ? t('mgr.restore') : t('mgr.archive'), () => mgrToggleArchive('challenge_steps', st)),
-      iconBtn('trash', t('mgr.delete'), () => mgrDelete('challenge_steps', st))));
+      iconBtnGeneric('up', t('mgr.up'), () => mgrMove('challenge_steps', vis, i, -1), i === 0),
+      iconBtnGeneric('down', t('mgr.down'), () => mgrMove('challenge_steps', vis, i, 1), i === vis.length - 1),
+      iconBtnGeneric(st.archived ? 'restore' : 'archive', st.archived ? t('mgr.restore') : t('mgr.archive'), () => mgrToggleArchive('challenge_steps', st)),
+      iconBtnGeneric('trash', t('mgr.delete'), () => mgrDelete('challenge_steps', st))));
+    const file = h('input', { type: 'file', accept: '.json,application/json', hidden: true });
+    file.addEventListener('change', async () => { if (file.files && file.files[0]) await importStepsSnapshot(file.files[0]); file.value = ''; });
     return h('main', { class: 'page' },
       h('a', { class: 'backlink', href: '#/challenge' }, icon('back'), t('tab.challenge')),
       h('h1', { class: 'note-title' }, t('challenge.stepsTitle')),
@@ -2224,7 +2396,11 @@
         hasArch ? h('button', {
           type: 'button', class: 'btn',
           on: { click: () => { S.ui.showArch.challenge_steps = !showArch; render(); } }
-        }, showArch ? t('mgr.hideArchived') : t('mgr.showArchived')) : null));
+        }, showArch ? t('mgr.hideArchived') : t('mgr.showArchived')) : null),
+      h('div', { class: 'actions' },
+        h('button', { type: 'button', class: 'btn ghost', on: { click: exportStepsSnapshot } }, t('challenge.snapshotSave')),
+        h('button', { type: 'button', class: 'btn ghost', on: { click: () => file.click() } }, t('challenge.snapshotLoad')),
+        file));
   }
 
   /* ==========================================================
