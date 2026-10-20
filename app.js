@@ -13,117 +13,136 @@
   const SEED_STEPS = [
     { block: 'Bilan positif', title: 'Gratitude envers Dieu',
       parts: [{ type: 'bullets', key: 'gratitudes', label: 'Actions de grâce' }],
-      help: { objective: 'Je prends le temps de repenser à ce que le Seigneur a été pour moi cette année.', scripture: 'Psaume 63:2-5' } },
+      help: { objective: 'Prendre le temps de repenser à ce que le Seigneur a été pour moi cette année.', scripture: 'Psaume 63:2-5' } },
     { block: 'Bilan positif', title: 'Transformation intérieure',
       parts: [{ type: 'table', key: 'transformations', columns: ['Attitude / trait initial', 'Changement opéré'], scale: true, scaleLabel: 'Progression (1 à 10)' },
         { type: 'text', key: 'conclusion', label: 'Conclusion' }],
-      help: { objective: 'J’apprécie les changements que Dieu a opérés en moi, même les plus petits.', scripture: '2 Corinthiens 4:16' } },
+      help: { objective: 'Apprécier les changements que Dieu a opérés en moi, même les plus petits.', scripture: '2 Corinthiens 4:16' } },
     { block: 'Bilan positif', title: 'Bénédiction pour les autres',
       parts: [{ type: 'table', key: 'benedictions', columns: ['Bénéficiaires', 'Bénédiction apportée', 'Motivation'] },
         { type: 'text', key: 'conclusion', label: 'Conclusion' }],
-      help: { objective: 'J’examine ma marche dans l’amour et je me réjouis d’avoir été un canal de bénédiction.', scripture: 'Actes 20:35' } },
+      help: { objective: 'Examiner ma marche dans l’amour et me réjouir d’avoir été un canal de bénédiction.', scripture: 'Actes 20:35' } },
     { block: 'Bilan positif', title: 'Délivrances et personnes-relais',
       parts: [{ type: 'bullets', key: 'bienfaits', label: 'Bienfaits, victoires, prières exaucées' },
         { type: 'bullets', key: 'personnes', label: 'Personnes par lesquelles Dieu m’a bénie' }],
-      help: { objective: 'Je me souviens des délivrances et des personnes que Dieu a mises sur ma route.', scripture: 'Psaume 71:6' } },
+      help: { objective: 'Me souvenir des délivrances et des personnes que Dieu a mises sur ma route.', scripture: 'Psaume 71:6' } },
     { block: 'Bilan positif', title: 'Objectifs accomplis',
       parts: [{ type: 'checklist', key: 'objectifs', label: 'Objectifs atteints cette année' },
         { type: 'text', key: 'horsplan', label: 'Accomplissements non planifiés' }],
-      help: { objective: 'Je rends grâce pour ce que Dieu m’a permis d’accomplir cette année.', scripture: 'Jean 6:63' } },
+      help: { objective: 'Rendre grâce pour ce que Dieu m’a permis d’accomplir cette année.', scripture: 'Jean 6:63' } },
     { block: 'Bilan positif', title: 'Actions de grâce pour les épreuves',
       parts: [{ type: 'text', key: 'revelation', label: 'Ce que le Seigneur m’a révélé à travers ces épreuves' },
         { type: 'text', key: 'priere', label: 'Prière et remerciement' }],
-      help: { objective: 'Je dis merci à Dieu même pour les épreuves traversées cette année.', scripture: 'Jacques 1:2 ; 1 Thessaloniciens 5:18' } },
+      help: { objective: 'Dire merci à Dieu même pour les épreuves traversées cette année.', scripture: 'Jacques 1:2 ; 1 Thessaloniciens 5:18' } },
     { block: 'Analyse et ajustements', title: 'Objectifs non atteints',
       parts: [{ type: 'table', key: 'nonatteints', columns: ['Objectif non atteint', 'Causes / obstacles', 'Mesures d’ajustement'] }],
-      help: { objective: 'J’identifie les objectifs non atteints et je réfléchis aux causes sans me juger.', scripture: 'Proverbes 26:11' } },
+      help: { objective: 'Identifier les objectifs non atteints et réfléchir aux causes sans me juger.', scripture: 'Proverbes 26:11' } },
     { block: 'Analyse et ajustements', title: 'Audit du temps',
       parts: [{ type: 'table', key: 'audittemps', columns: ['Activité', 'Impact (m’aide ou m’éloigne)'], scale: true, scaleLabel: 'Fréquence (1 à 10)' },
         { type: 'text', key: 'conclusion', label: 'Conclusion' }],
       help: {
-        objective: 'Je prends conscience des activités qui me rapprochent de mes objectifs et de celles qui m’en éloignent.',
+        objective: 'Prendre conscience des activités qui me rapprochent de mes objectifs et de celles qui m’en éloignent.',
         howto: '1. Je liste mes activités les plus fréquentes cette année.\n2. J’indique la fréquence de 1 à 10.\n3. Je note si chacune m’a aidée ou éloignée de mes objectifs.',
         example: 'Réseaux sociaux (fréquence : 8/10) → m’éloigne de mes objectifs.',
         scripture: 'Éphésiens 5:16'
       } },
+    { block: 'Analyse et ajustements', title: 'Audit du temps numérique & réseaux sociaux',
+      parts: [{ type: 'table', key: 'numerique', columns: ['Activité numérique', 'Fruit produit'], scale: true, scaleLabel: 'Temps passé (1 à 10)' },
+        { type: 'text', key: 'conclusion', label: 'Conclusion' }],
+      help: { objective: 'Examiner le temps que je passe sur mes écrans et les réseaux sociaux, et ce qu’ils produisent réellement dans ma vie.', scripture: 'Éphésiens 5:16' } },
     { block: 'Analyse et ajustements', title: 'Audit financier',
       parts: [{ type: 'table', key: 'auditfinances', columns: ['Poste de dépense', 'Alignement spirituel'], scale: true, scaleLabel: 'Montant ou proportion (1 à 10)' },
         { type: 'text', key: 'conclusion', label: 'Conclusion sur l’intendance' }],
-      help: { objective: 'J’examine comment j’ai utilisé mon argent cette année, en bonne intendance.', scripture: 'Proverbes 3:9 ; 1 Timothée 6:17' } },
+      help: { objective: 'Examiner comment j’ai utilisé mon argent cette année, en bonne intendance.', scripture: 'Proverbes 3:9 ; 1 Timothée 6:17' } },
+    { block: 'Analyse et ajustements', title: 'Audit des dons et talents',
+      parts: [{ type: 'cards', key: 'dons', fields: ['Don / talent', 'Utilisation actuelle', 'Ajustement souhaité'] },
+        { type: 'text', key: 'conclusion', label: 'Conclusion' }],
+      help: { objective: 'Faire le point sur les dons et talents que Dieu m’a confiés, et sur la façon dont je les utilise.', scripture: 'Matthieu 25:14-30' } },
+    { block: 'Analyse et ajustements', title: 'Revue des relations clés',
+      parts: [{ type: 'cards', key: 'relations', fields: ['Personne', 'État de la relation', 'Action à poser'] }],
+      help: { objective: 'Passer en revue mes relations les plus importantes et discerner les ajustements à faire.', scripture: 'Romains 12:18' } },
     { block: 'Analyse et ajustements', title: 'Erreurs à ne plus répéter',
       parts: [{ type: 'cards', key: 'erreurs', fields: ['Domaine', 'Erreur commise', 'Cause profonde', 'Mesure à cultiver'] }],
-      help: { objective: 'J’identifie les causes profondes de mes erreurs pour ne plus y retomber.', scripture: 'Proverbes 26:11' } },
+      help: { objective: 'Identifier les causes profondes de mes erreurs pour ne plus y retomber.', scripture: 'Proverbes 26:11' } },
     { block: 'Vision', title: 'Prière d’alignement & vision globale',
       parts: [{ type: 'text', key: 'vision', label: 'Impressions, versets reçus, révélations', rows: 8 }],
-      help: { objective: 'Je demande au Seigneur de me révéler Sa vision pour mon année, dans chaque domaine de ma vie.', scripture: 'Jérémie 33:3 ; Éphésiens 2:10' } },
+      help: { objective: 'Demander au Seigneur de me révéler Sa vision pour mon année, dans chaque domaine de ma vie.', scripture: 'Jérémie 33:3 ; Éphésiens 2:10' } },
+    { block: 'Vision', title: 'Semaine de consécration & jeûne',
+      parts: [{ type: 'text', key: 'consecration', label: 'Ce que je consacre au Seigneur cette semaine', rows: 6 },
+        { type: 'text', key: 'ressenti', label: 'Ce que le Seigneur me montre' }],
+      help: { objective: 'Mettre à part un temps pour me consacrer au Seigneur avant de recevoir Sa vision pour mon année.', scripture: 'Joël 2:12' } },
     { block: 'Vision', title: 'Vision — Vie spirituelle',
       parts: [{ type: 'text', key: 'spirituel', label: 'Ma vie spirituelle (j’écris au présent, comme si c’était déjà une réalité)', rows: 6 },
         { type: 'text', key: 'ancrage', label: 'Verset d’ancrage' }],
-      help: { objective: 'Je vois ma relation et ma marche avec le Seigneur au travers de Son regard.', scripture: 'Marc 1:35' } },
+      help: { objective: 'Voir ma relation et ma marche avec le Seigneur au travers de Son regard.', scripture: 'Marc 1:35' } },
+    { block: 'Vision', title: 'Lecture biblique de l’année',
+      parts: [{ type: 'text', key: 'plan', label: 'Mon plan de lecture pour cette année' },
+        { type: 'checklist', key: 'livres', label: 'Livres lus' }],
+      help: { objective: 'Prévoir comment je vais parcourir la Parole de Dieu cette année.', scripture: 'Josué 1:8' } },
     { block: 'Vision', title: 'Vision — Ministère, carrière & études',
       parts: [{ type: 'text', key: 'court', label: 'Court terme (1 an)' }, { type: 'text', key: 'long', label: 'Long terme (5 à 15 ans)' }],
-      help: { objective: 'Je vois mon ministère, ma carrière ou mes études au travers du regard de Dieu, à court et long terme.', scripture: 'Jérémie 29:11' } },
+      help: { objective: 'Voir mon ministère, ma carrière ou mes études au travers du regard de Dieu, à court et long terme.', scripture: 'Jérémie 29:11' } },
     { block: 'Vision', title: 'Vision — Relations, famille, santé & développement',
       parts: [{ type: 'text', key: 'relations', label: 'Relations & famille' }, { type: 'text', key: 'sante', label: 'Santé & bien-être' },
         { type: 'text', key: 'talents', label: 'Talents & compétences à développer' }],
-      help: { objective: 'Je vois mes relations, ma santé et mon développement personnel comme Dieu les voit.', scripture: 'Ésaïe 53:5 ; 3 Jean 2' } },
+      help: { objective: 'Voir mes relations, ma santé et mon développement personnel comme Dieu les voit.', scripture: 'Ésaïe 53:5 ; 3 Jean 2' } },
     { block: 'Vision', title: 'Vision — Finances & influence',
       parts: [{ type: 'text', key: 'finances', label: 'Finances — prospérité & gestion' }, { type: 'text', key: 'influence', label: 'Influence — héritage & impact' }],
-      help: { objective: 'Je vois mes finances et mon impact dans la société au travers du regard de Dieu.', scripture: 'Proverbes 10:22 ; Tite 3:8' } },
+      help: { objective: 'Voir mes finances et mon impact dans la société au travers du regard de Dieu.', scripture: 'Proverbes 10:22 ; Tite 3:8' } },
     { block: 'Objectifs SMART', title: 'Objectifs — Spirituel',
       parts: [{ type: 'cards', key: 'objectifs', fields: ['Titre de l’objectif', 'Indicateur de mesure (KPI)', 'Date cible'] }],
-      help: { objective: 'J’écris des objectifs pour ma vie spirituelle, à partir de la vision reçue.', scripture: null } },
+      help: { objective: 'Écrire des objectifs pour ma vie spirituelle, à partir de la vision reçue.', scripture: null } },
     { block: 'Objectifs SMART', title: 'Objectifs — Ministère & carrière',
       parts: [{ type: 'cards', key: 'objectifs', fields: ['Titre de l’objectif', 'Indicateur de mesure (KPI)', 'Date cible'] }],
-      help: { objective: 'J’écris mes objectifs pour mon ministère, ma carrière, mes affaires ou mes études.', scripture: null } },
+      help: { objective: 'Écrire mes objectifs pour mon ministère, ma carrière, mes affaires ou mes études.', scripture: null } },
     { block: 'Objectifs SMART', title: 'Objectifs — Social & personnel',
       parts: [{ type: 'cards', key: 'objectifs', fields: ['Titre de l’objectif', 'Indicateur de mesure (KPI)', 'Date cible'] }],
-      help: { objective: 'J’écris mes objectifs pour mes relations, ma famille, ma santé et mon développement personnel.', scripture: null } },
+      help: { objective: 'Écrire mes objectifs pour mes relations, ma famille, ma santé et mon développement personnel.', scripture: null } },
     { block: 'Objectifs SMART', title: 'Objectifs — Finances & influence',
       parts: [{ type: 'cards', key: 'objectifs', fields: ['Titre de l’objectif', 'Indicateur de mesure (KPI)', 'Date cible'] }],
-      help: { objective: 'J’écris mes objectifs financiers et ceux liés à mon influence dans la société.', scripture: null } },
+      help: { objective: 'Écrire mes objectifs financiers et ceux liés à mon influence dans la société.', scripture: null } },
     { block: 'Objectifs SMART', title: 'Consolidation & validation SMART',
       parts: [{ type: 'text', key: 'revue', label: 'Revue de mes objectifs', rows: 8 }, { type: 'bullets', key: 'retenus', label: 'Liste finale des objectifs retenus' }],
       help: {
-        objective: 'Je relis mes objectifs pour m’assurer qu’ils sont bien formulés avant de passer au plan d’action.',
+        objective: 'Relire mes objectifs pour m’assurer qu’ils sont bien formulés avant de passer au plan d’action.',
         howto: '1. Je formule chaque objectif de façon positive.\n2. Je vérifie qu’il est spécifique, mesurable, réaliste et limité dans le temps.\n3. Je regroupe ou découpe mes objectifs si besoin, puis je retiens ma liste définitive.',
         scripture: null
       } },
     { block: 'Plan d’action', title: 'Plan d’action — Spirituel',
       parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
         { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
-      help: { objective: 'J’élabore mon plan d’action pour atteindre mes objectifs spirituels.', scripture: null } },
+      help: { objective: 'Élaborer mon plan d’action pour atteindre mes objectifs spirituels.', scripture: null } },
     { block: 'Plan d’action', title: 'Plan d’action — Ministère',
       parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
         { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
-      help: { objective: 'J’élabore mon plan d’action pour mon ministère.', scripture: null } },
+      help: { objective: 'Élaborer mon plan d’action pour mon ministère.', scripture: null } },
     { block: 'Plan d’action', title: 'Plan d’action — Professionnel / académique',
       parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
         { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
-      help: { objective: 'J’élabore mon plan d’action pour mon travail, mes affaires ou mes études.', scripture: null } },
+      help: { objective: 'Élaborer mon plan d’action pour mon travail, mes affaires ou mes études.', scripture: null } },
     { block: 'Plan d’action', title: 'Plan d’action — Social & couple',
       parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
         { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
-      help: { objective: 'J’élabore mon plan d’action pour mes relations, ma famille et ma vie de couple.', scripture: null } },
+      help: { objective: 'Élaborer mon plan d’action pour mes relations, ma famille et ma vie de couple.', scripture: null } },
     { block: 'Plan d’action', title: 'Plan d’action — Santé & développement personnel',
       parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
         { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
-      help: { objective: 'J’élabore mon plan d’action pour ma santé, mon bien-être et mon développement personnel.', scripture: null } },
+      help: { objective: 'Élaborer mon plan d’action pour ma santé, mon bien-être et mon développement personnel.', scripture: null } },
     { block: 'Plan d’action', title: 'Plan d’action — Finances',
       parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
         { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
-      help: { objective: 'J’élabore mon plan d’action pour mes finances.', scripture: null } },
+      help: { objective: 'Élaborer mon plan d’action pour mes finances.', scripture: null } },
     { block: 'Plan d’action', title: 'Plan d’action — Influence',
       parts: [{ type: 'bullets', key: 'ressources', label: 'Ressources & forces à mobiliser' }, { type: 'bullets', key: 'obstacles', label: 'Obstacles & faiblesses à surmonter' },
         { type: 'table', key: 'strategies', columns: ['Étape / stratégie', 'Échéance'] }],
-      help: { objective: 'J’élabore mon plan d’action pour mon influence et mon apport dans la société.', scripture: null } },
+      help: { objective: 'Élaborer mon plan d’action pour mon influence et mon apport dans la société.', scripture: null } },
     { block: 'Clôture', title: 'Optimisation et délais',
       parts: [{ type: 'table', key: 'echeances', columns: ['Action', 'Domaine', 'Date limite'] }],
-      help: { objective: 'Je relis tous mes plans d’action et je m’assure que chaque échéance est réaliste.', scripture: null } },
+      help: { objective: 'Relire tous mes plans d’action et m’assurer que chaque échéance est réaliste.', scripture: null } },
     { block: 'Clôture', title: 'Tableau de bord d’engagement',
       parts: [{ type: 'text', key: 'engagement', label: 'Ce que je veux mettre en place pour tenir mes objectifs', rows: 6 }],
       help: {
-        objective: 'Je me donne les moyens de rester fidèle à ma vision tout au long de l’année.',
+        objective: 'Me donner les moyens de rester fidèle à ma vision tout au long de l’année.',
         howto: '1. Je garde ma vision et mes objectifs à portée de main.\n2. Je reste ouverte à toute nouvelle direction du Saint-Esprit.\n3. Je fais un bilan mensuel de ma progression.\n4. Je compte sur la puissance du Saint-Esprit.\n5. Je ne renonce pas à ces habitudes de suivi.',
         scripture: null
       } },
@@ -135,10 +154,10 @@
     SUPABASE_URL: 'https://foboghwbppqbyvfcjkoj.supabase.co',
     SUPABASE_KEY: 'sb_publishable_qh12xNgNAnoVTLhaUL8g6A_absINt8r', // clé publique : sans danger dans le code
     ALLOW_SIGNUP: false, // usage personnel : les comptes se créent dans Supabase
-    VERSION: '1.3 (lot 2)'
+    VERSION: '1.5 (lot 3)'
   };
 
-  const TABLES = ['domains', 'categories', 'challenge_steps', 'challenge_runs', 'challenge_entries'];
+  const TABLES = ['domains', 'categories', 'challenge_steps', 'challenge_runs', 'challenge_entries', 'schedule_slots', 'vrac_items', 'protocol_segments', 'day_state'];
   const PALETTE = ['#7c5cbf', '#2f7fd1', '#2e9c8a', '#4aa04a', '#c99a1c', '#d9772b',
     '#d4577a', '#c0392b', '#6b7480', '#8d6e63', '#00838f', '#5c6bc0'];
   const TEXT_SIZES = [90, 100, 112, 125];
@@ -195,11 +214,40 @@
 
       'set.account': 'Compte', 'set.appearance': 'Apparence', 'set.language': 'Langue',
       'set.lock': 'Verrouillage', 'set.domains': 'Domaines de vie', 'set.categories': 'Catégories',
+      'set.schedule': 'Emploi du temps', 'set.vrac': 'Vrac de tâches', 'set.protocol': 'Protocole',
       'set.sync': 'Synchronisation', 'set.backup': 'Sauvegarde', 'set.about': 'À propos',
       'set.theme': 'Thème', 'set.textSize': 'Taille du texte',
       'theme.day': 'Jour', 'theme.night': 'Nuit', 'theme.sepia': 'Sépia', 'theme.auto': 'Automatique',
       'size.90': 'Petit', 'size.100': 'Normal', 'size.112': 'Grand', 'size.125': 'Très grand',
       'lang.fr': 'Français', 'lang.en': 'English',
+
+      'rhythm.weekTab': 'Semaine type', 'rhythm.tempTab': 'Moments ponctuels',
+      'rhythm.addSlot': 'Ajouter un créneau', 'rhythm.editSlot': 'Modifier le créneau', 'rhythm.addMoment': 'Ajouter un moment',
+      'rhythm.start': 'Début', 'rhythm.end': 'Fin', 'rhythm.category': 'Catégorie',
+      'rhythm.mode': 'Type de créneau', 'rhythm.modeFixed': 'Fixe', 'rhythm.modeVrac': 'À préciser',
+      'rhythm.label': 'Intitulé', 'rhythm.labelFixedHint': 'Ce qui est prévu (ex. Ménage, Étude...)',
+      'rhythm.noCategory': 'Sans catégorie',
+      'rhythm.needTimes': 'Indique une heure de début et de fin.',
+      'rhythm.needEnd': "L'heure de fin doit être après l'heure de début.",
+      'rhythm.startDate': 'Date', 'rhythm.endDateOptional': 'Jusqu’au (facultatif)',
+      'rhythm.repeatWeekday': 'Se répète chaque semaine ce jour-là',
+      'rhythm.needStartDate': 'Choisis une date.',
+      'rhythm.empty': 'Aucun créneau pour ce jour.', 'rhythm.emptyTemp': 'Aucun moment ponctuel.',
+      'rhythm.oneTime': 'Ponctuel', 'rhythm.repeats': 'Se répète',
+      'rhythm.vracInfo': "Ajoute des tâches par catégorie : l'app te les proposera dans tes créneaux « à préciser ».",
+      'rhythm.vracAdd': 'Ajouter une tâche', 'rhythm.vracPickCategory': 'Catégorie de cette tâche',
+      'rhythm.protocolInfo': 'Organise ton protocole en stations (ex. Matin, Soir), chacune avec ses segments.',
+      'rhythm.addStation': 'Ajouter une station', 'rhythm.stationName': 'Nom de la station',
+      'rhythm.addSegment': 'Ajouter un segment', 'rhythm.segmentTitle': 'Titre du segment',
+      'rhythm.segmentDuration': 'Durée (minutes, facultatif)', 'rhythm.segmentMode': 'Type',
+      'rhythm.modeReading': 'Lecture', 'rhythm.modeText': 'Texte libre', 'rhythm.modeTimer': 'Minuteur', 'rhythm.modeFree': 'Libre',
+      'rhythm.segmentContent': 'Note ou contenu (facultatif)',
+      'rhythm.pickStation': 'Dans quelle station ?', 'rhythm.newStation': 'Nouvelle station…',
+      'rhythm.todayTitle': 'Mon rythme',
+      'rhythm.todayEmpty': "Aucun créneau aujourd'hui. Configure ta semaine type dans Réglages.",
+      'rhythm.choose': 'Choisir', 'rhythm.pickOrType': 'Choisis dans ta liste ou écris autre chose',
+      'rhythm.freeText': 'Autre chose…', 'rhythm.protocolTitle': 'Protocole du jour',
+      'rhythm.min': 'min', 'rhythm.segmentNote': 'Note du segment', 'rhythm.noSegments': 'Aucun segment pour le moment.',
 
       'challenge.welcomeTitle': 'Ton défi de bilan et de vision',
       'challenge.welcomeText': 'Choisis ton point de départ pour ce module. Tu pourras tout modifier ensuite.',
@@ -250,6 +298,12 @@
       'challenge.snapshotSaved': 'Programme sauvegardé.',
       'challenge.snapshotRestoreConfirm': "Restaurer ce programme ? Tes étapes actuelles seront remplacées ; les réponses déjà saisies restent conservées mais ne seront plus reliées à une étape visible.",
       'challenge.snapshotRestore': 'Restaurer', 'challenge.snapshotRestored': 'Programme restauré.',
+      'challenge.helpSectionTitle': 'Conseil', 'challenge.addHelp': 'Ajouter un conseil', 'challenge.editHelpBtn': 'Modifier le conseil',
+      'challenge.editHelpTitle': 'Conseil de cette étape', 'challenge.scriptureRefLabel': 'Référence biblique (ex. Psaume 23:1)',
+      'challenge.syncAction': 'Mettre à jour le contenu par défaut',
+      'challenge.syncConfirm': "Les conseils des étapes d'origine seront actualisés, et les nouvelles étapes proposées qui manquent encore seront ajoutées au bon endroit. Tes propres étapes et tes réponses déjà saisies ne sont pas touchées.",
+      'challenge.syncConfirmBtn': 'Mettre à jour',
+      'challenge.syncDone': '{updated} conseil(s) actualisé(s), {added} étape(s) ajoutée(s).',
 
       'nav.title': 'Navigation sur ordinateur', 'nav.visible': 'Visible', 'nav.rail': 'Icônes seulement', 'nav.hidden': 'Masquée',
       'nav.hint': 'Réglage propre à cet appareil. La touche F10 affiche ou masque la navigation.',
@@ -360,11 +414,40 @@
 
       'set.account': 'Account', 'set.appearance': 'Appearance', 'set.language': 'Language',
       'set.lock': 'Lock', 'set.domains': 'Life areas', 'set.categories': 'Categories',
+      'set.schedule': 'Schedule', 'set.vrac': 'Task bank', 'set.protocol': 'Protocol',
       'set.sync': 'Sync', 'set.backup': 'Backup', 'set.about': 'About',
       'set.theme': 'Theme', 'set.textSize': 'Text size',
       'theme.day': 'Day', 'theme.night': 'Night', 'theme.sepia': 'Sepia', 'theme.auto': 'Automatic',
       'size.90': 'Small', 'size.100': 'Normal', 'size.112': 'Large', 'size.125': 'Extra large',
       'lang.fr': 'Français', 'lang.en': 'English',
+
+      'rhythm.weekTab': 'Weekly schedule', 'rhythm.tempTab': 'One-off moments',
+      'rhythm.addSlot': 'Add a slot', 'rhythm.editSlot': 'Edit the slot', 'rhythm.addMoment': 'Add a moment',
+      'rhythm.start': 'Start', 'rhythm.end': 'End', 'rhythm.category': 'Category',
+      'rhythm.mode': 'Slot type', 'rhythm.modeFixed': 'Fixed', 'rhythm.modeVrac': 'To specify',
+      'rhythm.label': 'Label', 'rhythm.labelFixedHint': "What's planned (e.g. Housework, Study...)",
+      'rhythm.noCategory': 'No category',
+      'rhythm.needTimes': 'Enter a start and an end time.',
+      'rhythm.needEnd': 'The end time must be after the start time.',
+      'rhythm.startDate': 'Date', 'rhythm.endDateOptional': 'Until (optional)',
+      'rhythm.repeatWeekday': 'Repeats weekly on that day',
+      'rhythm.needStartDate': 'Choose a date.',
+      'rhythm.empty': 'No slot for this day.', 'rhythm.emptyTemp': 'No one-off moment.',
+      'rhythm.oneTime': 'One-off', 'rhythm.repeats': 'Repeats',
+      'rhythm.vracInfo': "Add tasks by category: the app will suggest them in your “to specify” slots.",
+      'rhythm.vracAdd': 'Add a task', 'rhythm.vracPickCategory': 'Category for this task',
+      'rhythm.protocolInfo': 'Organize your protocol into stations (e.g. Morning, Evening), each with its segments.',
+      'rhythm.addStation': 'Add a station', 'rhythm.stationName': 'Station name',
+      'rhythm.addSegment': 'Add a segment', 'rhythm.segmentTitle': 'Segment title',
+      'rhythm.segmentDuration': 'Duration (minutes, optional)', 'rhythm.segmentMode': 'Type',
+      'rhythm.modeReading': 'Reading', 'rhythm.modeText': 'Free text', 'rhythm.modeTimer': 'Timer', 'rhythm.modeFree': 'Free',
+      'rhythm.segmentContent': 'Note or content (optional)',
+      'rhythm.pickStation': 'Which station?', 'rhythm.newStation': 'New station…',
+      'rhythm.todayTitle': 'My rhythm',
+      'rhythm.todayEmpty': 'No slot today. Set up your weekly schedule in Settings.',
+      'rhythm.choose': 'Choose', 'rhythm.pickOrType': 'Pick from your list or write something else',
+      'rhythm.freeText': 'Something else…', 'rhythm.protocolTitle': "Today's protocol",
+      'rhythm.min': 'min', 'rhythm.segmentNote': 'Segment note', 'rhythm.noSegments': 'No segment yet.',
 
       'challenge.welcomeTitle': 'Your review and vision challenge',
       'challenge.welcomeText': 'Choose your starting point for this module. You can change everything afterwards.',
@@ -415,6 +498,12 @@
       'challenge.snapshotSaved': 'Program saved.',
       'challenge.snapshotRestoreConfirm': "Restore this program? Your current steps will be replaced; answers already entered stay saved but won't be linked to a visible step anymore.",
       'challenge.snapshotRestore': 'Restore', 'challenge.snapshotRestored': 'Program restored.',
+      'challenge.helpSectionTitle': 'Tip', 'challenge.addHelp': 'Add a tip', 'challenge.editHelpBtn': 'Edit the tip',
+      'challenge.editHelpTitle': 'Tip for this step', 'challenge.scriptureRefLabel': 'Bible reference (e.g. Psalm 23:1)',
+      'challenge.syncAction': 'Update default content',
+      'challenge.syncConfirm': "The original steps' tips will be refreshed, and any of the newly proposed steps still missing will be added in a sensible spot. Your own steps and answers already entered are left untouched.",
+      'challenge.syncConfirmBtn': 'Update',
+      'challenge.syncDone': '{updated} tip(s) refreshed, {added} step(s) added.',
 
       'nav.title': 'Navigation on computer', 'nav.visible': 'Visible', 'nav.rail': 'Icons only', 'nav.hidden': 'Hidden',
       'nav.hint': 'This setting is specific to this device. The F10 key shows or hides the navigation.',
@@ -586,7 +675,7 @@
   const IDB = (() => {
     let dbp = null;
     const open = () => dbp || (dbp = new Promise((resolve, reject) => {
-      const r = indexedDB.open('oree', 2);
+      const r = indexedDB.open('oree', 3);
       r.onupgradeneeded = () => {
         const db = r.result;
         TABLES.forEach((s) => { if (!db.objectStoreNames.contains(s)) db.createObjectStore(s, { keyPath: 'id' }); });
@@ -648,11 +737,12 @@
     syncing: false,
     onboarding: false,
     auth: { mode: 'signin', email: '', err: '', ok: '', busy: false },
-    ui: { showArch: { domains: false, categories: false, challenge_steps: false } },
+    ui: { showArch: { domains: false, categories: false, challenge_steps: false, vrac_items: false } },
     nav: { mode: 'visible', last: 'visible' },
     navOpen: false,
     installEvt: null,
-    currentEntry: null
+    currentEntry: null,
+    currentDay: null
   };
   let sb = null;
 
@@ -801,6 +891,7 @@
     S.sync = { state: 'idle', last: null, error: '' };
     S.locked = false;
     S.currentEntry = null;
+    S.currentDay = null;
     await kvSet('settings', S.settings);
     applyTheme();
   }
@@ -1472,16 +1563,17 @@
     const dateStr = now.toLocaleDateString(S.settings.language, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
     const doms = S.domains.filter((d) => !d.deleted_at && !d.archived).sort(byPos);
     const dotI = (c) => { const i = h('i'); i.style.background = c || 'var(--muted)'; return i; };
+    const rhythm = S.currentDay ? viewTodayRhythm(S.currentDay) : null;
     return h('main', { class: 'page' },
       h('h1', { class: 'note-title' }, greet),
       h('p', { class: 'lede' }, cap(dateStr) + ', ', h('span', { class: 'clock' }, fmtTime(now))),
       horizon(),
+      rhythm,
       h('h2', { class: 'section' }, t('today.domains')),
       doms.length
         ? h('div', { class: 'chips' }, doms.map((d) => h('span', { class: 'dchip' }, dotI(d.color), d.name)))
         : h('p', { class: 'empty' }, t('today.noDomains')),
-      h('div', { class: 'actions' }, h('a', { class: 'btn', href: '#/settings/domains' }, t('today.manageDomains'))),
-      h('div', { class: 'soon' }, h('p', null, t('soon.today')), h('span', { class: 'pill' }, t('soon.lot', { n: 3 }))));
+      h('div', { class: 'actions' }, h('a', { class: 'btn', href: '#/settings/domains' }, t('today.manageDomains'))));
   }
 
   function viewSoon(key) {
@@ -1493,13 +1585,14 @@
   /* ==========================================================
      Vues : réglages
      ========================================================== */
-  const SET_SECTIONS = ['account', 'appearance', 'language', 'lock', 'domains', 'categories', 'sync', 'backup', 'about'];
+  const SET_SECTIONS = ['account', 'appearance', 'language', 'lock', 'domains', 'categories', 'schedule', 'vrac', 'protocol', 'sync', 'backup', 'about'];
 
   function viewSettings(sec) {
     if (!sec || !SET_SECTIONS.includes(sec)) return viewSettingsHome();
     const builders = {
       account: secAccount, appearance: secAppearance, language: secLanguage, lock: secLock,
       domains: () => viewManager('domains'), categories: () => viewManager('categories'),
+      schedule: viewSchedule, vrac: viewVrac, protocol: viewProtocol,
       sync: secSync, backup: secBackup, about: secAbout
     };
     return h('main', { class: 'page' },
@@ -1517,6 +1610,9 @@
       lock: S.lock.enabled ? t('lockset.on').replace('.', '') : '',
       domains: String(live('domains')),
       categories: String(live('categories')),
+      schedule: String(S.schedule_slots.filter((r) => !r.deleted_at && !r.archived).length),
+      vrac: String(live('vrac_items')),
+      protocol: String(S.protocol_segments.filter((r) => !r.deleted_at && !r.archived).length),
       sync: statusInfo().text,
       backup: '',
       about: CONFIG.VERSION
@@ -1664,7 +1760,8 @@
   }
 
   async function mgrDelete(kind, rec) {
-    if (!(await confirmDialog(t('mgr.deleteConfirm', { name: rec.name }), t('mgr.delete'), true))) return;
+    const label = rec.name || rec.title || rec.text || rec.label || '';
+    if (!(await confirmDialog(t('mgr.deleteConfirm', { name: label }), t('mgr.delete'), true))) return;
     rec.deleted_at = new Date().toISOString();
     await saveRecord(kind, rec);
     await afterChange();
@@ -1769,7 +1866,9 @@
   async function prepareRoute() {
     const parts = S.route.split('/');
     S.currentEntry = null;
-    if (!S.user || parts[0] !== 'challenge') return;
+    if (!S.user) { S.currentDay = null; return; }
+    S.currentDay = await getOrCreateDayState(fmtYMD(new Date()));
+    if (parts[0] !== 'challenge') return;
     await maybeChallengeOnboard();
     if (parts[1] === 'step' && parts[2]) {
       const step = S.challenge_steps.find((s) => s.id === parts[2] && !s.deleted_at);
@@ -2111,13 +2210,63 @@
           type: 'button', class: 'btn primary', on: { click: () => addPartToStep(step) }
         }, icon('plus'), t('challenge.addPart'))));
     }
+    const hasHelp = step.help && (step.help.objective || step.help.howto || step.help.example || step.help.scripture || step.help.scriptureText);
+    const helpSection = h('div', null,
+      hasHelp ? h('p', { class: 'muted' }, step.help.objective || '') : h('p', { class: 'empty' }, t('challenge.noHelp')),
+      h('div', { class: 'actions' }, h('button', {
+        type: 'button', class: 'btn', on: { click: () => editHelp(step) }
+      }, icon('bulb'), hasHelp ? t('challenge.editHelpBtn') : t('challenge.addHelp'))));
+
     return h('main', { class: 'page' },
       h('a', { class: 'backlink', href: '#/challenge/steps' }, icon('back'), t('challenge.stepsTitle')),
       h('h1', { class: 'note-title' }, t('challenge.editStepTitle')),
       h('div', { class: 'field' }, h('label', { for: 'st-title' }, t('challenge.stepTitleLabel')), titleInput),
       h('div', { class: 'field' }, h('label', { for: 'st-block' }, t('challenge.stepBlockLabel')), blockInput),
+      h('h2', { class: 'section' }, t('challenge.helpSectionTitle')),
+      helpSection,
       h('h2', { class: 'section' }, t('challenge.contentTitle')),
       content);
+  }
+
+  function editHelp(step) {
+    const hlp = step.help || {};
+    const objective = h('textarea', { rows: '2' });
+    objective.value = hlp.objective || '';
+    const howto = h('textarea', { rows: '4' });
+    howto.value = hlp.howto || '';
+    const example = h('input', { type: 'text' });
+    example.value = hlp.example || '';
+    const scripture = h('input', { type: 'text' });
+    scripture.value = hlp.scripture || '';
+    const scriptureText = h('textarea', { rows: '4' });
+    scriptureText.value = hlp.scriptureText || '';
+    modal({
+      title: t('challenge.editHelpTitle'),
+      body: h('div', null,
+        h('div', { class: 'field' }, h('label', null, t('challenge.helpWhy')), objective),
+        h('div', { class: 'field' }, h('label', null, t('challenge.helpHow')), howto),
+        h('div', { class: 'field' }, h('label', null, t('challenge.helpExample')), example),
+        h('div', { class: 'field' }, h('label', null, t('challenge.scriptureRefLabel')), scripture),
+        h('div', { class: 'field' }, h('label', null, t('challenge.verseTextPlaceholder')), scriptureText)),
+      actions: [
+        { label: t('common.cancel') },
+        {
+          label: t('common.save'), kind: 'primary',
+          onClick: async () => {
+            const obj = objective.value.trim();
+            const how = howto.value.trim();
+            const ex = example.value.trim();
+            const scr = scripture.value.trim();
+            const scrT = scriptureText.value.trim();
+            step.help = (obj || how || ex || scr || scrT)
+              ? { objective: obj || null, howto: how || null, example: ex || null, scripture: scr || null, scriptureText: scrT || null }
+              : null;
+            await saveRecord('challenge_steps', step);
+            await afterChange();
+          }
+        }
+      ]
+    });
   }
 
   function openVerse(step) {
@@ -2372,6 +2521,83 @@
       body);
   }
 
+  async function syncDefaultContent() {
+    const ok = await confirmDialog(t('challenge.syncConfirm'), t('challenge.syncConfirmBtn'));
+    if (!ok) return;
+    const everKnownTitles = new Set(S.challenge_steps.map((s) => s.title));
+    const current = S.challenge_steps.filter((s) => !s.deleted_at).sort(byPos);
+    // placedByTitle suit, au fil de la boucle, aussi bien les étapes déjà là que celles qu'on vient d'insérer,
+    // pour que chaque nouvelle étape s'accroche à la plus proche déjà positionnée (existante ou tout juste ajoutée).
+    const placedByTitle = new Map(current.map((s) => [s.title, s]));
+    const finalOrder = current.slice();
+    let updated = 0;
+
+    for (let i = 0; i < SEED_STEPS.length; i++) {
+      const seed = SEED_STEPS[i];
+      const existing = placedByTitle.get(seed.title);
+      if (existing && current.includes(existing)) {
+        if (seed.help) {
+          const keep = existing.help && existing.help.scriptureText;
+          const nextHelp = keep ? { ...seed.help, scriptureText: keep } : seed.help;
+          if (JSON.stringify(existing.help) !== JSON.stringify(nextHelp)) {
+            existing.help = nextHelp;
+            await saveRecord('challenge_steps', existing);
+            updated++;
+          }
+        }
+        continue;
+      }
+      if (everKnownTitles.has(seed.title)) continue; // supprimée volontairement par le passé : on ne la recrée pas
+      let anchorIdx = -1;
+      for (let k = i - 1; k >= 0; k--) {
+        const prev = placedByTitle.get(SEED_STEPS[k].title);
+        if (prev) { anchorIdx = finalOrder.indexOf(prev); break; }
+      }
+      let insertAt;
+      if (anchorIdx >= 0) {
+        insertAt = anchorIdx + 1;
+      } else {
+        let followIdx = -1;
+        for (let k = i + 1; k < SEED_STEPS.length; k++) {
+          const nxt = placedByTitle.get(SEED_STEPS[k].title);
+          if (nxt) { followIdx = finalOrder.indexOf(nxt); break; }
+        }
+        insertAt = followIdx >= 0 ? followIdx : finalOrder.length;
+      }
+      const now = new Date().toISOString();
+      const rec = {
+        id: crypto.randomUUID(), user_id: S.user.id, position: 0, day_label: null,
+        title: seed.title, block: seed.block, help: seed.help || null, parts: seed.parts,
+        closing: !!seed.closing, archived: false, deleted_at: null, created_at: now, updated_at: now, _dirty: true, _rev: 1
+      };
+      finalOrder.splice(insertAt, 0, rec);
+      placedByTitle.set(seed.title, rec);
+    }
+
+    const closeIdx = finalOrder.findIndex((s) => s.closing);
+    if (closeIdx > -1 && closeIdx !== finalOrder.length - 1) {
+      const [closeStep] = finalOrder.splice(closeIdx, 1);
+      finalOrder.push(closeStep);
+    }
+
+    let added = 0;
+    for (let i = 0; i < finalOrder.length; i++) {
+      const st = finalOrder[i];
+      const wasExisting = current.includes(st);
+      if (!wasExisting) {
+        st.position = i;
+        await IDB.put('challenge_steps', st);
+        added++;
+      } else if (st.position !== i) {
+        st.position = i;
+        await saveRecord('challenge_steps', st);
+      }
+    }
+
+    await afterChange();
+    toast(t('challenge.syncDone', { updated, added }));
+  }
+
   function viewChallengeSteps() {
     const showArch = S.ui.showArch.challenge_steps;
     const all = S.challenge_steps.filter((r) => !r.deleted_at).sort(byPos);
@@ -2400,7 +2626,456 @@
       h('div', { class: 'actions' },
         h('button', { type: 'button', class: 'btn ghost', on: { click: exportStepsSnapshot } }, t('challenge.snapshotSave')),
         h('button', { type: 'button', class: 'btn ghost', on: { click: () => file.click() } }, t('challenge.snapshotLoad')),
-        file));
+        file),
+      h('div', { class: 'actions' },
+        h('button', { type: 'button', class: 'btn ghost', on: { click: syncDefaultContent } }, t('challenge.syncAction'))));
+  }
+
+  /* ==========================================================
+     Rythme du jour : semaine type, moments ponctuels, vrac, protocole
+     ========================================================== */
+  const WEEKDAY_ORDER = [1, 2, 3, 4, 5, 6, 0]; // Lun..Dim pour l'affichage, même si getDay() renvoie 0=dim
+  const activeSlots = () => S.schedule_slots.filter((r) => !r.deleted_at && !r.archived);
+  const activeVrac = () => S.vrac_items.filter((r) => !r.deleted_at && !r.archived);
+  const activeSegments = () => S.protocol_segments.filter((r) => !r.deleted_at && !r.archived);
+  const catById = (id) => S.categories.find((c) => c.id === id && !c.deleted_at);
+
+  function timeToMin(hm) { const [h, m] = (hm || '0:0').split(':').map(Number); return h * 60 + (m || 0); }
+  function catChip(id) {
+    const c = catById(id);
+    const dot = h('i'); dot.style.background = c ? c.color : 'var(--muted)';
+    return h('span', { class: 'dchip' }, dot, c ? c.name : t('rhythm.noCategory'));
+  }
+
+  function categoryPicker(selectedId) {
+    return new Promise((resolve) => {
+      let m = null;
+      const cats = S.categories.filter((c) => !c.deleted_at && !c.archived).sort(byPos);
+      const opt = (id, name, color) => {
+        const dot = h('i'); if (color) dot.style.background = color;
+        return h('button', { type: 'button', class: 'choice', on: { click: () => { m.close(); resolve(id); } } },
+          h('strong', null, color ? h('span', { class: 'dchip' }, dot, name) : name));
+      };
+      m = modal({
+        title: t('rhythm.category'),
+        body: h('div', null, opt(null, t('rhythm.noCategory'), null), cats.map((c) => opt(c.id, c.name, c.color))),
+        actions: [{ label: t('common.cancel'), onClick: () => resolve(undefined) }],
+        onDismiss: () => resolve(undefined)
+      });
+    });
+  }
+
+  /* --- Créneaux (semaine type + ponctuels) --- */
+  async function slotForm(existing, fixedKind, fixedWeekday) {
+    const kind = fixedKind || (existing && existing.kind) || 'weekly';
+    let categoryId = existing ? existing.category_id : null;
+    let mode = (existing && existing.mode) || 'fixed';
+    const start = h('input', { type: 'time', value: (existing && existing.start_time) || '' });
+    const end = h('input', { type: 'time', value: (existing && existing.end_time) || '' });
+    const label = h('input', { type: 'text', maxlength: 80, value: (existing && existing.label) || '' });
+    const catBtn = h('button', { type: 'button', class: 'btn' }, catChip(categoryId));
+    catBtn.addEventListener('click', async () => {
+      const v = await categoryPicker(categoryId);
+      if (v !== undefined) { categoryId = v; catBtn.replaceChildren(catChip(categoryId)); }
+    });
+    const modeBtns = ['fixed', 'vrac'].map((mo) => h('button', {
+      type: 'button', class: 'btn', 'aria-pressed': String(mo === mode),
+      on: { click: (e) => { mode = mo; modeBtns.forEach((b, i) => b.setAttribute('aria-pressed', String(['fixed', 'vrac'][i] === mo))); labelField.hidden = mo !== 'fixed'; } }
+    }, t(mo === 'fixed' ? 'rhythm.modeFixed' : 'rhythm.modeVrac')));
+    const labelField = h('div', { class: 'field', hidden: mode !== 'fixed' }, h('label', null, t('rhythm.label')), label);
+    label.placeholder = t('rhythm.labelFixedHint');
+
+    const fields = [
+      h('div', { class: 'field' }, h('label', null, t('rhythm.category')), catBtn),
+      h('div', { class: 'field' }, h('label', null, t('rhythm.mode')), h('div', { class: 'seg' }, modeBtns)),
+      labelField
+    ];
+
+    let dateInput = null, endDateInput = null, repeatCb = null;
+    if (kind === 'temporary') {
+      dateInput = h('input', { type: 'date', value: (existing && existing.start_date) || fmtYMD(new Date()) });
+      endDateInput = h('input', { type: 'date', value: (existing && existing.end_date) || '' });
+      repeatCb = h('input', { type: 'checkbox', checked: !!(existing && existing.weekday != null) });
+      const endWrap = h('div', { class: 'field', hidden: !repeatCb.checked }, h('label', null, t('rhythm.endDateOptional')), endDateInput);
+      repeatCb.addEventListener('change', () => { endWrap.hidden = !repeatCb.checked; });
+      fields.unshift(
+        h('div', { class: 'field' }, h('label', null, t('rhythm.startDate')), dateInput),
+        h('div', { class: 'field' }, h('label', { class: 'row', style: { minHeight: '0', padding: '0' } },
+          repeatCb, ' ', t('rhythm.repeatWeekday'))),
+        endWrap
+      );
+    }
+
+    const timeFields = h('div', { class: 'seg' },
+      h('div', { class: 'field' }, h('label', null, t('rhythm.start')), start),
+      h('div', { class: 'field' }, h('label', null, t('rhythm.end')), end));
+
+    return new Promise((resolve) => {
+      const err = h('p', { class: 'msg err', role: 'alert' }); err.hidden = true;
+      modal({
+        title: existing ? t('rhythm.editSlot') : (kind === 'temporary' ? t('rhythm.addMoment') : t('rhythm.addSlot')),
+        body: h('div', null, err, timeFields, fields),
+        actions: [
+          { label: t('common.cancel'), onClick: () => resolve(null) },
+          {
+            label: t('common.save'), kind: 'primary',
+            onClick: () => {
+              if (!start.value || !end.value) { err.textContent = t('rhythm.needTimes'); err.hidden = false; return false; }
+              if (timeToMin(end.value) <= timeToMin(start.value)) { err.textContent = t('rhythm.needEnd'); err.hidden = false; return false; }
+              if (kind === 'temporary' && !dateInput.value) { err.textContent = t('rhythm.needStartDate'); err.hidden = false; return false; }
+              resolve({
+                kind,
+                weekday: kind === 'weekly' ? fixedWeekday : (repeatCb && repeatCb.checked ? parseYMD(dateInput.value).getDay() : null),
+                start_date: kind === 'temporary' ? dateInput.value : null,
+                end_date: kind === 'temporary' && repeatCb.checked ? (endDateInput.value || null) : null,
+                start_time: start.value, end_time: end.value,
+                category_id: categoryId, mode, label: label.value.trim()
+              });
+              return undefined;
+            }
+          }
+        ],
+        onDismiss: () => resolve(null)
+      });
+    });
+  }
+
+  async function addSlot(kind, weekday) {
+    const data = await slotForm(null, kind, weekday);
+    if (!data) return;
+    const now = new Date().toISOString();
+    await IDB.put('schedule_slots', {
+      id: crypto.randomUUID(), user_id: S.user.id, ...data,
+      archived: false, deleted_at: null, created_at: now, updated_at: now, _dirty: true, _rev: 1
+    });
+    await afterChange();
+  }
+
+  async function editSlot(slot) {
+    const data = await slotForm(slot, slot.kind, slot.weekday);
+    if (!data) return;
+    Object.assign(slot, data);
+    await saveRecord('schedule_slots', slot);
+    await afterChange();
+  }
+
+  function slotRow(slot) {
+    const sub = slot.mode === 'fixed' ? (slot.label || t('rhythm.modeFixed')) : t('rhythm.modeVrac');
+    const del = h('button', {
+      type: 'button', class: 'iconbtn', 'aria-label': t('common.remove'),
+      on: { click: () => mgrDelete('schedule_slots', slot) }
+    }, icon('trash'));
+    return h('li', null, h('div', { class: 'row', style: { cursor: 'pointer' }, on: { click: () => editSlot(slot) } },
+      h('span', { class: 'stepdate' }, slot.start_time + '–' + slot.end_time),
+      catChip(slot.category_id),
+      h('span', { class: 'grow hint' }, sub),
+      del));
+  }
+
+  function viewSchedule() {
+    const tab = (S.route.split('/')[2]) || 'week';
+    const dayIdx = Number(S.route.split('/')[3]);
+    const curDay = Number.isFinite(dayIdx) ? dayIdx : new Date().getDay();
+
+    const tabs = h('div', { class: 'seg' },
+      h('a', { class: 'btn', href: '#/settings/schedule/week/' + curDay, 'aria-pressed': String(tab === 'week') }, t('rhythm.weekTab')),
+      h('a', { class: 'btn', href: '#/settings/schedule/temp', 'aria-pressed': String(tab === 'temp') }, t('rhythm.tempTab')));
+
+    let body;
+    if (tab === 'temp') {
+      const temp = activeSlots().filter((s) => s.kind === 'temporary').sort((a, b) => (a.start_date || '').localeCompare(b.start_date || ''));
+      const rows = temp.map((s) => h('li', null, h('div', { class: 'row', style: { cursor: 'pointer' }, on: { click: () => editSlot(s) } },
+        h('span', { class: 'stepdate' }, fmtDateShort(parseYMD(s.start_date))),
+        catChip(s.category_id),
+        h('span', { class: 'grow hint' }, (s.mode === 'fixed' ? (s.label || '') : t('rhythm.modeVrac')) + ' · ' + s.start_time + '–' + s.end_time + (s.weekday != null ? ' · ' + t('rhythm.repeats') : ' · ' + t('rhythm.oneTime'))),
+        h('button', { type: 'button', class: 'iconbtn', 'aria-label': t('common.remove'), on: { click: (e) => { e.stopPropagation(); mgrDelete('schedule_slots', s); } } }, icon('trash')))));
+      body = h('div', null,
+        rows.length ? h('ul', { class: 'list' }, rows) : h('p', { class: 'empty' }, t('rhythm.emptyTemp')),
+        h('div', { class: 'actions' }, h('button', { type: 'button', class: 'btn primary', on: { click: () => addSlot('temporary') } }, icon('plus'), t('rhythm.addMoment'))));
+    } else {
+      const dayBtns = WEEKDAY_ORDER.map((d) => h('a', {
+        href: '#/settings/schedule/week/' + d, class: 'btn', 'aria-pressed': String(d === curDay)
+      }, t('day.' + d)));
+      const dayRows = activeSlots().filter((s) => s.kind === 'weekly' && s.weekday === curDay)
+        .sort((a, b) => timeToMin(a.start_time) - timeToMin(b.start_time)).map(slotRow);
+      body = h('div', null,
+        h('div', { class: 'seg' }, dayBtns),
+        dayRows.length ? h('ul', { class: 'list' }, dayRows) : h('p', { class: 'empty' }, t('rhythm.empty')),
+        h('div', { class: 'actions' }, h('button', { type: 'button', class: 'btn primary', on: { click: () => addSlot('weekly', curDay) } }, icon('plus'), t('rhythm.addSlot'))));
+    }
+    return h('div', null, tabs, body);
+  }
+
+  /* --- Vrac --- */
+  async function addVracItem() {
+    const text = await textPrompt({ title: t('rhythm.vracAdd'), label: t('challenge.stepTitleLabel') });
+    if (!text) return;
+    const categoryId = await categoryPicker(null);
+    if (categoryId === undefined) return;
+    const now = new Date().toISOString();
+    await IDB.put('vrac_items', {
+      id: crypto.randomUUID(), user_id: S.user.id, category_id: categoryId, text, done: false,
+      position: nextPosition('vrac_items'), archived: false, deleted_at: null, created_at: now, updated_at: now, _dirty: true, _rev: 1
+    });
+    await afterChange();
+  }
+
+  async function toggleVracDone(item) {
+    item.done = !item.done;
+    await saveRecord('vrac_items', item);
+    await afterChange();
+  }
+
+  function viewVrac() {
+    const showArch = S.ui.showArch.vrac_items;
+    const all = S.vrac_items.filter((r) => !r.deleted_at).sort(byPos);
+    const vis = showArch ? all : all.filter((r) => !r.archived);
+    const hasArch = all.some((r) => r.archived);
+    const rows = vis.map((it, i) => {
+      const cb = h('input', { type: 'checkbox', checked: !!it.done });
+      cb.addEventListener('change', () => toggleVracDone(it));
+      return h('li', { class: 'mrow' + (it.archived ? ' is-archived' : '') },
+        cb,
+        h('button', { type: 'button', class: 'namebtn', on: { click: () => editVracText(it) } },
+          it.text, catChip(it.category_id), it.archived ? h('span', { class: 'tag' }, t('mgr.archivedTag')) : null),
+        iconBtnGeneric('up', t('mgr.up'), () => mgrMove('vrac_items', vis, i, -1), i === 0),
+        iconBtnGeneric('down', t('mgr.down'), () => mgrMove('vrac_items', vis, i, 1), i === vis.length - 1),
+        iconBtnGeneric(it.archived ? 'restore' : 'archive', it.archived ? t('mgr.restore') : t('mgr.archive'), () => mgrToggleArchive('vrac_items', it)),
+        iconBtnGeneric('trash', t('mgr.delete'), () => mgrDelete('vrac_items', it)));
+    });
+    return h('div', null,
+      h('p', { class: 'lede' }, t('rhythm.vracInfo')),
+      vis.length ? h('ul', { class: 'list' }, rows) : h('p', { class: 'empty' }, t('mgr.empty')),
+      h('div', { class: 'actions' },
+        h('button', { type: 'button', class: 'btn primary', on: { click: addVracItem } }, icon('plus'), t('rhythm.vracAdd')),
+        hasArch ? h('button', { type: 'button', class: 'btn', on: { click: () => { S.ui.showArch.vrac_items = !showArch; render(); } } }, showArch ? t('mgr.hideArchived') : t('mgr.showArchived')) : null));
+  }
+
+  async function editVracText(item) {
+    const text = await textPrompt({ title: t('mgr.rename'), label: t('challenge.stepTitleLabel'), value: item.text });
+    if (!text) return;
+    item.text = text;
+    await saveRecord('vrac_items', item);
+    await afterChange();
+  }
+
+  /* --- Protocole : stations et segments --- */
+  function stationNames() {
+    const fromSettings = (S.settings.data && S.settings.data.protocolStations) || [];
+    const fromSegs = [];
+    activeSegments().forEach((s) => { if (!fromSettings.includes(s.station) && !fromSegs.includes(s.station)) fromSegs.push(s.station); });
+    return [...fromSettings.filter((n) => activeSegments().some((s) => s.station === n)), ...fromSegs];
+  }
+
+  async function ensureStation(name) {
+    const list = (S.settings.data && S.settings.data.protocolStations) || [];
+    if (!list.includes(name)) await updateSettings(null, { protocolStations: [...list, name] });
+  }
+
+  async function pickOrCreateStation() {
+    const names = stationNames();
+    return new Promise((resolve) => {
+      let m = null;
+      const opt = (label, value) => h('button', { type: 'button', class: 'choice', on: { click: async () => {
+        if (value === '__new__') {
+          const name = await textPrompt({ title: t('rhythm.stationName'), label: t('rhythm.stationName') });
+          m.close();
+          resolve(name || null);
+        } else { m.close(); resolve(value); }
+      } } }, h('strong', null, label));
+      m = modal({
+        title: t('rhythm.pickStation'),
+        body: h('div', null, names.map((n) => opt(n, n)), opt(t('rhythm.newStation'), '__new__')),
+        actions: [{ label: t('common.cancel'), onClick: () => resolve(null) }],
+        onDismiss: () => resolve(null)
+      });
+    });
+  }
+
+  async function addSegmentFlow() {
+    const station = await pickOrCreateStation();
+    if (!station) return;
+    const title = await textPrompt({ title: t('rhythm.segmentTitle'), label: t('rhythm.segmentTitle') });
+    if (!title) return;
+    await ensureStation(station);
+    const stationSegs = activeSegments().filter((s) => s.station === station);
+    const now = new Date().toISOString();
+    await IDB.put('protocol_segments', {
+      id: crypto.randomUUID(), user_id: S.user.id, station, station_position: 0,
+      position: stationSegs.length, title, duration_minutes: null, mode: 'libre', content: null,
+      archived: false, deleted_at: null, created_at: now, updated_at: now, _dirty: true, _rev: 1
+    });
+    await afterChange();
+  }
+
+  function editSegment(seg) {
+    const titleInput = h('input', { type: 'text', value: seg.title, maxlength: 100 });
+    const duration = h('input', { type: 'number', min: '0', step: '1', value: seg.duration_minutes != null ? String(seg.duration_minutes) : '' });
+    const modeKeys = { libre: 'rhythm.modeFree', lecture: 'rhythm.modeReading', texte: 'rhythm.modeText', minuteur: 'rhythm.modeTimer' };
+    const modes = ['libre', 'lecture', 'texte', 'minuteur'];
+    const modeBtns = modes.map((mo) => h('button', {
+      type: 'button', class: 'btn', 'aria-pressed': String(mo === seg.mode),
+      on: { click: () => { seg.mode = mo; modeBtns.forEach((b, i) => b.setAttribute('aria-pressed', String(modes[i] === mo))); } }
+    }, t(modeKeys[mo])));
+    const content = h('textarea', { rows: '4' }); content.value = seg.content || '';
+    modal({
+      title: t('rhythm.addSegment'),
+      body: h('div', null,
+        h('div', { class: 'field' }, h('label', null, t('rhythm.segmentTitle')), titleInput),
+        h('div', { class: 'field' }, h('label', null, t('rhythm.segmentDuration')), duration),
+        h('div', { class: 'field' }, h('label', null, t('rhythm.segmentMode')), h('div', { class: 'seg' }, modeBtns)),
+        h('div', { class: 'field' }, h('label', null, t('rhythm.segmentContent')), content)),
+      actions: [
+        { label: t('common.cancel') },
+        {
+          label: t('common.save'), kind: 'primary',
+          onClick: async () => {
+            const v = titleInput.value.trim();
+            if (!v) return false;
+            seg.title = v;
+            seg.duration_minutes = duration.value ? Number(duration.value) : null;
+            seg.content = content.value.trim() || null;
+            await saveRecord('protocol_segments', seg);
+            await afterChange();
+            return undefined;
+          }
+        }
+      ]
+    });
+  }
+
+  function viewProtocol() {
+    const stations = stationNames();
+    const groups = stations.map((name) => {
+      const segs = activeSegments().filter((s) => s.station === name).sort(byPos);
+      const rows = segs.map((seg, i) => h('li', { class: 'mrow' },
+        h('button', { type: 'button', class: 'namebtn', on: { click: () => editSegment(seg) } },
+          seg.title, seg.duration_minutes ? h('span', { class: 'tag' }, ' · ' + seg.duration_minutes + ' ' + t('rhythm.min')) : null),
+        iconBtnGeneric('up', t('mgr.up'), () => mgrMove('protocol_segments', segs, i, -1), i === 0),
+        iconBtnGeneric('down', t('mgr.down'), () => mgrMove('protocol_segments', segs, i, 1), i === segs.length - 1),
+        iconBtnGeneric('trash', t('mgr.delete'), () => mgrDelete('protocol_segments', seg))));
+      return h('div', null, h('h2', { class: 'section' }, name), rows.length ? h('ul', { class: 'list' }, rows) : h('p', { class: 'empty' }, t('rhythm.noSegments')));
+    });
+    return h('div', null,
+      h('p', { class: 'lede' }, t('rhythm.protocolInfo')),
+      groups,
+      h('div', { class: 'actions' }, h('button', { type: 'button', class: 'btn primary', on: { click: addSegmentFlow } }, icon('plus'), t('rhythm.addSegment'))));
+  }
+
+  /* --- État du jour (choix dans les créneaux « à préciser », segments cochés) --- */
+  function getDayState(dateStr) {
+    return S.day_state.find((d) => d.date === dateStr && !d.deleted_at) || null;
+  }
+  let dayStatePending = null; // garde-fou : évite de créer deux fois la même journée si prepareRoute est relancé avant la fin de la première création (ex. hashchange + appel direct au login)
+  async function getOrCreateDayState(dateStr) {
+    let rec = getDayState(dateStr);
+    if (!rec) {
+      if (dayStatePending && dayStatePending.date === dateStr) {
+        rec = await dayStatePending.promise;
+      } else {
+        const now = new Date().toISOString();
+        const fresh = { id: crypto.randomUUID(), user_id: S.user.id, date: dateStr, data: { choices: {}, protocolDone: [] }, deleted_at: null, created_at: now, updated_at: now, _dirty: true, _rev: 1 };
+        const p = (async () => { await IDB.put('day_state', fresh); await loadLists(); return fresh; })();
+        dayStatePending = { date: dateStr, promise: p };
+        try { rec = await p; } finally { if (dayStatePending && dayStatePending.promise === p) dayStatePending = null; }
+      }
+    }
+    if (!rec.data) rec.data = {};
+    if (!rec.data.choices) rec.data.choices = {};
+    if (!rec.data.protocolDone) rec.data.protocolDone = [];
+    return rec;
+  }
+  let dayStateSaveTimer = null;
+  function touchDayState(rec) {
+    rec._dirty = true; rec._rev = (rec._rev || 0) + 1; rec.updated_at = new Date().toISOString();
+    clearTimeout(dayStateSaveTimer);
+    dayStateSaveTimer = setTimeout(async () => {
+      await IDB.put('day_state', rec);
+      await loadLists();
+      render();
+      scheduleSync(800);
+    }, 500);
+  }
+
+  function matchesTemporary(s, dateStr, weekday) {
+    if (s.weekday == null) return s.start_date === dateStr;
+    return s.weekday === weekday && dateStr >= s.start_date && (!s.end_date || dateStr <= s.end_date);
+  }
+  function todaysSlots() {
+    const now = new Date();
+    const dateStr = fmtYMD(now);
+    const weekday = now.getDay();
+    const weekly = activeSlots().filter((s) => s.kind === 'weekly' && s.weekday === weekday);
+    const temp = activeSlots().filter((s) => s.kind === 'temporary' && matchesTemporary(s, dateStr, weekday));
+    return [...weekly, ...temp].sort((a, b) => timeToMin(a.start_time) - timeToMin(b.start_time));
+  }
+
+  async function chooseVracFor(slot, dayRec) {
+    const cat = slot.category_id;
+    const items = activeVrac().filter((v) => v.category_id === cat && !v.done).sort(byPos);
+    const freeInput = h('input', { type: 'text', placeholder: t('rhythm.freeText') });
+    return new Promise((resolve) => {
+      let m = null;
+      const choose = (val) => { m.close(); resolve(val); };
+      const opt = (label) => h('button', { type: 'button', class: 'choice', on: { click: () => choose(label) } }, h('strong', null, label));
+      m = modal({
+        title: t('rhythm.choose'),
+        body: h('div', null,
+          h('p', { class: 'muted' }, t('rhythm.pickOrType')),
+          items.map((it) => opt(it.text)),
+          h('div', { class: 'field' }, h('label', null, t('rhythm.freeText')), freeInput)),
+        actions: [
+          { label: t('common.cancel'), onClick: () => resolve(null) },
+          { label: t('common.save'), kind: 'primary', onClick: () => { const v = freeInput.value.trim(); if (v) resolve(v); else return false; return undefined; } }
+        ],
+        onDismiss: () => resolve(null)
+      });
+    }).then(async (val) => {
+      if (!val) return;
+      dayRec.data.choices[slot.id] = val;
+      touchDayState(dayRec);
+    });
+  }
+
+  function viewTodayRhythm(dayRec) {
+    const slots = todaysSlots();
+    if (!slots.length && !activeSegments().length) return null;
+    const slotRows = slots.map((s) => {
+      const choice = dayRec.data.choices[s.id];
+      const content = s.mode === 'fixed'
+        ? h('span', { class: 'grow hint' }, s.label || t('rhythm.modeFixed'))
+        : h('button', { type: 'button', class: 'btn ghost', style: { marginLeft: 'auto' }, on: { click: () => chooseVracFor(s, dayRec) } }, choice || t('rhythm.choose'));
+      return h('li', null, h('div', { class: 'row' },
+        h('span', { class: 'stepdate' }, s.start_time),
+        catChip(s.category_id),
+        s.mode === 'fixed' ? content : h('span', { class: 'grow hint' }, choice || ''),
+        s.mode !== 'fixed' ? content : null));
+    });
+    const stations = stationNames();
+    const protoGroups = stations.map((name) => {
+      const segs = activeSegments().filter((s) => s.station === name).sort(byPos);
+      if (!segs.length) return null;
+      const rows = segs.map((seg) => {
+        const done = dayRec.data.protocolDone.includes(seg.id);
+        const cb = h('input', { type: 'checkbox', checked: done });
+        cb.addEventListener('change', () => {
+          const arr = dayRec.data.protocolDone;
+          const i = arr.indexOf(seg.id);
+          if (cb.checked) { if (i === -1) arr.push(seg.id); } else if (i > -1) arr.splice(i, 1);
+          touchDayState(dayRec);
+        });
+        const label = h('button', { type: 'button', class: 'namebtn', style: { cursor: seg.content ? 'pointer' : 'default' },
+          on: { click: () => { if (seg.content) modal({ title: seg.title, body: h('p', { style: { whiteSpace: 'pre-line' } }, seg.content), actions: [{ label: t('common.ok'), kind: 'primary' }] }); } } },
+          seg.title, seg.duration_minutes ? h('span', { class: 'tag' }, ' · ' + seg.duration_minutes + ' ' + t('rhythm.min')) : null);
+        return h('li', { class: 'mrow' + (done ? ' is-archived' : '') }, cb, label);
+      });
+      return h('div', null, h('h3', { class: 'part-label' }, name), h('ul', { class: 'list' }, rows));
+    }).filter(Boolean);
+
+    return h('div', null,
+      h('h2', { class: 'section' }, t('rhythm.todayTitle')),
+      slots.length ? h('ul', { class: 'list' }, slotRows) : h('p', { class: 'empty' }, t('rhythm.todayEmpty')),
+      protoGroups.length ? h('div', null, h('h2', { class: 'section' }, t('rhythm.protocolTitle')), protoGroups) : null);
   }
 
   /* ==========================================================
@@ -2469,6 +3144,42 @@
         await IDB.put('challenge_entries', {
           id: r.id, user_id: S.user.id, run_id: r.run_id, step_id: r.step_id,
           data: r.data && typeof r.data === 'object' ? r.data : {}, done: !!r.done, done_at: r.done_at || null,
+          deleted_at: r.deleted_at || null, created_at: r.created_at || now, updated_at: now, _dirty: true, _rev: 1
+        });
+      }
+      for (const r of Array.isArray(j.schedule_slots) ? j.schedule_slots : []) {
+        if (!r || !UUID_RE.test(String(r.id)) || !['weekly', 'temporary'].includes(r.kind) || typeof r.start_time !== 'string' || typeof r.end_time !== 'string') continue;
+        await IDB.put('schedule_slots', {
+          id: r.id, user_id: S.user.id, kind: r.kind, weekday: Number.isFinite(r.weekday) ? r.weekday : null,
+          start_date: typeof r.start_date === 'string' ? r.start_date : null, end_date: typeof r.end_date === 'string' ? r.end_date : null,
+          start_time: r.start_time, end_time: r.end_time, category_id: typeof r.category_id === 'string' ? r.category_id : null,
+          mode: r.mode === 'vrac' ? 'vrac' : 'fixed', label: typeof r.label === 'string' ? r.label.slice(0, 80) : '',
+          archived: !!r.archived, deleted_at: r.deleted_at || null, created_at: r.created_at || now, updated_at: now, _dirty: true, _rev: 1
+        });
+      }
+      for (const r of Array.isArray(j.vrac_items) ? j.vrac_items : []) {
+        if (!r || !UUID_RE.test(String(r.id)) || typeof r.text !== 'string') continue;
+        await IDB.put('vrac_items', {
+          id: r.id, user_id: S.user.id, category_id: typeof r.category_id === 'string' ? r.category_id : null,
+          text: r.text.slice(0, 160), done: !!r.done, position: Number.isFinite(r.position) ? r.position : 0,
+          archived: !!r.archived, deleted_at: r.deleted_at || null, created_at: r.created_at || now, updated_at: now, _dirty: true, _rev: 1
+        });
+      }
+      for (const r of Array.isArray(j.protocol_segments) ? j.protocol_segments : []) {
+        if (!r || !UUID_RE.test(String(r.id)) || typeof r.station !== 'string' || typeof r.title !== 'string') continue;
+        await IDB.put('protocol_segments', {
+          id: r.id, user_id: S.user.id, station: r.station.slice(0, 60), station_position: 0,
+          position: Number.isFinite(r.position) ? r.position : 0, title: r.title.slice(0, 100),
+          duration_minutes: Number.isFinite(r.duration_minutes) ? r.duration_minutes : null,
+          mode: ['lecture', 'texte', 'minuteur', 'libre'].includes(r.mode) ? r.mode : 'libre',
+          content: typeof r.content === 'string' ? r.content : null,
+          archived: !!r.archived, deleted_at: r.deleted_at || null, created_at: r.created_at || now, updated_at: now, _dirty: true, _rev: 1
+        });
+      }
+      for (const r of Array.isArray(j.day_state) ? j.day_state : []) {
+        if (!r || !UUID_RE.test(String(r.id)) || typeof r.date !== 'string') continue;
+        await IDB.put('day_state', {
+          id: r.id, user_id: S.user.id, date: r.date, data: r.data && typeof r.data === 'object' ? r.data : {},
           deleted_at: r.deleted_at || null, created_at: r.created_at || now, updated_at: now, _dirty: true, _rev: 1
         });
       }
