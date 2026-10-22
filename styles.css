@@ -682,6 +682,34 @@ textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; }
   .trow-actions .iconbtn, .brow .iconbtn { opacity: 0.55; }
 }
 
+.modal h3.note-h2 { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; margin: 1rem 0 0.4rem; }
+.modal h3.note-h2:first-child { margin-top: 0; }
+.modal h4.note-h3 { font-size: 1.02rem; font-weight: 600; margin: 0.9rem 0 0.35rem; }
+.modal p.note-p { margin: 0 0 0.65rem; line-height: 1.55; }
+.modal blockquote.note-quote {
+  margin: 0.75rem 0;
+  padding: 0.15rem 0 0.15rem 0.9rem;
+  border-left: 3px solid var(--accent);
+  color: var(--muted);
+  font-style: italic;
+}
+.modal blockquote.note-quote p.note-p { margin: 0.3rem 0; }
+.modal mark, mark {
+  background: color-mix(in srgb, var(--gold) 38%, transparent);
+  color: var(--ink);
+  padding: 0 0.15em;
+  border-radius: 3px;
+}
+
+.timer-display {
+  font-size: 2.75rem;
+  font-weight: 600;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  margin: 0.5rem 0 1.25rem;
+  color: var(--ink);
+}
+
 .versebtn {
   display: inline;
   background: none;

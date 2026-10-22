@@ -154,7 +154,7 @@
     SUPABASE_URL: 'https://foboghwbppqbyvfcjkoj.supabase.co',
     SUPABASE_KEY: 'sb_publishable_qh12xNgNAnoVTLhaUL8g6A_absINt8r', // clé publique : sans danger dans le code
     ALLOW_SIGNUP: false, // usage personnel : les comptes se créent dans Supabase
-    VERSION: '1.5 (lot 3)'
+    VERSION: '1.6 (lot 3)'
   };
 
   const TABLES = ['domains', 'categories', 'challenge_steps', 'challenge_runs', 'challenge_entries', 'schedule_slots', 'vrac_items', 'protocol_segments', 'day_state'];
@@ -248,6 +248,13 @@
       'rhythm.choose': 'Choisir', 'rhythm.pickOrType': 'Choisis dans ta liste ou écris autre chose',
       'rhythm.freeText': 'Autre chose…', 'rhythm.protocolTitle': 'Protocole du jour',
       'rhythm.min': 'min', 'rhythm.segmentNote': 'Note du segment', 'rhythm.noSegments': 'Aucun segment pour le moment.',
+      'rhythm.timerStart': 'Démarrer', 'rhythm.timerPause': 'Mettre en pause', 'rhythm.timerReset': 'Réinitialiser', 'rhythm.timerDone': 'Terminé',
+      'rhythm.writeHere': "J'écris ici...",
+      'rhythm.markdownHint': 'Tu peux utiliser # Titre, ## Sous-titre, **gras**, *italique*, ==surlignage== et > citation.',
+      'rhythm.modeDesc.libre': 'Une simple case à cocher, sans contenu particulier (ex. « Faire du sport »).',
+      'rhythm.modeDesc.lecture': "Un texte que tu relis chaque jour (prière, proclamation...). Un tap l'ouvre, mis en forme.",
+      'rhythm.modeDesc.texte': "Un champ où tu écris quelque chose de nouveau chaque jour, directement sur Aujourd'hui.",
+      'rhythm.modeDesc.minuteur': 'Un tap démarre un compte à rebours pour la durée indiquée.',
 
       'challenge.welcomeTitle': 'Ton défi de bilan et de vision',
       'challenge.welcomeText': 'Choisis ton point de départ pour ce module. Tu pourras tout modifier ensuite.',
@@ -448,6 +455,13 @@
       'rhythm.choose': 'Choose', 'rhythm.pickOrType': 'Pick from your list or write something else',
       'rhythm.freeText': 'Something else…', 'rhythm.protocolTitle': "Today's protocol",
       'rhythm.min': 'min', 'rhythm.segmentNote': 'Segment note', 'rhythm.noSegments': 'No segment yet.',
+      'rhythm.timerStart': 'Start', 'rhythm.timerPause': 'Pause', 'rhythm.timerReset': 'Reset', 'rhythm.timerDone': 'Done',
+      'rhythm.writeHere': 'Write here...',
+      'rhythm.markdownHint': 'You can use # Heading, ## Subheading, **bold**, *italic*, ==highlight== and > quote.',
+      'rhythm.modeDesc.libre': 'A plain checkbox, with no particular content (e.g. “Exercise”).',
+      'rhythm.modeDesc.lecture': 'A text you reread every day (prayer, declaration...). A tap opens it, nicely formatted.',
+      'rhythm.modeDesc.texte': 'A field where you write something new each day, right on Today.',
+      'rhythm.modeDesc.minuteur': 'A tap starts a countdown for the duration you set.',
 
       'challenge.welcomeTitle': 'Your review and vision challenge',
       'challenge.welcomeText': 'Choose your starting point for this module. You can change everything afterwards.',
@@ -2859,6 +2873,75 @@
     await afterChange();
   }
 
+  /* --- Rendu « Markdown léger » pour les notes du protocole (titres, gras, italique, surlignage, citation) --- */
+  function inlineNoteNodes(text) {
+    const out = [];
+    const re = /\*\*([^*]+)\*\*|==([^=]+)==|\*([^*]+)\*/g;
+    let last = 0, m;
+    while ((m = re.exec(text))) {
+      if (m.index > last) out.push(document.createTextNode(text.slice(last, m.index)));
+      if (m[1] !== undefined) out.push(h('strong', null, m[1]));
+      else if (m[2] !== undefined) out.push(h('mark', null, m[2]));
+      else if (m[3] !== undefined) out.push(h('em', null, m[3]));
+      last = re.lastIndex;
+    }
+    if (last < text.length) out.push(document.createTextNode(text.slice(last)));
+    return out.length ? out : [document.createTextNode(text)];
+  }
+  function renderNote(text) {
+    const lines = (text || '').split('\n');
+    const blocks = [];
+    let i = 0;
+    while (i < lines.length) {
+      const line = lines[i];
+      if (!line.trim()) { i++; continue; }
+      const hm = line.match(/^(#{1,4})\s+(.*)$/);
+      if (hm) {
+        const tag = hm[1].length <= 2 ? 'h3' : 'h4';
+        blocks.push(h(tag, { class: hm[1].length <= 2 ? 'note-h2' : 'note-h3' }, inlineNoteNodes(hm[2])));
+        i++; continue;
+      }
+      if (line.trim().startsWith('>')) {
+        const qLines = [];
+        while (i < lines.length && lines[i].trim().startsWith('>')) { qLines.push(lines[i].trim().replace(/^(>\s?)+/, '')); i++; }
+        blocks.push(h('blockquote', { class: 'note-quote' }, qLines.map((l) => h('p', null, inlineNoteNodes(l)))));
+        continue;
+      }
+      const pLines = [];
+      while (i < lines.length && lines[i].trim() && !lines[i].match(/^#{1,4}\s/) && !lines[i].trim().startsWith('>')) { pLines.push(lines[i]); i++; }
+      blocks.push(h('p', { class: 'note-p' }, inlineNoteNodes(pLines.join(' '))));
+    }
+    return blocks;
+  }
+
+  function fmtClock(sec) { const m = Math.floor(Math.max(0, sec) / 60), s = Math.max(0, sec) % 60; return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0'); }
+  function openTimer(seg) {
+    const total = (seg.duration_minutes || 5) * 60;
+    let remaining = total, timerId = null;
+    const display = h('p', { class: 'timer-display' }, fmtClock(remaining));
+    const startBtn = h('button', { type: 'button', class: 'btn primary' }, t('rhythm.timerStart'));
+    const resetBtn = h('button', { type: 'button', class: 'btn ghost' }, t('rhythm.timerReset'));
+    const tick = () => {
+      remaining--;
+      display.textContent = fmtClock(remaining);
+      if (remaining <= 0) { clearInterval(timerId); timerId = null; startBtn.textContent = t('rhythm.timerDone'); startBtn.disabled = true; }
+    };
+    startBtn.addEventListener('click', () => {
+      if (timerId) { clearInterval(timerId); timerId = null; startBtn.textContent = t('rhythm.timerStart'); }
+      else { timerId = setInterval(tick, 1000); startBtn.textContent = t('rhythm.timerPause'); }
+    });
+    resetBtn.addEventListener('click', () => {
+      clearInterval(timerId); timerId = null; remaining = total;
+      display.textContent = fmtClock(remaining); startBtn.textContent = t('rhythm.timerStart'); startBtn.disabled = false;
+    });
+    modal({
+      title: seg.title,
+      body: h('div', null, display, h('div', { class: 'actions', style: { justifyContent: 'center' } }, startBtn, resetBtn)),
+      actions: [{ label: t('common.ok'), kind: 'primary' }],
+      onDismiss: () => clearInterval(timerId)
+    });
+  }
+
   /* --- Protocole : stations et segments --- */
   function stationNames() {
     const fromSettings = (S.settings.data && S.settings.data.protocolStations) || [];
@@ -2913,9 +2996,10 @@
     const duration = h('input', { type: 'number', min: '0', step: '1', value: seg.duration_minutes != null ? String(seg.duration_minutes) : '' });
     const modeKeys = { libre: 'rhythm.modeFree', lecture: 'rhythm.modeReading', texte: 'rhythm.modeText', minuteur: 'rhythm.modeTimer' };
     const modes = ['libre', 'lecture', 'texte', 'minuteur'];
+    const modeDesc = h('p', { class: 'muted' }, t('rhythm.modeDesc.' + seg.mode));
     const modeBtns = modes.map((mo) => h('button', {
       type: 'button', class: 'btn', 'aria-pressed': String(mo === seg.mode),
-      on: { click: () => { seg.mode = mo; modeBtns.forEach((b, i) => b.setAttribute('aria-pressed', String(modes[i] === mo))); } }
+      on: { click: () => { seg.mode = mo; modeBtns.forEach((b, i) => b.setAttribute('aria-pressed', String(modes[i] === mo))); modeDesc.textContent = t('rhythm.modeDesc.' + mo); } }
     }, t(modeKeys[mo])));
     const content = h('textarea', { rows: '4' }); content.value = seg.content || '';
     modal({
@@ -2923,8 +3007,8 @@
       body: h('div', null,
         h('div', { class: 'field' }, h('label', null, t('rhythm.segmentTitle')), titleInput),
         h('div', { class: 'field' }, h('label', null, t('rhythm.segmentDuration')), duration),
-        h('div', { class: 'field' }, h('label', null, t('rhythm.segmentMode')), h('div', { class: 'seg' }, modeBtns)),
-        h('div', { class: 'field' }, h('label', null, t('rhythm.segmentContent')), content)),
+        h('div', { class: 'field' }, h('label', null, t('rhythm.segmentMode')), h('div', { class: 'seg' }, modeBtns), modeDesc),
+        h('div', { class: 'field' }, h('label', null, t('rhythm.segmentContent')), content, h('p', { class: 'muted' }, t('rhythm.markdownHint')))),
       actions: [
         { label: t('common.cancel') },
         {
@@ -2983,6 +3067,7 @@
     if (!rec.data) rec.data = {};
     if (!rec.data.choices) rec.data.choices = {};
     if (!rec.data.protocolDone) rec.data.protocolDone = [];
+    if (!rec.data.segmentNotes) rec.data.segmentNotes = {};
     return rec;
   }
   let dayStateSaveTimer = null;
@@ -3064,10 +3149,23 @@
           if (cb.checked) { if (i === -1) arr.push(seg.id); } else if (i > -1) arr.splice(i, 1);
           touchDayState(dayRec);
         });
-        const label = h('button', { type: 'button', class: 'namebtn', style: { cursor: seg.content ? 'pointer' : 'default' },
-          on: { click: () => { if (seg.content) modal({ title: seg.title, body: h('p', { style: { whiteSpace: 'pre-line' } }, seg.content), actions: [{ label: t('common.ok'), kind: 'primary' }] }); } } },
+        const canOpen = seg.mode === 'lecture' && seg.content;
+        const titleLabel = h('button', { type: 'button', class: 'namebtn', style: { cursor: canOpen || seg.mode === 'minuteur' ? 'pointer' : 'default' },
+          on: {
+            click: () => {
+              if (seg.mode === 'minuteur') openTimer(seg);
+              else if (canOpen) modal({ title: seg.title, body: renderNote(seg.content), actions: [{ label: t('common.ok'), kind: 'primary' }] });
+            }
+          } },
           seg.title, seg.duration_minutes ? h('span', { class: 'tag' }, ' · ' + seg.duration_minutes + ' ' + t('rhythm.min')) : null);
-        return h('li', { class: 'mrow' + (done ? ' is-archived' : '') }, cb, label);
+        const extra = [];
+        if (seg.mode === 'texte') {
+          if (seg.content) extra.push(h('p', { class: 'muted' }, seg.content));
+          const ta = growField(dayRec.data.segmentNotes[seg.id], t('rhythm.writeHere'));
+          ta.addEventListener('input', () => { dayRec.data.segmentNotes[seg.id] = ta.value; touchDayState(dayRec); });
+          extra.push(ta);
+        }
+        return h('li', { class: 'mrow' + (done ? ' is-archived' : ''), style: { flexWrap: 'wrap' } }, cb, titleLabel, extra.length ? h('div', { style: { flexBasis: '100%', marginLeft: '2.5rem' } }, extra) : null);
       });
       return h('div', null, h('h3', { class: 'part-label' }, name), h('ul', { class: 'list' }, rows));
     }).filter(Boolean);
